@@ -81,6 +81,26 @@ include('config/dbconn.php');
           </div>
         </div>
         <div class="col-lg-3 col-6">
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3><?php
+                $sql = "SELECT id FROM tblappointment WHERE status='Pending' AND schedtype='Online Schedule' ";
+                $query_run = mysqli_query($conn,$sql);
+
+                $row = mysqli_num_rows($query_run);
+                echo $row;
+              ?></h3>
+              <p>Online Request</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <a href="online-request.php" class="small-box-footer">
+              More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
           <div class="small-box bg-warning">
             <div class="inner">
               <h3><?php
@@ -101,22 +121,85 @@ include('config/dbconn.php');
             </a>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-lg-3 col-6">
-          <div class="small-box bg-danger">
+          <div class="small-box bg-olive color-palette">
             <div class="inner">
               <h3><?php
-                $sql = "SELECT id FROM tblappointment WHERE status='Pending' AND schedtype='Online Schedule' ";
+                $sql = "SELECT id FROM medicines ORDER BY id";
                 $query_run = mysqli_query($conn,$sql);
 
                 $row = mysqli_num_rows($query_run);
                 echo $row;
               ?></h3>
-              <p>Online Request</p>
+              <p>Medicines</p>
             </div>
             <div class="icon">
-              <i class="fas fa-chart-pie"></i>
+              <i class="fas fa-medkit"></i>
             </div>
-            <a href="online-request.php" class="small-box-footer">
+            <a href="all-medicine.php" class="small-box-footer">
+              More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-maroon color-palette">
+            <div class="inner">
+              <h3><?php
+                $sql = "SELECT id FROM supplies ORDER BY id";
+                $query_run = mysqli_query($conn,$sql);
+
+                $row = mysqli_num_rows($query_run);
+                echo $row;
+              ?></h3>
+              <p>Supplies</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-box-full"></i>
+            </div>
+            <a href="all-supply.php" class="small-box-footer">
+              More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-gray color-palette">
+            <div class="inner">
+              <h3><?php
+                $sql = "SELECT id FROM treatment ORDER BY id";
+                $query_run = mysqli_query($conn,$sql);
+
+                $row = mysqli_num_rows($query_run);
+                echo $row;
+              ?>
+              </h3>
+              <p>Patient Treated</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-file-check"></i>
+            </div>
+            <a href="treatment.php" class="small-box-footer">
+              More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-indigo color-palette">
+            <div class="inner">
+              <h3><?php
+                $sql = "SELECT id FROM medicines WHERE expiration < now() ";
+                $query_run = mysqli_query($conn,$sql);
+
+                $row = mysqli_num_rows($query_run);
+                echo $row;
+              ?></h3>
+              <p>Expired Medicines</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-exclamation-square"></i>
+            </div>
+            <a href="all-medicine.php#expired" class="small-box-footer">
               More info <i class="fas fa-arrow-circle-right"></i>
             </a>
           </div>

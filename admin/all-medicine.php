@@ -194,66 +194,114 @@ include('config/dbconn.php');
                 <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#AddMedicineModal">
                 <i class="fa fa-plus"></i> &nbsp;&nbsp;Add Medicine</button>
               </div>
+              <div class="col-md-12 mt-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" data-target="#all" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="expired-tab" data-toggle="tab" data-target="#expired" href="#expired" role="tab" aria-controls="expired" aria-selected="false">Expired Medicines</a>
+                  </li>
+                </ul>
+              </div>
                 <div class="card-body">
-                  <table id="treatment_table" class="table table-borderless table-hover" style="width:100%">
-                    <thead class="bg-light">
-                      <tr>
-                        <th width="5%">#</th>
-                        <th class="export" width="25%">Medicine Name</th>
-                        <th class="export" width="10%">Unit</th>
-                        <th class="export" width="15%">Danger Level</th>
-                        <th class="export">Date Received</th>
-                        <th class="export">Expiration Date</th>
-                        <th width="10%">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        date_default_timezone_set("Asia/Manila");
-                        $i = 1;
-                        $today = date("Y-m-d");
-                        $sql = "SELECT * FROM medicines";
-                        $query_run = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($query_run) > 0)
-                        {
-                            foreach($query_run as $row)
-                            {
-                              $expired = $row['expiration'];
-                              if ($today > $expired) {
-                                echo '<tr class="bg-warning">';
-                                }
-                                else {
-                                echo '<tr>';
-                                }
-                                ?>                            
-                            <td><?php echo $i++; ?></td>
-                            <td><?=$row['med_name']?></td>
-                            <td><?=$row['unit']?></td>
-                            <td class="text-center"><?=$row['danger_level']?></td>
-                            <td><?=date('d-M-Y',strtotime($row['received']))?></td>
-                            <td><?=date('d-M-Y',strtotime($row['expiration'])) ?></td>
-                            <td>
-                              <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>
-                              <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-danger btn-sm deletebtn"><i class="far fa-trash-alt"></i></button>
-                            </td>
+                  <div class="tab-content">
+                    <div id="all" class="tab-pane fade show active" role="tabpanel" aria-labelledby="all-tab">
+                      <table id="medicinetbl" class="table table-borderless table-hover" style="width:100%">
+                      <thead class="bg-light">
+                        <tr>
+                          <th width="5%">#</th>
+                          <th class="export" width="25%">Medicine Name</th>
+                          <th class="export" width="10%">Unit</th>
+                          <th class="export" width="15%">Danger Level</th>
+                          <th class="export">Date Received</th>
+                          <th class="export">Expiration Date</th>
+                          <th width="10%">Action</th>
                         </tr>
-                          <?php
+                      </thead>
+                      <tbody>
+                          <?php 
+                          date_default_timezone_set("Asia/Manila");
+                          $i = 1;
+                          $today = date("Y-m-d");
+                          $sql = "SELECT * FROM medicines";
+                          $query_run = mysqli_query($conn, $sql);
+                          if(mysqli_num_rows($query_run) > 0)
+                          {
+                              foreach($query_run as $row)
+                              {
+                                $expired = $row['expiration'];
+                                if ($today > $expired) {
+                                  echo '<tr class="bg-warning">';
+                                  }
+                                  else {
+                                  echo '<tr>';
+                                  }
+                                  ?>                            
+                              <td><?php echo $i++; ?></td>
+                              <td><?=$row['med_name']?></td>
+                              <td><?=$row['unit']?></td>
+                              <td class="text-center"><?=$row['danger_level']?></td>
+                              <td><?=date('d-M-Y',strtotime($row['received']))?></td>
+                              <td><?=date('d-M-Y',strtotime($row['expiration'])) ?></td>
+                              <td>
+                                <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>
+                                <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-danger btn-sm deletebtn"><i class="far fa-trash-alt"></i></button>
+                              </td>
+                          </tr>
+                            <?php
+                            }
+                        }
+                        ?>
+                      </tbody>
+                      </table>
+                    </div>            
+                    <div id="expired" class="tab-pane fade" role="tabpanel" aria-labelledby="expired-tab">
+                      <table id="expiredtbl" class="table table-borderless table-hover" style="width:100%">
+                        <thead class="bg-light">
+                          <tr>
+                            <th width="5%">#</th>
+                            <th class="export" width="25%">Medicine Name</th>
+                            <th class="export" width="10%">Unit</th>
+                            <th class="export" width="15%">Danger Level</th>
+                            <th class="export">Date Received</th>
+                            <th class="export">Expiration Date</th>
+                            <th width="10%">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            date_default_timezone_set("Asia/Manila");
+                            $i = 1;
+                            $today = date("Y-m-d");
+                            $sql = "SELECT * FROM medicines WHERE expiration < now()";
+                            $query_run = mysqli_query($conn, $sql);
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $row)
+                                { ?>
+                              <tr>                        
+                                <td><?php echo $i++; ?></td>
+                                <td><?=$row['med_name']?></td>
+                                <td><?=$row['unit']?></td>
+                                <td class="text-center"><?=$row['danger_level']?></td>
+                                <td><?=date('d-M-Y',strtotime($row['received']))?></td>
+                                <td><?=date('d-M-Y',strtotime($row['expiration'])) ?></td>
+                                <td>
+                                  <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>
+                                  <button type="button" data-id="<?=$row['id'] ?>" class="btn btn-danger btn-sm deletebtn"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                              <?php
+                              }
                           }
-                      }
-                      ?>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th></th>
-                        <th class="search">Medicine Name</th>
-                        <th class="search">Unit</th>
-                        <th class="search">Danger Level</th>
-                        <th class="search">Date Received</th>
-                        <th class="search">Date Expiration</th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                          ?>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                  
               </div>
             </div>
           </div>
@@ -267,74 +315,122 @@ include('config/dbconn.php');
 <?php include('includes/scripts.php');?>
 <script>
     $(document).ready(function () {
-      $('#treatment_table tfoot th.search').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" class="search-input form-control form-control-sm"/>' );
-      } );
-      var table = $('#treatment_table').DataTable({
-            "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            "responsive":true,
-            "searching": true,
-            "paging": true,
-            "buttons": [
-            {
-                extend: 'copyHtml5',
-                className: 'btn btn-outline-secondary btn-sm',
-                text: '<i class="fas fa-clipboard"></i>  Copy',
-                exportOptions: {
-                    columns: '.export'
-                }
-            },
-            {
-                extend: 'csvHtml5',
-                className: 'btn btn-outline-secondary btn-sm',
-                text: '<i class="far fa-file-csv"></i>  CSV',
-                exportOptions: {
-                    columns: '.export'
-                }
-            },
-            {
-                extend: 'excel',
-                className: 'btn btn-outline-secondary btn-sm',
-                text: '<i class="far fa-file-excel"></i>  Excel',
-                exportOptions: {
-                    columns: '.export'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                className: 'btn btn-outline-secondary btn-sm',
-                text: '<i class="far fa-file-pdf"></i>  PDF',
-                exportOptions: {
-                    columns: '.export'
-                }
-            },
-            {
-                extend: 'print',
-                className: 'btn btn-outline-secondary btn-sm',
-                text: '<i class="fas fa-print"></i>  Print',
-                exportOptions: {
-                    columns: '.export'
-                }
+      // $('#medicinetbl, #expiredtbl tfoot th.search').each( function () {
+      //       var title = $(this).text();
+      //       $(this).html( '<input type="text" placeholder="Search '+title+'" class="search-input form-control form-control-sm"/>' );
+      // } );
+      var table1 = $('#medicinetbl').DataTable({
+        "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+          "<'row'<'col-sm-12'tr>>" +
+          "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "responsive":true,
+        "searching": true,
+        "paging": true,
+        "buttons": [
+        {
+            extend: 'copyHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="fas fa-clipboard"></i>  Copy',
+            exportOptions: {
+                columns: '.export'
             }
-        ],
-            initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-     
-                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
+        },
+        {
+            extend: 'csvHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-csv"></i>  CSV',
+            exportOptions: {
+                columns: '.export'
             }
-        });
+        },
+        {
+            extend: 'excel',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-excel"></i>  Excel',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'pdfHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-pdf"></i>  PDF',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'print',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="fas fa-print"></i>  Print',
+            exportOptions: {
+                columns: '.export'
+            }
+        }
+    ],
+    });
+
+      var table2 = $('#expiredtbl').DataTable({
+        "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+          "<'row'<'col-sm-12'tr>>" +
+          "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "responsive":true,
+        "searching": true,
+        "paging": true,
+        "buttons": [
+        {
+            extend: 'copyHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="fas fa-clipboard"></i>  Copy',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'csvHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-csv"></i>  CSV',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'excel',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-excel"></i>  Excel',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'pdfHtml5',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="far fa-file-pdf"></i>  PDF',
+            exportOptions: {
+                columns: '.export'
+            }
+        },
+        {
+            extend: 'print',
+            className: 'btn btn-outline-secondary btn-sm',
+            text: '<i class="fas fa-print"></i>  Print',
+            exportOptions: {
+                columns: '.export'
+            }
+        }
+    ],
+    });
+
+    $('.nav-tabs a').on('shown.bs.tab', function (event) {
+      var tabID = $(event.target).attr('data-target');
+      if( tabID === '#all') {
+        table1.columns.adjust().responsive.recalc();
+      }
+      if( tabID === '#expired') {
+        
+        table2.columns.adjust().responsive.recalc();
+      }
+    } );
 
       $(document).on('click', '.editbtn', function() {          
       var medicine = $(this).data('id');
@@ -368,6 +464,18 @@ include('config/dbconn.php');
       $('#deletemodal').modal('show');
       
       });
+
+      $(function(){
+      var hash = window.location.hash;
+      hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+      $('.nav-tabs a').click(function (e) {
+        $(this).tab('show');
+        var scrollmem = $('body').scrollTop();
+        window.location.hash = this.hash;
+        $('html,body').scrollTop(scrollmem);
+      });
+    });
 });
 
 </script>
