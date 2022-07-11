@@ -53,6 +53,7 @@
 <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7-beta.29/jquery.inputmask.min.js" integrity="sha512-Ax4+qW2rAVWrk3SU1ef/L8O0jF6vKSfaMIR3du6efzf5v/pibzDcLFx29YCeR7WphoPO4zranQFsFUf+9Rb+dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="appointment.js"></script>
+<script src="online-appointment.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>

@@ -177,7 +177,7 @@ include('includes/sidebar.php');
                                     }
                                     else 
                                     {
-                                       echo $row['status'] = '<span class="badge badge-secondary">No Show</span>';
+                                       echo $row['status'] = '<span class="badge badge-secondary">Reschedule</span>';
                                     }
 
                                     ?>
@@ -228,7 +228,7 @@ include('includes/sidebar.php');
                                        }
                                        else 
                                        {
-                                          echo $row['status'] = '<span class="badge badge-secondary">No Show</span>';
+                                          echo $row['status'] = '<span class="badge badge-secondary">Reschedule</span>';
                                        }
 
                                        ?>
