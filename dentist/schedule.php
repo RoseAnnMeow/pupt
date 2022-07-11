@@ -74,7 +74,7 @@ include('../admin/config/dbconn.php');
       
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="insert_schedule" class="btn btn-primary">Submit</button>
+          <button type="submit" name="insert_schedule" class="btn btn-primary submit">Submit</button>
         </div>
       </form>
     </div>
@@ -241,6 +241,49 @@ include('../admin/config/dbconn.php');
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" class="search-input form-control form-control-sm"/>' );
     } );
+
+    let getTime = (m) => {
+    return m.minutes() + m.hours() * 60;
+    }
+
+    $('.submit').on('click', () => {
+        let timeFrom = $('input[name=start_time]').val(),
+            timeTo = $('input[name=end_time]').val();
+
+        if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
+        timeFrom = moment(timeFrom, 'hh:mm a');
+        timeTo = moment(timeTo, 'hh:mm a');
+
+        if (getTime(timeFrom) >= getTime(timeTo)) {
+            alert('Start time must not greater than or equal to End time');
+            return false;
+        } else {
+            return true;
+        }
+    });
+    $('.submit1').on('click', () => {
+      let timeFrom = $('#edit_stime').find("input").val(),
+            timeTo = $('#edit_etime').find("input").val();
+
+            if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
+
+        timeFrom = moment(timeFrom, ["h:mm A"]).format("HH:mm");
+        timeTo = moment(timeTo, ["h:mm A"]).format("HH:mm");
+        if(timeFrom >= timeTo)
+        {
+          alert('Start time must not greater than or equal to End time');
+          return false;
+        }
+        else{
+          return true;
+        }
+    });
   //MIN DATE TOMMOROW
   var today = new Date();
   var dd = today.getDate()+1;

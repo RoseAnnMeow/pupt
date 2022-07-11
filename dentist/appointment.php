@@ -30,10 +30,12 @@ include('../admin/config/dbconn.php');
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
+                <input type="hidden" value="<?php echo $_SESSION['auth_user']['user_id'];?>" id="user_id">
                 <input type="hidden" name="edit_id" id="edit_id">
                 <input type="hidden" name="select_patient" id="edit_patient_id">	
                 <input type="hidden" name="select_dentist" id="edit_dentist_id">
                 <input type="hidden" name="sched_id" id="sched_id">
+                <input type="hidden" id="edit_schedule">
               <label>Select Patient</label>
               <span class="text-danger">*</span>
                 <select class="select2 patient" name="" id="edit_patient" style="width:100%;" required disabled>
@@ -101,7 +103,7 @@ include('../admin/config/dbconn.php');
                     <select class="form-control custom-select" name="status" id="edit_status" id="show-checkbox" required>
                         <option value="Confirmed">Confirmed</option>
                         <option value="Cancelled">Cancelled</option>
-                        <option value="No Show">No Show</option>
+                        <option value="Reschedule">Reschedule</option>
                         <option value="Treated">Treated</option>
                     </select>
                 </div>
@@ -164,31 +166,86 @@ include('../admin/config/dbconn.php');
               <div class="card-header">
                 <h3 class="card-title">Walk-in Appointment List</h3>
               </div>
+              <div class="col-md-12 mt-4">
+                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="confirmed-tab" data-toggle="tab" data-target="#confirmed" role="tab" aria-controls="confirmed" aria-selected="true">Confirmed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="treated-tab" data-toggle="tab" data-target="#treated" role="tab" aria-controls="treated-tab" aria-selected="false">Treated</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="cancelled-tab" data-toggle="tab" data-target="#cancelled" role="tab" aria-controls="cancelled-tab" aria-selected="false">Cancelled</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="reschedule-tab" data-toggle="tab" data-target="#reschedule" aria-controls="reschedule-tab" aria-selected="false">Reschedule</a>
+                    </li>
+                </ul>
+              </div>
                 <div class="card-body">
-                  <table id="apptmttbl" class="table table-borderless table-hover" style="width: 100%;">
-                    <thead class="bg-light">
-                      <tr>
-                        <th class="export">Patient</th>
-                        <th class="export">Date Submitted</th>
-                        <th class="export">Appointment Date</th>
-                        <th class="export">Start Time</th>
-                        <th class="export">End Time</th>
-                        <th class="export">Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                        <th class="search">Patient</th>
-                        <th class="search">Date Submitted</th>
-                        <th class="search">Appointment Date</th>
-                        <th class="search">Start Time</th>
-                        <th class="search">End Time</th>
-                        <th class="search">Status</th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  <div class="tab-content">
+                    <div id="confirmed" class="tab-pane fade show active" role="tabpanel" aria-labelledby="confirmed-tab">
+                      <table id="confirmedtbl" class="table table-borderless table-hover" style="width: 100%;">
+                        <thead class="bg-light">
+                          <tr>
+                            <th class="export">Patient</th>
+                            <th class="export">Date Submitted</th>
+                            <th class="export">Appointment Date</th>
+                            <th class="export">Start Time</th>
+                            <th class="export">End Time</th>
+                            <th class="export">Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <div id="treated" class="tab-pane fade" role="tabpanel" aria-labelledby="treated-tab">
+                      <table id="treatedtbl" class="table table-borderless table-hover" style="width: 100%;">
+                        <thead class="bg-light">
+                          <tr>
+                            <th class="export">Patient</th>
+                            <th class="export">Date Submitted</th>
+                            <th class="export">Appointment Date</th>
+                            <th class="export">Start Time</th>
+                            <th class="export">End Time</th>
+                            <th class="export">Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <div id="cancelled" class="tab-pane fade" role="tabpanel" aria-labelledby="cancelled-tab">
+                      <table id="cancelledtbl" class="table table-borderless table-hover" style="width: 100%;">
+                        <thead class="bg-light">
+                          <tr>
+                            <th class="export">Patient</th>
+                            <th class="export">Date Submitted</th>
+                            <th class="export">Appointment Date</th>
+                            <th class="export">Start Time</th>
+                            <th class="export">End Time</th>
+                            <th class="export">Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <div id="reschedule" class="tab-pane fade" role="tabpanel" aria-labelledby="reschedule-tab">
+                      <table id="rescheduletbl" class="table table-borderless table-hover" style="width: 100%;">
+                        <thead class="bg-light">
+                          <tr>
+                            <th class="export">Patient</th>
+                            <th class="export">Date Submitted</th>
+                            <th class="export">Appointment Date</th>
+                            <th class="export">Start Time</th>
+                            <th class="export">End Time</th>
+                            <th class="export">Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -200,8 +257,9 @@ include('../admin/config/dbconn.php');
 </div>
 <?php include('includes/scripts.php');?>
 <script>
-    $(document).ready(function(){
-      var table = $('#apptmttbl').DataTable( {
+  
+  $(document).ready(function(){
+      var table1 = $('#confirmedtbl').DataTable( {
         "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -262,7 +320,8 @@ include('../admin/config/dbconn.php');
             "url": "appointment_table.php",
             "type": "POST",
              "data": {
-                "doctor_id": <?php echo $_SESSION['auth_user']['user_id'] ?>
+                "doctor_id":<?php echo $_SESSION['auth_user']['user_id']?>,
+                "status": 'Confirmed' 
              }
         },
         "columns": [
@@ -290,8 +349,8 @@ include('../admin/config/dbconn.php');
                 return '<span class="badge badge-warning">Pending</span>';
               }else if(data == 'Treated'){
                 return '<span class="badge badge-primary">Treated</span>';
-              }else if(data == 'No Show'){
-                return '<span class="badge badge-secondary">No Show</span>';
+              }else if(data == 'Reschedule'){
+                return '<span class="badge badge-secondary">Reschedule</span>';
               }else{
                 return '<span class="badge badge-danger">Cancelled</span>';
               }
@@ -304,24 +363,317 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
-        "initComplete": function () {
-          this.api().columns().every( function () {
-            var that = this;
-            $( 'input', this.footer() ).on( 'keyup change clear', function () {
-              if ( that.search() !== this.value ) {
-                that
-                  .search( this.value )
-                  .draw();
-              }
-            });
-          });
-        },
       });
-      $('#apptmttbl tfoot th.search').each( function () {
-          var title = $(this).text();
-          $(this).html( '<input type="text" placeholder="Search '+title+'" class="search-input form-control form-control-sm"/>' );
-      } );
+
+      var table12 = $('#treatedtbl').DataTable( {
+        "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "responsive":true,
+        "pagingType": "simple",
+        "buttons": [
+            {
+                extend: 'copyHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-clipboard"></i>  Copy',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-csv"></i>  CSV',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'excel',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-excel"></i>  Excel',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-pdf"></i>  PDF',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'print',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-print"></i>  Print',
+                exportOptions: {
+                    columns: '.export'
+                }
+            }
+        ],
+        "order": [[ 1, "desc" ]],
+        "language": {
+          'search': '',
+          'searchPlaceholder': "Search...",
+          'emptyTable': "No results found",
+        },
+        "ajax": {
+            "url": "appointment_table.php",
+            "type": "POST",
+             "data": {
+                "doctor_id":<?php echo $_SESSION['auth_user']['user_id']?>,
+                "status": 'Treated'
+             }
+        },
+        "columns": [
+          { "data": "patient_name" },
+          { 
+            "data": "created_at",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { 
+            "data": "schedule",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { "data": "starttime" },
+          { "data": "endtime" },
+          {
+            "data": 'status',
+            render: function(data, type, row) {
+              if(data == 'Treated'){
+                return '<span class="badge badge-primary">Treated</span>';
+              }
+            }
+          },
+          {
+            "data": 'id',
+            render: function(data, type,row) {
+              return '<button type="button" data-id="'+ data +'" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>';
+            }
+          },
+        ],
+      });
+      var table13 = $('#cancelledtbl').DataTable( {
+        "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "responsive":true,
+        "pagingType": "simple",
+        "buttons": [
+            {
+                extend: 'copyHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-clipboard"></i>  Copy',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-csv"></i>  CSV',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'excel',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-excel"></i>  Excel',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-pdf"></i>  PDF',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'print',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-print"></i>  Print',
+                exportOptions: {
+                    columns: '.export'
+                }
+            }
+        ],
+        "order": [[ 1, "desc" ]],
+        "language": {
+          'search': '',
+          'searchPlaceholder': "Search...",
+          'emptyTable': "No results found",
+        },
+        "ajax": {
+            "url": "appointment_table.php",
+            "type": "POST",
+             "data": {
+                "doctor_id":<?php echo $_SESSION['auth_user']['user_id']?>,
+                "status": 'Cancelled'
+             }
+        },
+        "columns": [
+          { "data": "patient_name" },
+          { 
+            "data": "created_at",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { 
+            "data": "schedule",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { "data": "starttime" },
+          { "data": "endtime" },
+          {
+            "data": 'status',
+            render: function(data, type, row) {
+              if(data == 'Cancelled'){
+                return '<span class="badge badge-danger">Cancelled</span>';
+              }
+            }
+          },
+          {
+            "data": 'id',
+            render: function(data, type,row) {
+              return '<button type="button" data-id="'+ data +'" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>';
+            }
+          },
+        ],
+      });
+      var table14 = $('#rescheduletbl').DataTable( {
+        "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "responsive":true,
+        "pagingType": "simple",
+        "buttons": [
+            {
+                extend: 'copyHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-clipboard"></i>  Copy',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-csv"></i>  CSV',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'excel',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-excel"></i>  Excel',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-pdf"></i>  PDF',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'print',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-print"></i>  Print',
+                exportOptions: {
+                    columns: '.export'
+                }
+            }
+        ],
+        "order": [[ 1, "desc" ]],
+        "language": {
+          'search': '',
+          'searchPlaceholder': "Search...",
+          'emptyTable': "No results found",
+        },
+        "ajax": {
+            "url": "appointment_table.php",
+            "type": "POST",
+             "data": {
+                "doctor_id":<?php echo $_SESSION['auth_user']['user_id']?>,
+                "status": 'Reschedule'
+             }
+        },
+        "columns": [
+          { "data": "patient_name" },
+          { 
+            "data": "created_at",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { 
+            "data": "schedule",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { "data": "starttime" },
+          { "data": "endtime" },
+          {
+            "data": 'status',
+            render: function(data, type, row) {
+              if(data == 'Reschedule'){
+                return '<span class="badge badge-secondary">Reschedule</span>';
+              }
+            }
+          },
+          {
+            "data": 'id',
+            render: function(data, type,row) {
+              return '<button type="button" data-id="'+ data +'" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>';
+            }
+          },
+        ],
+      });
+
     });
+
+    $('.nav-tabs a').on('shown.bs.tab', function (event) {
+      var tabID = $(event.target).attr('data-target');
+      if( tabID === '#confirmed') {
+        table1.columns.adjust().responsive.recalc();
+      }
+      if( tabID === '#treated') {
+        table2.columns.adjust().responsive.recalc();
+      }
+      if( tabID === '#cancelled') {
+        table3.columns.adjust().responsive.recalc();
+      }
+      if( tabID === '#reschedule') {
+        table4.columns.adjust().responsive.recalc();
+      }
+    } );
 
     $(document).ready(function () {
 
@@ -474,6 +826,7 @@ include('../admin/config/dbconn.php');
           $('#edit_reason').trigger('change');
           $('#edit_status').val(response['status']);
           $('#edit_color').val(response['bgcolor']);
+          $('#edit_schedule').val(response['schedule']);
           var newOption = new Option(response['schedule'], response['sched_id'], true, false);
           $('#edit_sched').append(newOption).trigger('change');
           var newOpt = new Option(response['time'], response['time'], true, false);
@@ -484,8 +837,25 @@ include('../admin/config/dbconn.php');
       });
     });
 
+    $('#edit_status').on('change', function() {
+          var treated = $(this).val();
+          var schedDate = $("#edit_schedule").val();
+          var appDate = Date.parse(schedDate);
+          var todayDate = new Date().getTime();; 
+          if(treated == "Treated")
+          {
+            if(todayDate < appDate)
+            {
+              if(confirm('The appointment date is not today, are you sure you want to set it to Treated?')){
+              }else{
+                  this.selectedIndex = 0;
+              }
+            }         
+            return false;
+          }  
+        });
+
 });
 
 </script>
-
 <?php include('includes/footer.php');?>

@@ -6,13 +6,8 @@
     {
         $id = $_POST['userid'];
         $name = $_POST['name'];
-        $dob = $_POST['birthday'];
-        $gender = $_POST['gender'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
-        $email = $_POST['email'];
-        $degree = $_POST['degree'];
-        $specialty = $_POST['specialty'];
 
         $old_image = $_POST['old_image'];
         $image = $_FILES['img_url']['name'];
@@ -45,7 +40,7 @@
         }
         if($_SESSION['error'] == '')
         {
-            $sql = "UPDATE tbldoctor SET name='$name',dob='$dob',gender='$gender',address='$address',phone='$contact',email='$email',degree='$degree',specialty='$specialty',image='$update_filename' WHERE id='$id'";
+            $sql = "UPDATE tbladmin SET name='$name',address='$address',phone='$contact',image='$update_filename' WHERE id='$id'";
             $query_run = mysqli_query($conn,$sql);
 
             if($query_run)
@@ -78,7 +73,7 @@
 
         if(!empty($current_pass) && !empty($new_pass) && !empty($confirm_pass))
         {
-            $sql = "SELECT password FROM tbldoctor WHERE id='$id'";
+            $sql = "SELECT password FROM tbladmin WHERE id='$id'";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) > 0)
             {
@@ -89,7 +84,7 @@
                         if($new_pass == $confirm_pass)
                         {
                             $hash = password_hash($new_pass,PASSWORD_DEFAULT);
-                            $update_password = "UPDATE tbldoctor SET password='$hash' WHERE id='$id' LIMIT 1";
+                            $update_password = "UPDATE tbladmin SET password='$hash' WHERE id='$id' LIMIT 1";
                             $update_password_run = mysqli_query($conn,$update_password);
 
                             if($update_password_run)
