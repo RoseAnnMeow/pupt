@@ -47,14 +47,14 @@ include('config/dbconn.php');
                 <div class="form-group">
                   <label>Date Received</label>
                   <span class="text-danger">*</span>
-                  <input type="date" name="received" class="form-control" required>
+                  <input type="date" name="received" id="rcvdate" class="form-control" required>
                 </div>
               </div>      
               <div class="col-sm-12">              
                 <div class="form-group">
                   <label>Expiration Date</label>
                   <span class="text-danger">*</span>
-                  <input type="date" name="expiration" class="form-control" required>
+                  <input type="date" name="expiration" id="expdate" class="form-control" required>
                 </div>
               </div>      
             </div>
@@ -63,7 +63,7 @@ include('config/dbconn.php');
       
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="insert_medicine" class="btn btn-primary">Submit</button>
+          <button type="submit" name="insert_medicine" class="btn btn-primary submit">Submit</button>
         </div>
       </form>
     </div>
@@ -126,7 +126,7 @@ include('config/dbconn.php');
       
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="update_medicine" class="btn btn-primary">Submit</button>
+          <button type="submit" name="update_medicine" class="btn btn-primary submit1">Submit</button>
         </div>
       </form>
     </div>
@@ -431,6 +431,41 @@ include('config/dbconn.php');
         table2.columns.adjust().responsive.recalc();
       }
     } );
+
+    $('.submit').on('click', () => {
+      let timeFrom = $('#rcvdate').val(),
+            timeTo = $('#expdate').val();
+
+            if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
+        if(timeFrom >= timeTo)
+        {
+          alert('Please Enter a Valid Date.');
+          return false;
+        }
+        else{
+          return true;
+        }
+    });
+    $('.submit1').on('click', () => {
+      let timeFrom = $('#edit_received').val(),
+            timeTo = $('#edit_expiration').val();
+
+            if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
+        if(timeFrom >= timeTo)
+        {
+          alert('Please Enter a Valid Date.');
+          return false;
+        }
+        else{
+          return true;
+        }
+    });
 
       $(document).on('click', '.editbtn', function() {          
       var medicine = $(this).data('id');

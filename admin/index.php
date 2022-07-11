@@ -90,7 +90,7 @@ include('config/dbconn.php');
                 $row = mysqli_num_rows($query_run);
                 echo $row;
               ?></h3>
-              <p>Online Request</p>
+              <p>Online Appointments</p>
             </div>
             <div class="icon">
               <i class="fas fa-globe"></i>
