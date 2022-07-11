@@ -61,6 +61,24 @@ include('config/dbconn.php');
             </div>
             <div class="card card-primary card-outline">
                 <div class="card-header">
+                    <h3 class="card-title">Patient Treated</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    <?php 
+                    echo getDateTextBox('From', 'treated_from');
+
+                    echo getDateTextBox('To', 'treated_to');
+                    ?>
+                    <div class="col-md-2">
+                        <label>&nbsp;</label>
+                        <button type="button" id="print_treated" class="btn btn-success btn-sm btn-flat btn-block">Generate  PDF</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="card card-primary card-outline">
+                <div class="card-header">
                     <h3 class="card-title">Medicine Inventory</h3>
                 </div>
                 <div class="card-body">
@@ -107,7 +125,7 @@ include('config/dbconn.php');
             }
         });
 
-        $('#patients_from, #patients_to, #medicine_from, #medicine_to, #supply_from, #supply_to').datetimepicker({
+        $('#patients_from, #patients_to, #medicine_from, #medicine_to, #supply_from, #supply_to, #treated_from, #treated_to').datetimepicker({
           format: 'L'
         });
     
@@ -117,6 +135,20 @@ include('config/dbconn.php');
           
           if(from !== '' && to !== '') {
             var win = window.open("print-patient-registered.php?from=" + from 
+              +"&to=" + to, "_blank");
+            if(win) {
+              win.focus();
+            } else {
+              showCustomMessage('Please allow popups.');
+            }
+          }
+        });
+        $("#print_treated").click(function() {
+          var from = $("#treated_from").val();
+          var to = $("#treated_to").val();
+          
+          if(from !== '' && to !== '') {
+            var win = window.open("print-patient-treated.php?from=" + from 
               +"&to=" + to, "_blank");
             if(win) {
               win.focus();

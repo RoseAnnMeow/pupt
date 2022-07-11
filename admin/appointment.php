@@ -516,4 +516,5 @@ include('config/dbconn.php');
 </div>
 
 <?php include('includes/scripts.php');?>
+<script src="appointment.js"></script>
 <?php include('includes/footer.php');?>

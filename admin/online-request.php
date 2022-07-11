@@ -375,4 +375,5 @@ include('config/dbconn.php');
 </div>
 
 <?php include('includes/scripts.php');?>
+<script src="online-appointment.js"></script>
 <?php include('includes/footer.php');?>
