@@ -90,6 +90,64 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item <?= $page == 'all-medicine.php' || $page == 'medicine-stock.php' || $page == 'medicine-stock-history.php' || $page == 'medicine-transactions.php' ? 'menu-open':''?>">
+          <a href="#" class="nav-link <?= $page == 'all-medicine.php' || $page == 'medicine-stock.php' || $page == 'medicine-stock-history.php' || $page == 'medicine-transactions.php' ? 'active':''?>">
+            <i class="nav-icon fas fa-capsules"></i>
+            <p>
+              Medicine Inventory
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="all-medicine.php" class="nav-link <?= $page == 'all-medicine.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Medicines</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="medicine-stock.php" class="nav-link <?= $page == 'medicine-stock.php' || $page == 'medicine-stock-history.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stocks</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="medicine-transactions.php" class="nav-link <?= $page == 'medicine-transactions.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Transactions</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item <?= $page == 'all-supply.php' || $page == 'supply-stock.php' || $page == 'supply-stock-history.php' || $page == 'supply-transactions.php' ? 'menu-open':''?>">
+          <a href="#" class="nav-link <?= $page == 'all-supply.php' || $page == 'supply-stock.php' || $page == 'supply-stock-history.php' || $page == 'supply-transactions.php' ? 'active':''?>">
+            <i class="nav-icon fas fa-box-open"></i>
+            <p>
+              Supplies Inventory
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="all-supply.php" class="nav-link <?= $page == 'all-supply.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Supply</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="supply-stock.php" class="nav-link <?= $page == 'supply-stock.php' || $page == 'supply-stock-history.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stocks</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="supply-transactions.php" class="nav-link <?= $page == 'supply-transactions.php' ? 'active':''?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Transactions</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a href="prescription.php" class="nav-link <?= $page == 'prescription.php' || $page == 'add-prescription.php' || $page == 'view-prescription.php' || $page == 'edit-prescription.php' ? 'active':''?>">
             <i class="nav-icon  fas fa-prescription"></i>
@@ -100,6 +158,12 @@
           <a href="treatment.php" class="nav-link <?= $page == 'treatment.php'  ? 'active':''?>">
             <i class="nav-icon  fas fa-file-check"></i>
             <p>Treatment</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="reports.php" class="nav-link <?= $page == 'reports.php' ? 'active':''?>">
+            <i class="nav-icon fas fa-file-pdf "></i>
+            <p>Reports</p>
           </a>
         </li>
         <li class="nav-item">

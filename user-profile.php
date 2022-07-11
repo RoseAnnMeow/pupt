@@ -55,12 +55,12 @@ include('includes/sidebar.php');
                                                 <div class="form-group col-md-6">
                                                     <label for="">First Name</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="text" name="fname" class="form-control" value="<?=$row['fname']?>" required>
+                                                    <input type="text" name="fname" class="form-control" value="<?=$row['fname']?>" pattern="[a-zA-Z'-'\s]*" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Last Name</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="text" name="lname" class="form-control" value="<?=$row['lname']?>" required>
+                                                    <input type="text" name="lname" class="form-control" value="<?=$row['lname']?>" pattern="[a-zA-Z'-'\s]*" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Address</label>
@@ -94,12 +94,12 @@ include('includes/sidebar.php');
                                                 <div class="form-group col-md-6">
                                                     <label for="">Email</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="email" name="email" class="form-control" value="<?=$row['email']?>" readonly>
+                                                    <input type="email" class="form-control" value="<?=$row['email']?>" readonly>
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="">Contact Number</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="+63 9XX XXX XXXX" name="contact" pattern="^(09|\+639)\d{9}$" required>
+                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="09051234567" name="contact" pattern="^(09|\+639)\d{9}$" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Patient Image</label>

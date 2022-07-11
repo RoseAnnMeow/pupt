@@ -22,7 +22,6 @@
         $gender = $_POST['gender'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
-        $email = $_POST['email'];
         $degree = $_POST['degree'];
         $specialty = $_POST['specialty'];
 
@@ -57,7 +56,7 @@
         }
         if($_SESSION['error'] == '')
         {
-            $sql = "UPDATE tbldoctor SET name='$name',dob='$dob',gender='$gender',address='$address',phone='$contact',email='$email',degree='$degree',specialty='$specialty',image='$update_filename' WHERE id='$id'";
+            $sql = "UPDATE tbldoctor SET name='$name',dob='$dob',gender='$gender',address='$address',phone='$contact',degree='$degree',specialty='$specialty',image='$update_filename' WHERE id='$id'";
             $query_run = mysqli_query($conn,$sql);
 
             if($query_run)

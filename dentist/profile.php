@@ -55,22 +55,56 @@ include('../admin/config/dbconn.php');
                                                 <div class="form-group col-md-6">
                                                     <label for="">Full Name</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="text" name="name" class="form-control" value="<?=$row['name']?>" required>
+                                                    <input type="text" name="name" class="form-control" value="<?=$row['name']?>" pattern="[a-zA-Z'-'\s]*" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Address</label>
                                                     <span class="text-danger">*</span>
                                                     <input type="text" name="address" class="form-control" value="<?=$row['address']?>"required>
                                                 </div>
-                                                <div class="form-group col-md-2">
-                                                    <label for="">Contact Number</label>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Birthdate</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="+63 9XX XXX XXXX" name="contact" pattern="^(09|\+639)\d{9}$" required>
+                                                    <input type="text" autocomplete="off" id="datepicker" name="birthday" value="<?=$row['dob']?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="">Gender</label>
+                                                    <span class="text-danger">*</span>                   
+                                                        <?php $array = array("Female","Male","Others");
+                                                        echo "<select class='custom-select' name='gender' required>";
+                                                        foreach($array as $gender)
+                                                        {
+                                                            if($gender == $row['gender'])
+                                                            {
+                                                                echo "<option selected>$gender</option>";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "<option>$gender</option>";
+                                                            }
+                                                        }
+                                                        echo "</select>";
+                                                    ?>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Email</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="email" name="email" class="form-control" value="<?=$row['email']?>" readonly>
+                                                    <input type="email" class="form-control" value="<?=$row['email']?>" readonly>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="">Contact Number</label>
+                                                    <span class="text-danger">*</span>
+                                                    <input type="tel"  class="form-control"  value="<?=$row['phone']?>" placeholder="09051234567" name="contact" pattern="^(09|\+639)\d{9}$" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Degree</label>
+                                                    <span class="text-danger">*</span>
+                                                    <input type="text" class="form-control" name="degree" value="<?=$row['degree']?>" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Specialty</label>
+                                                    <span class="text-danger">*</span>
+                                                    <input type="text" class="form-control" name="specialty" value="<?=$row['specialty']?>" required>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="">Dentist Image</label>
@@ -80,6 +114,7 @@ include('../admin/config/dbconn.php');
                                                     <img src="../upload/doctors/<?= $row['image']?>" class="img-thumbnail img-fluid" width="120" alt="Doctor Image">
                                                     </div>     
                                                 </div>
+                                                
                                             </div>
                                             <?php 
                                                 } 

@@ -259,14 +259,14 @@ include('../admin/config/dbconn.php');
 <script>
   
   $(document).ready(function(){
-      var table1 = $('#confirmedtbl').DataTable( {
+    var table1 = $('#confirmedtbl').DataTable( {
         "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         "processing": true,
         "searching": true,
         "paging": true,
-        "responsive":true,
+        "responsive": true,
         "pagingType": "simple",
         "buttons": [
             {
@@ -310,7 +310,7 @@ include('../admin/config/dbconn.php');
                 }
             }
         ],
-        "order": [[ 1, "asc" ]],
+        "order": [[ 1, "desc" ]],
         "language": {
           'search': '',
           'searchPlaceholder': "Search...",
@@ -329,13 +329,17 @@ include('../admin/config/dbconn.php');
           { 
             "data": "created_at",
             render: function(data,type,row){
-              return moment(data).format("DD-MMMM-YYYY")
+              var options = { year: 'numeric', month: 'long', day: 'numeric' };
+              var date  = new Date(data);
+              return  date.toLocaleDateString("en-US", options)
             }
           },
           { 
             "data": "schedule",
             render: function(data,type,row){
-              return moment(data).format("DD-MMMM-YYYY")
+              var options = { year: 'numeric', month: 'long', day: 'numeric' };
+              var date  = new Date(data);
+              return  date.toLocaleDateString("en-US", options)
             }
           },
           { "data": "starttime" },
@@ -363,9 +367,28 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
+        "initComplete": function () {
+          this.api().columns().every( function () {
+            var that = this;
+            $( 'input', this.footer() ).on( 'keyup change clear', function () {
+              if ( that.search() !== this.value ) {
+                that
+                  .search( this.value )
+                  .draw();
+              }
+            });
+          });
+        },
       });
+      $('#confirmedtbl tfoot th.search').each( function () {
+          var title = $(this).text();
+          $(this).html( '<input type="text" placeholder="Search '+title+'" class="search-input form-control form-control-sm"/>' );
+      } );
+    });
 
-      var table12 = $('#treatedtbl').DataTable( {
+    $(document).ready(function () {
+
+      var table2 = $('#treatedtbl').DataTable( {
         "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -462,7 +485,8 @@ include('../admin/config/dbconn.php');
           },
         ],
       });
-      var table13 = $('#cancelledtbl').DataTable( {
+
+      var table3 = $('#cancelledtbl').DataTable( {
         "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -559,7 +583,8 @@ include('../admin/config/dbconn.php');
           },
         ],
       });
-      var table14 = $('#rescheduletbl').DataTable( {
+
+      var table4 = $('#rescheduletbl').DataTable( {
         "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -656,8 +681,6 @@ include('../admin/config/dbconn.php');
           },
         ],
       });
-
-    });
 
     $('.nav-tabs a').on('shown.bs.tab', function (event) {
       var tabID = $(event.target).attr('data-target');
@@ -854,7 +877,7 @@ include('../admin/config/dbconn.php');
             return false;
           }  
         });
-
+      });
 });
 
 </script>
