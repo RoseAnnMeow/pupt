@@ -64,13 +64,13 @@ include('config/dbconn.php');
           <div class="small-box bg-success">
             <div class="inner">
               <h3><?php
-                $sql = "SELECT id FROM tblappointment WHERE status='Confirmed' ORDER BY id";
+                $sql = "SELECT id FROM tblappointment WHERE schedtype='Walk-in Schedule' ORDER BY id";
                 $query_run = mysqli_query($conn,$sql);
 
                 $row = mysqli_num_rows($query_run);
                 echo $row;
               ?></h3>
-              <p>Confirmed Appointments</p>
+              <p>Appointments</p>
             </div>
             <div class="icon">
               <i class="fas fa-calendar-check"></i>
@@ -111,7 +111,7 @@ include('config/dbconn.php');
                 $row = mysqli_num_rows($query_run);
                 echo $row;
               ?></h3>
-              <p>Pending Online Request</p>
+              <p>Online Request</p>
             </div>
             <div class="icon">
               <i class="fas fa-chart-pie"></i>

@@ -68,20 +68,17 @@ if(isset($_POST['password_reset_link']))
             send_password_reset($get_name,$get_email,$token);
             $_SESSION['info'] = "We emailed you a password reset link";
             header("Location:password-reset.php");
-            exit(0);
         }
         else
         {
             $_SESSION['error'] = "Something went wrong";
             header("Location:password-reset.php");
-            exit(0);
         }
     }
     else
     {
         $_SESSION['error'] = "No Email Found";
         header("Location:password-reset.php");
-        exit(0);
     }
 }
 
@@ -117,41 +114,37 @@ if(isset($_POST['update_password']))
                         
                         $_SESSION['success'] = "Password has been changed";
                         header("Location:login.php");
-                        exit(0);
                     }
                     else
                     {
                         $_SESSION['error'] = "Did not update password. Something went wrong!";
                         header("Location:password-change.php?token=$token&email=$email");
-                        exit(0);
+                        
                     }
                 }
                 else
                 {
                     $_SESSION['error'] = "Password and Confirm Password does not match";
                     header("Location:password-change.php?token=$token&email=$email");
-                    exit(0);
+                    
                 }
             }
             else
             {
                 $_SESSION['error'] = "Invalid Token";
                 header("Location:password-change.php?token=$token&email=$email");
-                exit(0);
             }
         }
         else
         {
             $_SESSION['error'] = "Please Complete All Fields";
             header("Location:password-change.php?token=$token&email=$email");
-            exit(0);
         }
     }
     else
     {
         $_SESSION['error'] = "No Token Available";
         header("Location:password-change.php");
-        exit(0);
     }
 }
 ?>

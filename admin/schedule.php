@@ -424,14 +424,15 @@ include('config/dbconn.php');
     let getTime = (m) => {
     return m.minutes() + m.hours() * 60;
     }
+
     $('.submit').on('click', () => {
         let timeFrom = $('input[name=start_time]').val(),
             timeTo = $('input[name=end_time]').val();
 
-        // if (!timeFrom || !timeTo) {
-        //     alert('Select time');
-        //     return
-        // }
+        if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
         timeFrom = moment(timeFrom, 'hh:mm a');
         timeTo = moment(timeTo, 'hh:mm a');
 
@@ -442,7 +443,27 @@ include('config/dbconn.php');
             return true;
         }
     });
-    
+    $('.submit1').on('click', () => {
+      let timeFrom = $('#edit_stime').find("input").val(),
+            timeTo = $('#edit_etime').find("input").val();
+
+            if (!timeFrom || !timeTo) {
+            alert('Select time');
+            return
+        }
+
+        timeFrom = moment(timeFrom, ["h:mm A"]).format("HH:mm");
+        timeTo = moment(timeTo, ["h:mm A"]).format("HH:mm");
+        if(timeFrom >= timeTo)
+        {
+          alert('Start time must not greater than or equal to End time');
+          return false;
+        }
+        else{
+          return true;
+        }
+    });
+
   //MIN DATE TOMMOROW
   var today = new Date();
   var dd = today.getDate()+1;
