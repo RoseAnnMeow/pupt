@@ -212,7 +212,7 @@ include('config/dbconn.php');
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" name="update_sched" class="btn btn-primary">Submit</button>
+          <button type="submit" name="update_sched" class="btn btn-primary submit1">Submit</button>
         </div>
       </form>
     </div>

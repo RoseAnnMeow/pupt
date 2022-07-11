@@ -73,14 +73,18 @@
         $fname  = $_POST['fname'];
         $address = $_POST['address'];
         $phone = $_POST['phone'];
-        $doc_email = $_POST['email'];
+        $admin_email = $_POST['email'];
         $password = $_POST['edit_password'];
         $confirmPassword = $_POST['edit_confirmPassword'];
 
         $old_image = $_POST['old_image'];
         $image = $_FILES['edit_docimage']['name'];
         
-        $checkemail = "SELECT email FROM tbladmin UNION SELECT email FROM tblpatient UNION SELECT email FROM tbldoctor UNION SELECT email FROM tblstaff WHERE email='$doc_email' AND id != '$id' ";
+        $checkemail = "SELECT email FROM tbladmin WHERE email='$admin_email'
+        AND id != '$id'  
+        UNION ALL SELECT email FROM tblstaff WHERE email='$admin_email'
+        UNION ALL SELECT email FROM tblpatient WHERE email='$admin_email'
+        UNION ALL SELECT email FROM tbldoctor WHERE email='$admin_email' ";
         $checkemail_run = mysqli_query($conn, $checkemail);
 
         if($password == $confirmPassword)
@@ -123,7 +127,7 @@
                 }
                 if($_SESSION['error'] == '')
                 {
-                    $sql = "UPDATE tbladmin set name='$fname',address='$address', phone='$phone', email='$doc_email', password='$password', image='$update_filename' WHERE id='$id' ";
+                    $sql = "UPDATE tbladmin set name='$fname',address='$address', phone='$phone', email='$admin_email', password='$password', image='$update_filename' WHERE id='$id' ";
                     $query_run = mysqli_query($conn,$sql);
         
                     if ($query_run)
@@ -218,7 +222,7 @@
         $doc_fname  = $_POST['fname'];
         $doc_address = $_POST['address'];
         $doc_phone = $_POST['phone'];
-        $doc_email = $_POST['email'];
+        $admin_email = $_POST['email'];
         $role = '';
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirmPassword'];
@@ -229,7 +233,10 @@
         if($password == $confirmPassword)
         {
             $hash = password_hash($password,PASSWORD_DEFAULT);       
-            $checkemail = "SELECT email FROM tbladmin WHERE email='$doc_email' ";
+            $checkemail = "SELECT email FROM tbladmin WHERE email='$admin_email' 
+            UNION ALL SELECT email FROM tblstaff WHERE email='$admin_email'
+            UNION ALL SELECT email FROM tblpatient WHERE email='$admin_email'
+            UNION ALL SELECT email FROM tbldoctor WHERE email='$admin_email' ";
             $checkemail_run = mysqli_query($conn, $checkemail);
 
             if(mysqli_num_rows($checkemail_run) > 0)
@@ -281,7 +288,7 @@
                 if($_SESSION['error'] == '')
                 {
                     $sql = "INSERT INTO tbladmin (name,address,phone,email,image,password,role,created_at)
-                    VALUES ('$doc_fname','$doc_address','$doc_phone','$doc_email','$filename','$hash','admin','$regdate')";
+                    VALUES ('$doc_fname','$doc_address','$doc_phone','$admin_email','$filename','$hash','admin','$regdate')";
                     $doctor_query_run = mysqli_query($conn,$sql);
                     if ($doctor_query_run)
                     {

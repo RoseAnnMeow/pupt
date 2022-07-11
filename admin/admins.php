@@ -243,6 +243,7 @@ include('config/dbconn.php');
                     </thead>
                     <tbody><?php
                         $i = 1;
+                        $user = $_SESSION['auth_user']['user_id'];
                         $sql = "SELECT * FROM tbladmin";
                         $query_run = mysqli_query($conn, $sql);
                         
@@ -254,12 +255,16 @@ include('config/dbconn.php');
                         <td><?php echo $row['phone']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php
-                            if($row['status']==1){
-                              echo '<button data-id="'.$row['id'].'" data-status="'.$row['status'].'" class="btn btn-sm btn-primary activatebtn">Active</button>';
-                            }
-                            else{
-                              echo '<button data-id="'.$row['id'].'" data-status="'.$row['status'].'" class="btn btn-sm btn-danger activatebtn">Inactive</button>';
-                            }
+                        if($row['id'] == $user){}
+                        else
+                        {
+                          if($row['status']==1){
+                            echo '<button data-id="'.$row['id'].'" data-status="'.$row['status'].'" class="btn btn-sm btn-primary activatebtn">Active</button>';
+                          }
+                          else{
+                            echo '<button data-id="'.$row['id'].'" data-status="'.$row['status'].'" class="btn btn-sm btn-danger activatebtn">Inactive</button>';
+                          }
+                        }
                           ?>
                         </td>     
                         <td>

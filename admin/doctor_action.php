@@ -96,7 +96,10 @@
         $old_image = $_POST['old_image'];
         $image = $_FILES['edit_docimage']['name'];
         
-        $checkemail = "SELECT email FROM tbladmin UNION SELECT email FROM tblpatient UNION SELECT email FROM tbldoctor UNION SELECT email FROM tblstaff WHERE email='$doc_email' AND id != '$id' ";
+        $checkemail = "SELECT email FROM tbladmin WHERE email='$doc_email' 
+        UNION ALL SELECT email FROM tblstaff WHERE email='$doc_email'
+        UNION ALL SELECT email FROM tblpatient WHERE email='$doc_email'
+        UNION ALL SELECT email FROM tbldoctor WHERE email='$doc_email' AND id != '$id' ";
         $checkemail_run = mysqli_query($conn, $checkemail);
 
         if($password == $confirmPassword)
@@ -261,7 +264,10 @@
         if($password == $confirmPassword)
         {
             $hash = password_hash($password,PASSWORD_DEFAULT);       
-            $checkemail = "SELECT email FROM tbladmin UNION SELECT email FROM tblpatient UNION SELECT email FROM tbldoctor UNION SELECT email FROM tblstaff WHERE email='$doc_email' ";
+            $checkemail = "SELECT email FROM tbladmin WHERE email='$doc_email' 
+            UNION ALL SELECT email FROM tblstaff WHERE email='$doc_email'
+            UNION ALL SELECT email FROM tblpatient WHERE email='$doc_email'
+            UNION ALL SELECT email FROM tbldoctor WHERE email='$doc_email' ";
             $checkemail_run = mysqli_query($conn, $checkemail);
 
             if(mysqli_num_rows($checkemail_run) > 0)
