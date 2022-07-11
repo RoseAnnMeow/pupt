@@ -1,0 +1,319 @@
+
+<?php
+include('authentication.php');
+include('../admin/config/dbconn.php');
+
+date_default_timezone_set("Asia/Manila");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
+
+function sendEmail($patient_name,$patient_email,$patient_date,$patient_time,$patient_phone,$reason,$date_submission)
+{
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();                                         
+    $mail->Host       = 'smtp.gmail.com'; 
+    $mail->SMTPAuth   = true;                 
+    $mail->Username   = 'puptdental@gmail.com';                  
+    $mail->Password   = 'alhxegkzskfvgicm';  
+
+    $mail->SMTPSecure = 'tls';                                
+    $mail->Port       = 587;        
+    //$mail->SMTPDebug = 2;
+
+    $mail->setFrom('puptdental@gmail.com','PUP Taguig Dental Clinic');
+    $mail->addAddress($patient_email);  
+
+    $mail->isHTML(true);                              
+    $mail->Subject = 'Set an Appointment | PUP Taguig Dental Clinic';
+    $email_template = 
+                    '<p>Appointment Submitted on ' .$date_submission.'</p>
+                    <p>Appointment Details<br>
+                    Name: ' .$patient_name. '<br>
+                    Contact Number: ' .$patient_phone. '<br>
+                    Email: ' .$patient_email. '<br>
+                    Preferred Date: ' .$patient_date. '<br>
+                    Time: ' .$patient_time. '</p>
+                    <p>Treatment: ' . $reason. '</p>	
+                    <p>Reminder: Don\'t forget to wear face mask to reduce the spread of the coronavirus</p>
+                    <p>Thank you!<br>
+                    PUP Taguig Dental Team</p>'
+                    ;
+    $mail->Body = $email_template;
+    
+    try
+    {
+        $mail->send();
+        echo "Message has been sent";
+    }
+    catch(Exception $e)
+    {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
+    if(isset($_POST['checking_editbtn']))
+    {
+        $s_id = $_POST['app_id'];
+
+        $sql = "SELECT * FROM tblappointment WHERE id='$s_id' ";
+        $query_run = mysqli_query($conn,$sql);
+
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $sched =  date('F d, Y', strtotime($row['schedule']));
+                $time = date('h:i A', strtotime($row['starttime'])) ."-". date('h:i A', strtotime($row['endtime']));
+                $result_array = array(
+                    'id' => $row['id'],
+                    'patient_id' => $row['patient_id'],
+                    'doc_id' => $row['doc_id'],
+                    'schedule' => $sched,
+                    'time' => $time,
+                    'sched_id' => $row['sched_id'],
+                    'reason' => $row['reason'],
+                    'status' => $row['status'],
+                    'bgcolor' => $row['bgcolor']
+                );      
+            }
+            header('Content-type: application/json');
+            echo json_encode($result_array);
+        }
+    }
+
+    if(isset($_POST['update_appointment'])){
+        $id = $_POST['edit_id'];
+
+        $patient_id = $_POST['select_patient'];
+        $doctor_id = $_POST['select_dentist'];
+        $schedule_id = $_POST['sched_id'];
+        $selectedTime = $_POST['schedTime'];
+        $preferredTime = explode("-", $selectedTime);
+        $s_time = $preferredTime[0];
+        $e_time = $preferredTime[1];
+        foreach ($_POST['service'] as $selectedService){
+          $services .= $selectedService.",";
+        }
+        $treatment = rtrim($services, ", ");
+
+        $sql = "SELECT * FROM schedule WHERE id='$schedule_id'";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $schedule = $row['day'];
+            }
+        }
+        $status = $_POST['status'];
+        $bgcolor = $_POST['color'];
+        $send_email = $_POST['send-email'];
+        $cancelled = 'Cancelled your Appointment';
+        $subject = 'Confirmed your Appointment';
+        $type = '1';
+        $date_submitted = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE tblappointment set reason='$treatment',status='$status',bgcolor='$bgcolor' WHERE id='$id' ";	
+        $query_run = mysqli_query($conn,$sql);
+
+        if($status=='Treated')
+        {
+            $check_app = mysqli_query($conn, "SELECT appointment_id FROM treatment where appointment_id = '$id' ");
+            if(mysqli_num_rows($check_app) > 0)
+            {
+                
+            }
+            else
+            {
+                $sql ="INSERT INTO treatment (appointment_id,patient_id,doc_id,visit,treatment,created_at) VALUES ('$id','$patient_id','$doctor_id','$schedule_id','$treatment','$date_submitted')";
+                $query_run = mysqli_query($conn,$sql);
+            }
+        }
+        else
+        {
+            $check_app = mysqli_query($conn, "SELECT appointment_id FROM treatment where appointment_id = '$id' ");
+            if(mysqli_num_rows($check_app) > 0)
+            {
+                $sql ="DELETE FROM treatment WHERE appointment_id = '$id'";
+                $query_run = mysqli_query($conn,$sql);
+            }
+        }
+
+        $systemlogo = "SELECT * from system_details";
+        $systemdetails = mysqli_query($conn,$systemlogo);
+        $systemdata = mysqli_fetch_array($systemdetails);
+        $system_logo = $systemdata['brand'];
+
+        $fulldata = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.phone,p.email,a.created_at,a.starttime,a.reason FROM tblappointment a INNER JOIN tblpatient p ON p.id ='$patient_id' WHERE a.id='$id'";
+        $appdetails = mysqli_query($conn,$fulldata);
+        $patient_data = mysqli_fetch_array($appdetails);
+        $patient_name = $patient_data['pname'];
+        $date_submission = date('l, F j, Y',strtotime($patient_data['created_at']));
+        $patient_email = $patient_data['email'];
+        $patient_date = date('l, F j, Y',strtotime($patient_data['schedule']));
+        $patient_phone = $patient_data['phone'];
+	    $reason = $patient_data['reason'];
+        $patient_time = $reason = $patient_data['reason'];
+
+        if($query_run)
+        {               
+             if($status =='Confirmed')
+              {
+                $sql = "INSERT INTO notification (patient_id,doc_id,subject,type,created_at) VALUES ('$patient_id',$doctor_id,'$subject','$type','$date_submitted')";
+                $query_run = mysqli_query($conn,$sql);
+              }
+              else if($status =='Cancelled')
+              {
+                $sql = "INSERT INTO notification (patient_id,doc_id,subject,type,created_at) VALUES ('$patient_id',$doctor_id,'$cancelled','$type','$date_submitted')";
+                $query_run = mysqli_query($conn,$sql);
+              }       
+            if(!empty($_POST['send-email']))
+            {
+                sendEmail($patient_name,$patient_email,$patient_date,$patient_time,$patient_phone,$treatment,$date_submission);  
+            }
+            $_SESSION['success'] = "Appointment Updated Successfully";
+            header('Location:appointment.php');
+        }
+        else
+        {
+            $_SESSION['error'] = "Appointment Failed to Update";
+            header('Location:appointment.php');
+        }
+    }
+
+    if(isset($_POST['deletedata']))
+    {  
+        $id = $_POST['delete_id'];
+        
+        $sql = "DELETE FROM tblappointment WHERE id='$id' ";
+        $query_run = mysqli_query($conn,$sql);
+        
+        if ($query_run)
+        {
+            $_SESSION['success'] = "Appointment Deleted Successfully";
+            header('Location:appointment.php');
+        }
+        else
+        {
+            $_SESSION['error'] = "Appointment Failed to Delete";
+            header('Location:appointment.php');
+        }
+    }
+
+    if(isset($_GET['getDoctors'])){
+        $pat_id = $_GET['getDoctors'];
+        $today = date("Y-m-d");
+
+        $data = array();
+
+        if($pat_id != ""){
+            $sql = "SELECT * FROM tbldoctor WHERE status='1'";
+            $query_run = mysqli_query($conn,$sql);
+            if(mysqli_num_rows($query_run) > 0){
+                foreach($query_run as $row){
+                    $id = $row['id'];
+                    $doctor_name = $row['name'];
+
+                    $data[] = array('id'=>$id,'text'=>$doctor_name);
+                }
+            }
+        }
+
+        echo json_encode($data);
+    }
+
+    if(isset($_GET['doctorIdDate'])){
+        $doc_id = $_GET['doctorIdDate'];
+        $pat_id = $_GET['patientId'];
+        $today = date("Y-m-d");
+
+        $data = array();
+
+        $sql = "SELECT * FROM schedule WHERE doc_id='$doc_id' AND day > CURDATE()";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $id = $row['id'];
+                $day = date('F d, Y',strtotime($row['day']));
+                $startTime = strtotime($row['starttime']);
+                $endTime = strtotime($row['endtime']);
+                $duration = $row['duration'];
+
+                $minuteDiff = round(abs($endTime - $startTime) / 60,2);
+
+                $getApptSql = "SELECT count(*) as numberOfappt FROM tblappointment WHERE doc_id='$doc_id' AND schedule='$day'";
+                $getApptRes = mysqli_query($conn, $getApptSql);
+                $getApptRow = mysqli_fetch_assoc($getApptRes);
+                $numberOfAppt =  $getApptRow['numberOfappt'];
+
+                if($duration <= ($minuteDiff - ($numberOfAppt * 60))){
+                    $chkApptSql = "SELECT count(*) as appt FROM tblappointment WHERE patient_id='$pat_id' AND schedule='$day' AND status!='Cancelled'";
+                    $chkApptRes = mysqli_query($conn, $chkApptSql);
+                    $chkApptRow = mysqli_fetch_assoc($chkApptRes);
+                    $appt =  $chkApptRow['appt'];
+                    if($appt == 0){
+                        $data[] = array('id'=>$id,'text'=>$day);
+                    }
+                }
+            }
+        }else{
+            $data[] = array('id'=>0,'text'=>'No dates found', 'disabled'=> true);
+        }
+
+        echo json_encode($data);
+    }
+
+    if(isset($_POST['selectedDateId'])){
+        $schedId = $_POST['selectedDateId'];
+        $today = date("Y-m-d");
+        $conflict = 0;
+        $previousEndTime = '';
+        $lunchbreak = false;
+
+        $data = array();
+
+        $sql = "SELECT * FROM schedule WHERE id='$schedId'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            
+            while($row = mysqli_fetch_assoc($result)) {
+                $id = $row['id'];
+                $day = date('F d, Y',strtotime($row['day']));
+                $startTime = $row['starttime'];
+                $endTime = $row['endtime'];
+                $duration = $row['duration'];
+
+                $totalNoOfMins = round(abs(strtotime($endTime) - strtotime($startTime)) / 60,2);
+
+                $noOfAppt = ($totalNoOfMins - 60) / $duration;
+
+                $currentStartTime = date('h:i A',strtotime($startTime));
+                $currentEndTime = date('h:i A',strtotime($startTime." ".$duration." minutes"));
+
+                do{
+                    $timeSched = $currentStartTime."-".$currentEndTime;
+                    if(date('H',strtotime($currentStartTime)) != 12 ){
+                        $data[] = array('id'=>$timeSched,'text'=>$timeSched);
+                    }
+
+                    if(date('H',strtotime($currentEndTime)) == 12 && $lunchbreak == false){
+                        $currentStartTime = date('h:i A',strtotime($currentEndTime));
+                        $currentEndTime = date('h:i A',strtotime($currentEndTime." +60 minutes"));
+
+                        $lunchbreak = true;
+                    }else{
+                        $currentStartTime = date('h:i A',strtotime($currentEndTime));
+                        $currentEndTime = date('h:i A',strtotime($currentEndTime." +".$duration." minutes"));
+                    }
+                    
+                    $noOfAppt--;
+                }while($noOfAppt >= 1);
+            }
+        }else{
+            $data[] = array('id'=>0,'text'=>'No dates found', 'disabled'=> true);
+        }
+
+        echo json_encode($data);
+    }
+
+?>
