@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2022 at 12:40 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 11, 2022 at 08:22 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,33 +49,10 @@ INSERT INTO `about` (`id`, `title`, `image`, `content`) VALUES
 
 CREATE TABLE `dental_history` (
   `id` int(11) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
   `dentist` varchar(255) NOT NULL,
   `visit` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `documents`
---
-
-CREATE TABLE `documents` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `description` varchar(255) NOT NULL,
-  `document` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `documents`
---
-
-INSERT INTO `documents` (`id`, `patient_id`, `date`, `description`, `document`) VALUES
-(1, '103', '2021-12-05 11:39:54', 'dsdfsds', ''),
-(2, '104', '2021-12-05 14:51:37', 'dfdf', '1638715897.txt'),
-(3, '104', '2021-12-05 14:52:30', 'fsdfs', '1638715950.docx');
 
 -- --------------------------------------------------------
 
@@ -138,7 +115,7 @@ CREATE TABLE `header` (
 --
 
 INSERT INTO `header` (`id`, `title`, `content`, `image`) VALUES
-(1, 'Experience PUP Taguig Dental Care', 'We at PUP Taguig Dental Clinic take pride in the level of treatments and services we’re offering. Aside from the state-of-the-art equipment, our dental team is fully equipped with knowledge and experience in the field.', '1656599955.png');
+(1, 'Experience PUP Taguig Dental Care', 'We at PUP Taguig Dental Clinic take pride in the level of treatments and services we’re offering. Aside from the state-of-the-art equipment, our dental team is fully equipped with knowledge and experience in the field.', '1657019222.png');
 
 -- --------------------------------------------------------
 
@@ -148,8 +125,8 @@ INSERT INTO `header` (`id`, `title`, `content`, `image`) VALUES
 
 CREATE TABLE `health_declaration` (
   `id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `patient_id` varchar(191) NOT NULL,
+  `question_id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
   `answer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -158,104 +135,20 @@ CREATE TABLE `health_declaration` (
 --
 
 INSERT INTO `health_declaration` (`id`, `question_id`, `patient_id`, `answer`) VALUES
-(1382, 3, '151', 'No'),
-(1383, 4, '151', 'No'),
-(1384, 5, '151', 'No'),
-(1385, 6, '151', 'No'),
-(1386, 7, '151', 'No'),
-(1387, 8, '151', 'No'),
-(1388, 9, '151', 'No'),
-(1389, 10, '151', 'No'),
-(1390, 11, '151', 'No'),
-(1391, 12, '151', 'No'),
-(1392, 13, '151', 'No'),
-(1393, 14, '151', 'No'),
-(1394, 15, '151', 'No'),
-(1395, 16, '151', 'No'),
-(1452, 3, '177', 'No'),
-(1453, 4, '177', 'No'),
-(1454, 5, '177', 'No'),
-(1455, 6, '177', 'No'),
-(1456, 7, '177', 'No'),
-(1457, 8, '177', 'No'),
-(1458, 9, '177', 'No'),
-(1459, 10, '177', 'No'),
-(1460, 11, '177', 'No'),
-(1461, 12, '177', 'No'),
-(1462, 13, '177', 'No'),
-(1463, 14, '177', 'No'),
-(1464, 15, '177', 'No'),
-(1465, 16, '177', 'No'),
-(1536, 3, '178', 'No'),
-(1537, 4, '178', 'No'),
-(1538, 5, '178', 'No'),
-(1539, 6, '178', 'No'),
-(1540, 7, '178', 'No'),
-(1541, 8, '178', 'No'),
-(1542, 9, '178', 'No'),
-(1543, 10, '178', 'No'),
-(1544, 11, '178', 'No'),
-(1545, 12, '178', 'No'),
-(1546, 13, '178', 'No'),
-(1547, 14, '178', 'No'),
-(1548, 15, '178', 'No'),
-(1549, 16, '178', 'No'),
-(1564, 3, '169', 'No'),
-(1565, 4, '169', 'No'),
-(1566, 5, '169', 'Yes'),
-(1567, 6, '169', 'Yes'),
-(1568, 7, '169', 'Yes'),
-(1569, 8, '169', 'No'),
-(1570, 9, '169', 'No'),
-(1571, 10, '169', 'No'),
-(1572, 11, '169', 'No'),
-(1573, 12, '169', 'No'),
-(1574, 13, '169', 'No'),
-(1575, 14, '169', 'No'),
-(1576, 15, '169', 'No'),
-(1577, 16, '169', 'No'),
-(1592, 3, '114', 'No'),
-(1593, 4, '114', 'No'),
-(1594, 5, '114', 'No'),
-(1595, 6, '114', 'No'),
-(1596, 7, '114', 'No'),
-(1597, 8, '114', 'No'),
-(1598, 9, '114', 'No'),
-(1599, 10, '114', 'No'),
-(1600, 11, '114', 'No'),
-(1601, 12, '114', 'No'),
-(1602, 13, '114', 'No'),
-(1603, 14, '114', 'No'),
-(1604, 15, '114', 'No'),
-(1605, 16, '114', 'No'),
-(1662, 3, '185', 'No'),
-(1663, 4, '185', 'No'),
-(1664, 5, '185', 'No'),
-(1665, 6, '185', 'No'),
-(1666, 7, '185', 'No'),
-(1667, 8, '185', 'No'),
-(1668, 9, '185', 'No'),
-(1669, 10, '185', 'No'),
-(1670, 11, '185', 'No'),
-(1671, 12, '185', 'No'),
-(1672, 13, '185', 'No'),
-(1673, 14, '185', 'No'),
-(1674, 15, '185', 'No'),
-(1675, 16, '185', 'No'),
-(1676, 3, '183', 'No'),
-(1677, 4, '183', 'No'),
-(1678, 5, '183', 'No'),
-(1679, 6, '183', 'No'),
-(1680, 7, '183', 'No'),
-(1681, 8, '183', 'No'),
-(1682, 9, '183', 'No'),
-(1683, 10, '183', 'No'),
-(1684, 11, '183', 'No'),
-(1685, 12, '183', 'No'),
-(1686, 13, '183', 'No'),
-(1687, 14, '183', 'No'),
-(1688, 15, '183', 'No'),
-(1689, 16, '183', 'No');
+(1760, 3, 193, 'No'),
+(1761, 4, 193, 'No'),
+(1762, 5, 193, 'No'),
+(1763, 6, 193, 'No'),
+(1764, 7, 193, 'No'),
+(1765, 8, 193, 'No'),
+(1766, 9, 193, 'No'),
+(1767, 10, 193, 'No'),
+(1768, 11, 193, 'No'),
+(1769, 12, 193, 'No'),
+(1770, 13, 193, 'No'),
+(1771, 14, 193, 'No'),
+(1772, 15, 193, 'No'),
+(1773, 16, 193, 'No');
 
 -- --------------------------------------------------------
 
@@ -264,8 +157,8 @@ INSERT INTO `health_declaration` (`id`, `question_id`, `patient_id`, `answer`) V
 --
 
 CREATE TABLE `medical_record` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
   `q1` varchar(255) NOT NULL,
   `q2` varchar(255) NOT NULL,
   `q3` varchar(255) NOT NULL,
@@ -279,13 +172,96 @@ CREATE TABLE `medical_record` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `medicines`
+--
+
+CREATE TABLE `medicines` (
+  `id` bigint(20) NOT NULL,
+  `med_name` varchar(255) NOT NULL,
+  `unit` varchar(100) NOT NULL,
+  `danger_level` int(11) DEFAULT NULL,
+  `received` varchar(100) NOT NULL,
+  `expiration` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medicines`
+--
+
+INSERT INTO `medicines` (`id`, `med_name`, `unit`, `danger_level`, `received`, `expiration`, `created_at`) VALUES
+(28, 'Naproxen', 'capsule', 5, '2022-06-10', '2022-08-21', '2022-07-06 05:31:42'),
+(29, 'Biogesic', 'tab', 4, '2022-06-10', '2022-07-10', '2022-07-06 05:32:35'),
+(31, 'Mefenamic Acid - 500mg', 'capsule', 5, '2022-06-10', '2022-08-01', '2022-07-06 06:13:27'),
+(32, 'Co-Amoxiclav 625mg', 'capsule', 2, '2022-07-07', '2022-07-28', '2022-07-07 07:00:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicines_transactions`
+--
+
+CREATE TABLE `medicines_transactions` (
+  `id` bigint(20) NOT NULL,
+  `medicines_id` bigint(20) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  `stock` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medicines_transactions`
+--
+
+INSERT INTO `medicines_transactions` (`id`, `medicines_id`, `user`, `stock`, `created_at`, `updated_at`) VALUES
+(43, 31, 'Admin (admin@gmail.com)', '+30', '2022-07-06 06:13:39', '2022-07-06 06:13:39'),
+(44, 31, 'Admin (admin@gmail.com)', '-10', '2022-07-06 06:13:46', '2022-07-06 06:13:46'),
+(45, 29, 'Admin (admin@gmail.com)', '+128', '2022-07-06 06:14:01', '2022-07-06 06:14:01'),
+(46, 29, 'Admin (admin@gmail.com)', '-20', '2022-07-06 06:14:18', '2022-07-06 06:14:18'),
+(47, 28, 'Admin (admin@gmail.com)', '+30', '2022-07-06 06:14:31', '2022-07-06 06:14:31'),
+(48, 28, 'Admin (admin@gmail.com)', '-10', '2022-07-06 06:14:42', '2022-07-06 06:14:42'),
+(49, 32, 'Admin (admin@gmail.com)', '+1', '2022-07-07 07:00:24', '2022-07-07 07:00:24'),
+(50, 32, 'Admin (admin@gmail.com)', '+1', '2022-07-07 07:00:25', '2022-07-07 07:00:25'),
+(51, 32, 'Admin (admin@gmail.com)', '-2', '2022-07-07 07:04:37', '2022-07-07 07:04:37'),
+(52, 32, 'Admin (admin@gmail.com)', '+2', '2022-07-07 07:28:16', '2022-07-07 07:28:16'),
+(53, 32, 'Admin (admin@gmail.com)', '+3', '2022-07-07 07:28:24', '2022-07-07 07:28:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicine_stocks`
+--
+
+CREATE TABLE `medicine_stocks` (
+  `id` bigint(20) NOT NULL,
+  `medicines_id` bigint(20) NOT NULL,
+  `current_stock` varchar(255) NOT NULL DEFAULT '0',
+  `consumed` varchar(255) NOT NULL DEFAULT '0',
+  `total` varchar(255) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medicine_stocks`
+--
+
+INSERT INTO `medicine_stocks` (`id`, `medicines_id`, `current_stock`, `consumed`, `total`, `created_at`) VALUES
+(23, 28, '30', '10', '20', '2022-07-06 05:31:42'),
+(24, 29, '128', '20', '108', '2022-07-06 05:32:35'),
+(26, 31, '30', '10', '20', '2022-07-06 06:13:27'),
+(27, 32, '7', '2', '5', '2022-07-07 07:00:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notification`
 --
 
 CREATE TABLE `notification` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
-  `doc_id` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
+  `doc_id` bigint(20) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `seen_status` int(1) NOT NULL COMMENT '0=not seen, 1=seen',
   `type` int(1) NOT NULL,
@@ -297,19 +273,10 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`id`, `patient_id`, `doc_id`, `subject`, `seen_status`, `type`, `created_at`) VALUES
-(311, '183', '142', 'Request An Appointment', 1, 0, '2022-06-21 19:27:06'),
-(312, '183', '142', 'Confirmed your Appointment', 1, 1, '2022-06-21 19:28:04'),
-(313, '185', '142', 'Request An Appointment', 1, 0, '2022-06-21 20:23:41'),
-(314, '185', '142', 'Confirmed your Appointment', 1, 1, '2022-06-21 20:23:57'),
-(315, '183', '142', 'Request An Appointment', 1, 0, '2022-06-22 09:56:18'),
-(316, '183', '142', 'Confirmed your Appointment', 1, 1, '2022-06-22 09:57:58'),
-(317, '183', '142', 'Confirmed your Appointment', 1, 1, '2022-06-22 11:23:46'),
-(318, '183', '142', 'Confirmed your Appointment', 1, 1, '2022-06-22 13:07:16'),
-(319, '183', '157', 'Request An Appointment', 1, 0, '2022-07-02 16:22:52'),
-(320, '185', '157', 'Request An Appointment', 1, 0, '2022-07-02 16:26:32'),
-(321, '183', '157', 'Confirmed your Appointment', 1, 1, '2022-07-02 16:28:06'),
-(322, '183', '158', 'Request An Appointment', 1, 0, '2022-07-02 17:24:28'),
-(323, '183', '158', 'Confirmed your Appointment', 1, 1, '2022-07-02 17:25:03');
+(353, 193, 158, 'Request An Appointment', 1, 0, '2022-07-11 04:31:55'),
+(355, 193, 158, 'Request An Appointment', 1, 0, '2022-07-11 20:49:46'),
+(362, 193, 158, 'Confirmed your Appointment', 0, 1, '2022-07-12 02:17:24'),
+(363, 193, 158, 'Confirmed your Appointment', 0, 1, '2022-07-12 02:17:25');
 
 -- --------------------------------------------------------
 
@@ -318,22 +285,17 @@ INSERT INTO `notification` (`id`, `patient_id`, `doc_id`, `subject`, `seen_statu
 --
 
 CREATE TABLE `prescription` (
-  `id` int(11) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `doc_id` varchar(255) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `doc_id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
   `medicine` varchar(255) NOT NULL,
+  `dose` varchar(100) NOT NULL,
+  `duration` varchar(100) NOT NULL,
   `advice` varchar(255) NOT NULL,
-  `created_at` varchar(50) NOT NULL
+  `qty` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `prescription`
---
-
-INSERT INTO `prescription` (`id`, `date`, `doc_id`, `patient_id`, `medicine`, `advice`, `created_at`) VALUES
-(35, '06/21/2022', '142', '183', 'Paracetamol', '3 x a day for 7 days', ''),
-(36, '06/25/2022', '142', '183', 'Amoxcicillin', '1 x a day for 2 weeks', '');
 
 -- --------------------------------------------------------
 
@@ -343,7 +305,7 @@ INSERT INTO `prescription` (`id`, `date`, `doc_id`, `patient_id`, `medicine`, `a
 
 CREATE TABLE `procedures` (
   `id` int(11) NOT NULL,
-  `service_id` varchar(255) NOT NULL,
+  `service_id` int(11) NOT NULL,
   `procedures` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -353,28 +315,13 @@ CREATE TABLE `procedures` (
 --
 
 INSERT INTO `procedures` (`id`, `service_id`, `procedures`, `price`) VALUES
-(2, '10', 'Sealant', '0 - Free of charge'),
-(3, '7', 'Retainers', '8,000 per U & L'),
-(4, '10', 'Replacement of rubber elastics/ligaties', '0 - Free of charge'),
-(5, '7', 'Minor tooth movement', '10,000'),
-(9, '9', 'Direct Composite Veneers ', '0 - Free of charge'),
-(10, '9', 'Indirect Composite Veneers ', '0 - Free of charge'),
-(11, '9', 'Porcelain Veneers', '0 - Free of charge'),
-(12, '9', 'Laser Bleaching/Whitening (One session)', '0 - Free of charge'),
-(13, '9', 'Cosmetic Gum Surgery (Recountouring)', '0 - Free of charge'),
-(14, '6', 'Oral Prophylaxis with Tongue Scrapping', '0 - Free of charge'),
-(15, '6', 'Deep Scaling', '0 - Free of charge'),
-(16, '10', 'Fluoride Application with tray', '0 - Free of charge'),
-(17, '8', 'Complicated Extraction', '0 - Free of charge'),
-(18, '8', 'Sinus Lifting Procedure', '0 - Free of charge'),
-(19, '8', 'Gingivoplasty', '0 - Free of charge'),
-(20, '5', 'Plastic Crown with Metal Backing', '0 - Free of charge'),
-(21, '5', 'Removable Partial Denture (Stay Plate) 1 to 4 pontics', '0 - Free of charge'),
-(22, '6', 'Consultation', '0 - Free of charge'),
-(23, '5', 'Removable Partial Denture (One piece casting)', '0 - Free of charge'),
-(24, '5', 'Flexible Partial Denture (Bilateral)', '0 - Free of charge'),
-(25, '5', 'Temporary Denture', '0 - Free of charge'),
-(27, '10', 'Pasta', '0 - Free of charge');
+(28, 6, 'Cleaning', '0'),
+(29, 6, 'Whitening', '0'),
+(30, 10, 'Restoration', '0'),
+(31, 10, 'Extraction', '0'),
+(32, 10, 'Temporary Filling', '0'),
+(33, 27, 'Consultation', '0'),
+(34, 5, 'Composite', '0');
 
 -- --------------------------------------------------------
 
@@ -383,7 +330,7 @@ INSERT INTO `procedures` (`id`, `service_id`, `procedures`, `price`) VALUES
 --
 
 CREATE TABLE `questionnaires` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `questions` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -438,8 +385,8 @@ INSERT INTO `reviews` (`id`, `name`, `designation`, `review`, `status`, `image`)
 --
 
 CREATE TABLE `schedule` (
-  `id` int(11) NOT NULL,
-  `doc_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `doc_id` bigint(20) NOT NULL,
   `doc_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `day` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `starttime` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -452,8 +399,15 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`id`, `doc_id`, `doc_name`, `day`, `starttime`, `endtime`, `duration`) VALUES
-(50, '158', 'Dr. Nelson Angeles', '2022-07-04', '9:05 AM', '9:05 PM', '30'),
-(51, '158', 'Dr. Nelson Angeles', '2022-07-03', '9:30 PM', '5:00 PM', '45');
+(50, 158, 'Dr. Nelson Angeles', '2022-07-04', '9:05 AM', '9:05 PM', '30'),
+(51, 158, 'Dr. Nelson Angeles', '2022-07-03', '9:30 AM', '5:00 PM', '45'),
+(52, 158, 'Dr. Nelson Angeles', '2022-07-06', '9:00 AM', '5:00 PM', '30'),
+(56, 158, 'Dr. Nelson Angeles', '2022-07-09', '10:00 AM', '3:00 PM', '30'),
+(57, 158, 'Dr. Nelson Angeles', '2022-07-11', '8:00 AM', '5:00 PM', '30'),
+(59, 158, 'Dr. Nelson Angeles', '2022-07-10', '8:00 AM', '4:00 PM', '45'),
+(90, 158, 'Dr. Nelson Angeles', '2022-07-13', '9:00 AM', '2:00 PM', '60'),
+(91, 158, 'Dr. Nelson Angeles', '2022-07-15', '8:00 AM', '3:00 PM', '60'),
+(92, 158, 'Nelson Angeles', '2022-07-27', '10:00 AM', '3:00 PM', '30');
 
 -- --------------------------------------------------------
 
@@ -480,8 +434,102 @@ INSERT INTO `services` (`id`, `title`, `article_title`, `description`, `image`) 
 (8, 'Oral Surgery (Minor Surgery)', 'What is Oral Surgery?', '<p style=\"margin-right: 0px; margin-bottom: 10.5px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, Calibri, Candara, Arial, sans-serif;\"><span style=\"font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;;\">You can expect our team of dentists to be very gentle but thorough with every surgical process. From simple extractions to complex treatments like frenectomy, where tissue is removed to prepare for dentures or braces, patients can be assured of great comfort during surgery as well as long-term enhancement of oral functions.</span></p><ul style=\"margin-bottom: 10.5px; color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, Calibri, Candara, Arial, sans-serif;\"><li><span style=\"font-family: &quot;Open Sans&quot;;\">Simple Extraction</span></li><li><span style=\"font-family: &quot;Open Sans&quot;;\">Odontectomy (Wisdom Tooth Removal)</span></li><li><span style=\"font-family: &quot;Open Sans&quot;;\">Apicoectomy</span></li><li><span style=\"font-family: &quot;Open Sans&quot;;\">Alveolectomy/Alveoplasty (Removal or Trimming of Ridge)</span></li><li><span style=\"font-family: &quot;Open Sans&quot;;\">Frenectomy</span></li><li><span style=\"font-family: &quot;Open Sans&quot;;\">Torus Palatinus/Mandibularis</span></li></ul>', '1641531487.jpg'),
 (9, 'Cosmetic Dentistry', 'What is Cosmetic Dentistry?', '<p style=\"margin-right: 0px; margin-bottom: 10.5px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, Calibri, Candara, Arial, sans-serif;\"><span style=\"font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;;\">We promise you a smile makeover that goes beyond improving how your teeth and gums function. Ever wonder how actors and actresses have gotten that picture-perfect teeth? At PUP Taguig Dental Clinic, you can now also enjoy quality cosmetic treatments that they get. Our services involve whitening, teeth reshaping, bonding, porcelain veneers (laminates), crowns (caps), and gum grafts, among others. We can also restore decayed teeth to their original form and function.</span></p><p style=\"margin-right: 0px; margin-bottom: 10.5px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, Calibri, Candara, Arial, sans-serif;\"><span style=\"font-family: &quot;Open Sans&quot;;\">Our all-porcelain/ceramic crowns mimic the appearance of natural teeth. Materials used for both are 100% biocompatible, metal-free, hypoallergenic, translucent, and natural-looking, without the unsightly dark gumlines. Zirconia crowns and bridges can also be used instead. The clinic utilizes E-max and Empress Systems for such treatments.</span></p>', '1641881695.jpg'),
 (10, 'Restorative Treatment', 'What is Restorative Treatment?', '<p class=\"brz-mb-xs-15 brz-tp-paragraph brz-text-xs-center brz-mb-lg-20\" style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding: 0px; line-height: 1.6em;\"><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span class=\"brz-cp-color1\" style=\"margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; line-height: inherit; display: inline; font-family: &quot;Open Sans&quot;;\">A dental filling or also known as pasta is a way to restore a tooth damaged by decay back to its normal function and shape. When a dentist gives you a filling, he or she first removes the decayed tooth material, cleans the affected area, and then fills the cleaned out cavity with a filling material.</span></p><p class=\"brz-mb-xs-15 brz-tp-paragraph brz-text-xs-center brz-mb-lg-20\" style=\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding: 0px; line-height: 1.6em;\"><span class=\"brz-cp-color1\" style=\"margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; line-height: inherit; display: inline; font-family: &quot;Open Sans&quot;;\">Fillings are also used to repair cracked or broken teeth and teeth that have been worn down from misuse such as from nail-biting or tooth grinding. The dentist will tell you what type of restorative material will be used depending on the case of your tooth.</span></p>', '1655750197.jpg'),
-(26, 'Routine Dental Examination', 'What is Routine Dental Examination?', '<p style=\"margin-top: 0cm; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">A dental exam is a checkup of\r\nyour teeth and gums. Most children and adults should get a dental exam every\r\nsix months. These exams are important for protecting oral health. Oral health\r\nproblems can become serious and painful if not treated promptly.</span><font face=\"Source Sans Pro, sans-serif\"><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">&nbsp;</span></font><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">Dental exams are used to help find&nbsp;</span><span style=\"background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; border: 1pt none windowtext; padding: 0cm;\">tooth decay</span><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">,&nbsp;</span><span style=\"background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; border: 1pt none windowtext; padding: 0cm;\">gum disease</span><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">,\r\nand other oral health problems early, when they are easier to treat. The exams\r\nare also used to help educate people on the best ways to care for their teeth\r\nand gums.</span></p><p><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span></p>', '1656754648.jpg'),
-(27, 'Dental Consultation', 'What is Dental Consultation?', '<p><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">A consultation is basically&nbsp;</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">an evaluation of the current condition of your teeth</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">. If you have not seen a dentist in a while, you may be worried or embarrassed about the current state of your teeth. A good dentist will not be judgmental or make you feel bad about your current dental health.</span><br><span style=\"font-family: &quot;Open Sans&quot;;\">﻿</span></p>', '1656754771.jpg');
+(26, 'Routine Dental Examination', 'What is Routine Dental Examination?', '<p style=\"margin-top: 0cm; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\"><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">A dental exam is a checkup of\r\nyour teeth and gums. Most children and adults should get a dental exam every\r\nsix months. These exams are important for protecting oral health. Oral health\r\nproblems can become serious and painful if not treated promptly.</span><font face=\"Source Sans Pro, sans-serif\"><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">&nbsp;</span></font><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">Dental exams are used to help find&nbsp;</span><span style=\"background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; border: 1pt none windowtext; padding: 0cm;\">tooth decay</span><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">,&nbsp;</span><span style=\"background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; border: 1pt none windowtext; padding: 0cm;\">gum disease</span><span style=\"font-size: 14px; line-height: 107%; font-family: &quot;Open Sans&quot;; color: rgb(68, 68, 68);\">,\r\nand other oral health problems early, when they are easier to treat. The exams\r\nare also used to help educate people on the best ways to care for their teeth\r\nand gums.</span></p><p><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span></p>', '1657017472.jpg'),
+(27, 'Dental Consultation', 'What is Dental Consultation?', '<p><span style=\"font-size: 14px; font-family: &quot;Open Sans&quot;;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;; font-size: 14px;\">﻿</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">A consultation is basically&nbsp;</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">an evaluation of the current condition of your teeth</span><span style=\"font-size: 14px; color: rgb(32, 33, 36); font-family: &quot;Open Sans&quot;;\">. If you have not seen a dentist in a while, you may be worried or embarrassed about the current state of your teeth. A good dentist will not be judgmental or make you feel bad about your current dental health.</span><br><span style=\"font-family: &quot;Open Sans&quot;;\">﻿</span></p>', '1657017500.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplies`
+--
+
+CREATE TABLE `supplies` (
+  `id` bigint(20) NOT NULL,
+  `supply_name` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `unit` varchar(100) NOT NULL,
+  `danger_level` varchar(255) DEFAULT NULL,
+  `received` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supplies`
+--
+
+INSERT INTO `supplies` (`id`, `supply_name`, `image`, `unit`, `danger_level`, `received`, `created_at`) VALUES
+(13, 'Surgical mask', '', 'box', '5', '2022-06-06', NULL),
+(15, 'Celluloid strips', '', 'pck/100s', '20', '2022-06-07', NULL),
+(16, 'Dental Needle', '', 'pck/100s', '10', '2022-06-07', NULL),
+(17, 'Lidocaine carpule', '', 'pck/100s', '5', '2022-06-06', NULL),
+(18, 'Suturing Thread', '', 'roll', '0', '2022-06-06', NULL),
+(19, 'Gloves', '', 'box', '30', '2022-06-07', NULL),
+(20, 'Foot socks', '', 'pc', '0', '2022-07-05', NULL),
+(21, 'Saliva tip', '', 'pc', '10', '2022-06-15', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_stocks`
+--
+
+CREATE TABLE `supply_stocks` (
+  `id` bigint(20) NOT NULL,
+  `supply_id` bigint(20) NOT NULL,
+  `current_stock` varchar(255) NOT NULL DEFAULT '0',
+  `consumed` varchar(255) NOT NULL DEFAULT '0',
+  `total` varchar(255) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supply_stocks`
+--
+
+INSERT INTO `supply_stocks` (`id`, `supply_id`, `current_stock`, `consumed`, `total`, `created_at`, `updated_at`) VALUES
+(5, 13, '50', '20', '30', '2022-07-05 11:09:58', NULL),
+(7, 15, '41', '1', '40', '2022-07-05 11:22:45', NULL),
+(8, 16, '25', '2', '23', '2022-07-05 11:59:46', NULL),
+(9, 17, '20', '6', '14', '2022-07-05 12:01:02', NULL),
+(10, 18, '1', '0', '1', '2022-07-06 06:24:36', NULL),
+(11, 19, '100', '10', '90', '2022-07-06 06:30:55', NULL),
+(12, 20, '6', '0', '6', '2022-07-06 06:32:47', NULL),
+(13, 21, '45', '0', '45', '2022-07-06 06:33:48', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supply_transactions`
+--
+
+CREATE TABLE `supply_transactions` (
+  `id` bigint(20) NOT NULL,
+  `supply_id` bigint(20) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  `stock` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supply_transactions`
+--
+
+INSERT INTO `supply_transactions` (`id`, `supply_id`, `user`, `stock`, `created_at`, `updated_at`) VALUES
+(18, 13, 'Admin (admin@gmail.com)', '+50', '2022-07-06 06:21:34', '2022-07-06 06:21:34'),
+(19, 13, 'Admin (admin@gmail.com)', '-20', '2022-07-06 06:23:18', '2022-07-06 06:23:18'),
+(20, 18, 'Admin (admin@gmail.com)', '+1', '2022-07-06 06:25:10', '2022-07-06 06:25:10'),
+(21, 15, 'Admin (admin@gmail.com)', '+41', '2022-07-06 06:26:50', '2022-07-06 06:26:50'),
+(22, 15, 'Admin (admin@gmail.com)', '-1', '2022-07-06 06:26:57', '2022-07-06 06:26:57'),
+(23, 16, 'Admin (admin@gmail.com)', '+25', '2022-07-06 06:28:24', '2022-07-06 06:28:24'),
+(24, 16, 'Admin (admin@gmail.com)', '-2', '2022-07-06 06:28:37', '2022-07-06 06:28:37'),
+(25, 17, 'Admin (admin@gmail.com)', '+20', '2022-07-06 06:30:14', '2022-07-06 06:30:14'),
+(26, 17, 'Admin (admin@gmail.com)', '-6', '2022-07-06 06:30:23', '2022-07-06 06:30:23'),
+(27, 19, 'Admin (admin@gmail.com)', '+100', '2022-07-06 06:31:11', '2022-07-06 06:31:11'),
+(28, 19, 'Admin (admin@gmail.com)', '-10', '2022-07-06 06:31:21', '2022-07-06 06:31:21'),
+(29, 20, 'Admin (admin@gmail.com)', '+6', '2022-07-06 06:33:00', '2022-07-06 06:33:00'),
+(30, 21, 'Admin (admin@gmail.com)', '+45', '2022-07-06 06:33:59', '2022-07-06 06:33:59');
 
 -- --------------------------------------------------------
 
@@ -509,7 +557,7 @@ CREATE TABLE `system_details` (
 --
 
 INSERT INTO `system_details` (`id`, `days`, `openhr`, `closehr`, `address`, `telno`, `email`, `mobile`, `facebook`, `map`, `logo`, `brand`) VALUES
-(1, '1,2,3,4,5,6', '10:00 AM', '6:00 PM', 'Building A, General Santos Ave, Taguig, Metro Manila', '+63 966 164 5400', 'test@puptaguig.com', '+639208326896', 'https://www.facebook.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1279.8261523267472!2d121.05026643954743!3d14.488365400729407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cf3cec1946a7%3A0xbe4d3aaa3dfe3a0!2sPUP%20Taguig%20Building%20A!5e0!3m2!1sen!2sph!4v1', '1656599254.png', '1656598995.png');
+(1, '1,2,3,4,5,6', '10:00 AM', '6:00 PM', 'Building A, General Santos Ave, Taguig, Metro Manila', '+63 966 164 5400', 'test@puptaguig.com', '+639208326896', 'https://www.facebook.com/', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1279.8261523267472!2d121.05026643954743!3d14.488365400729407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cf3cec1946a7%3A0xbe4d3aaa3dfe3a0!2sPUP%20Taguig%20Building%20A!5e0!3m2!1sen!2sph!4v1', '1657018710.png', '1657018661.png');
 
 -- --------------------------------------------------------
 
@@ -538,9 +586,8 @@ CREATE TABLE `tbladmin` (
 
 INSERT INTO `tbladmin` (`id`, `name`, `address`, `phone`, `email`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
 (2, 'Admin', '123 Tests', '+639991234567', 'admin@gmail.com', '1642944005.png', '$2y$10$rOMqq.NE6WAaD5VqvBAwdeGqzdgG.4kTmIoeSoLS48rXBCRt34SPu', 'admin', 1, '', 0, '2022-01-23 21:20:05'),
-(9, 'Admin1', 'sample', '+639888876666', 'admin1@gmail.com', '1644421353.png', '$2y$10$4sIufeGGGI5TEdkgvbNxe.YCVyHv/JT9Og0b1IZPaIzeyducddp6m', 'admin', 1, '', 0, '2022-02-09 23:42:33'),
 (11, 'Victoria Dolor', 'Barangay new lower bicutan Taguig city', '+639164546149', 'lullabyangela@gmail.com', '1655807754.png', '$2y$10$7syGUZfYF1ChM.tDksHyjeAtuUAGuSCod9gEymrUqk/2lJLSyxq4q', 'admin', 1, '', 0, '2022-06-21 18:35:54'),
-(12, 'Julius Cabaces', 'Pateros ', '+639164546149', 'juliuscarlo.cabaces@gmail.com', '1655863262.png', '$2y$10$gXNBMoFD6BqC9aEQ.YRz7OjXTXfTClBhfbWuLHJ96tMnMP6KvQwBi', 'admin', 1, '', 0, '2022-06-22 10:01:01');
+(12, 'Julius Cabaces', 'Pateros ', '+639164546149', 'juliuscarlos.cabaces@gmail.com', '1655863262.png', '$2y$10$gXNBMoFD6BqC9aEQ.YRz7OjXTXfTClBhfbWuLHJ96tMnMP6KvQwBi', 'admin', 1, '', 0, '2022-06-22 10:01:01');
 
 -- --------------------------------------------------------
 
@@ -549,14 +596,14 @@ INSERT INTO `tbladmin` (`id`, `name`, `address`, `phone`, `email`, `image`, `pas
 --
 
 CREATE TABLE `tblappointment` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(191) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
   `patient_name` varchar(255) NOT NULL,
-  `doc_id` varchar(191) NOT NULL,
+  `doc_id` bigint(20) NOT NULL,
   `schedule` varchar(191) NOT NULL,
   `starttime` varchar(191) NOT NULL,
   `endtime` varchar(191) NOT NULL,
-  `sched_id` varchar(225) NOT NULL,
+  `sched_id` bigint(20) NOT NULL,
   `schedtype` varchar(191) NOT NULL,
   `reason` varchar(255) NOT NULL,
   `seen_status` int(1) NOT NULL,
@@ -570,8 +617,13 @@ CREATE TABLE `tblappointment` (
 --
 
 INSERT INTO `tblappointment` (`id`, `patient_id`, `patient_name`, `doc_id`, `schedule`, `starttime`, `endtime`, `sched_id`, `schedtype`, `reason`, `seen_status`, `status`, `bgcolor`, `created_at`) VALUES
-(296, '114', 'Rose Ann Bonador', '142', '2022-06-24', '09:00 AM', '09:45 AM', '47', 'Walk-in Schedule', 'Retainers', 0, 'Confirmed', '#f39c12', '2022-06-21 02:16:56'),
-(302, '183', 'Victoria Angela Marie Aquino Dolor', '158', '2022-07-04', '09:35 AM', '10:05 AM', '50', 'Online Schedule', 'Pasta', 0, 'Treated', '', '2022-07-02 17:24:28');
+(337, 187, 'Alexis Martin', 158, '2022-07-11', '08:00 AM', '08:30 AM', 57, 'Walk-in Schedule', 'Cleaning', 0, 'Confirmed', '#FF8C00', '2022-07-09 21:11:57'),
+(339, 183, 'Victoria Angela Marie Aquino Dolor', 158, '2022-07-11', '09:00 AM', '09:30 AM', 57, 'Walk-in Schedule', 'Restoration', 0, 'Confirmed', '#f39c12', '2022-07-10 02:31:43'),
+(341, 185, 'Julius Cabaces', 158, '2022-07-11', '01:30 PM', '02:00 PM', 57, 'Walk-in Schedule', 'Cleaning', 0, 'Confirmed', '#00c0ef', '2022-07-10 02:32:29'),
+(342, 184, 'Nicole Alcid', 158, '2022-07-11', '11:30 AM', '12:00 PM', 57, 'Walk-in Schedule', 'Whitening', 0, 'Confirmed', '#00a65a', '2022-07-10 02:33:49'),
+(343, 193, 'Rose Ann Bonador', 158, '2022-07-11', '08:30 AM', '09:00 AM', 57, 'Walk-in Schedule', 'Restoration', 0, 'Confirmed', '#FF8C00', '2022-07-10 03:13:42'),
+(350, 182, 'Alexis Martin', 158, '2022-07-13', '09:00 AM', '10:00 AM', 90, 'Walk-in Schedule', 'Whitening', 0, 'Cancelled', '#00c0ef', '2022-07-11 19:03:24'),
+(351, 193, 'Rose Ann Bonador', 158, '2022-07-13', '11:00 AM', '12:00 PM', 90, 'Online Schedule', 'Restoration', 0, 'Confirmed', '#0073b7', '2022-07-11 20:49:46');
 
 -- --------------------------------------------------------
 
@@ -580,7 +632,7 @@ INSERT INTO `tblappointment` (`id`, `patient_id`, `patient_name`, `doc_id`, `sch
 --
 
 CREATE TABLE `tbldoctor` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `dob` varchar(100) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -603,7 +655,7 @@ CREATE TABLE `tbldoctor` (
 --
 
 INSERT INTO `tbldoctor` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `email`, `degree`, `specialty`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
-(158, 'Dr. Nelson Angeles', '10/19/1967', 'Block 4 Lot 4 Annex 31, Betterliving Subdivision, Marcelo Green, Paranaque', 'Male', '+639088906445', 'nelsonangeles.pupt@gmail.com', 'Doctor of Dental Medicine Masters in Educational Management , BS in Industrial Technology', 'General Dentistry', '1656752485.jpg', '$2y$10$3WY9GVfbAiCAtUVOpNb7dug4Tf9ksGfHifJlGSpvt7efkR3bLcAyu', '2', 1, '', 0, '2022-07-02 17:01:25');
+(158, 'Nelson Angeles', '10/19/1967', 'Block 4 Lot 4 Annex 31, Betterliving Subdivision, Marcelo Green, Paranaque', 'Male', '+639088906445', 'staff@gmail.com', 'Doctor of Dental Medicine Masters in Educational Management , BS in Industrial Technology', 'General Dentistry', '1657015690.jpg', '$2y$10$3WY9GVfbAiCAtUVOpNb7dug4Tf9ksGfHifJlGSpvt7efkR3bLcAyu', '2', 1, '', 0, '2022-07-02 17:01:25');
 
 -- --------------------------------------------------------
 
@@ -612,7 +664,7 @@ INSERT INTO `tbldoctor` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `ema
 --
 
 CREATE TABLE `tblpatient` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `fname` varchar(100) NOT NULL,
   `lname` varchar(191) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -633,38 +685,12 @@ CREATE TABLE `tblpatient` (
 --
 
 INSERT INTO `tblpatient` (`id`, `fname`, `lname`, `address`, `dob`, `gender`, `phone`, `email`, `image`, `password`, `role`, `verify_token`, `verify_status`, `created_at`) VALUES
-(114, 'Rose Ann', 'Bonador', '25 Maginoo St. Brgy. Pinyahan Q.C.', '02/07/2002', 'Female', '+639297245140', 'roseannbonador5@gmail.com', '1640808093.png', '$2y$10$fi3QEukoZt1MPnG21NN9pui63/FzEoJ31KRF0jmtDBY5G0kpb2nfq', 'patient', 'd0bc6b0aca1687432f1d4b9df3fd468dfeliztooth', 1, '2021-12-30 04:01:33'),
 (182, 'Alexis', 'Martin', 'Barangay pinagsama Taguig city', '02/27/2002', 'Male', '+639956493817', 'martinalexis2827@gmail.com', '1655800863.jpg', '$2y$10$glWUVLr.GNwFC3VyzBw25e3jG3abslGhzRUTLu/HFDhiacXULGYEq', 'patient', '863d8d9ddf57ec59ab42e21e1c55eceb', 0, '2022-06-21 16:41:03'),
 (183, 'Victoria Angela Marie Aquino', 'Dolor', 'Barangay new lower bicutan Taguig city', '11/04/2000', 'Female', '+639164546149', 'dolorvam@gmail.com', '1655809993.png', '$2y$10$HbRdpIepu4G9SDv.nmN0/.gLHxXGEfc1VP.NQpDD/U/tqosChMMnK', 'patient', '33ad5aca204c75e7f496ff1e4a6adac0', 1, '2022-06-21 19:13:13'),
 (184, 'Nicole', 'Alcid', 'Binan Laguna', '06/15/2022', 'Female', '+639956493817', 'nicolealcid9@gmail.com', '1655813588.jpeg', '$2y$10$OwiS7iqB2vxWnwIGpHrdA.rGTqlY9VtcNsLojuPCYpTVogRAqAwzy', 'patient', '3cc429d89d090420d29ff87f0011dd10', 0, '2022-06-21 20:13:08'),
 (185, 'Julius', 'Cabaces', 'Pateros', '06/15/2022', 'Male', '+639956493817', 'juliuscarlo.cabaces@gmail.com', '1655813844.jpeg', '$2y$10$792keY3FGbPSk4fntEvNde8ysmr.iRc1Gxg5fEyXF9S.kwaGQADt.', 'patient', '8416836a1ba0caf99536d2e39ea72290', 1, '2022-06-21 20:17:24'),
-(187, 'Alexis', 'Martin', '144-A Road 4 A. Reyes St. New Lower Bicutan, Taguig City', '02/27/2002', 'Male', '+639956493817', 'httpastronaut@gmail.com', '1656757993.jpeg', '$2y$10$0jejkcqg3KnLZs01pd8bk.I2eDJwmY/lCC21oVv7U3ZMbywTUmHSe', '3', '', 1, '2022-07-02 18:33:13');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblschedule`
---
-
-CREATE TABLE `tblschedule` (
-  `id` int(11) NOT NULL,
-  `doc_id` varchar(255) NOT NULL,
-  `day` varchar(50) NOT NULL,
-  `starttime` varchar(255) NOT NULL,
-  `endtime` varchar(255) NOT NULL,
-  `duration` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblschedule`
---
-
-INSERT INTO `tblschedule` (`id`, `doc_id`, `day`, `starttime`, `endtime`, `duration`) VALUES
-(24, '110', 'Wednesday', '15:22', '15:52', '30 minutes'),
-(25, '85', 'Monday', '19:45', '20:45', '15 minutes'),
-(28, '88', 'Monday', '07:23', '19:24', '15 minutes'),
-(29, '88', 'Monday', '07:24', '19:26', '15 minutes'),
-(30, '88', 'Monday', '07:44', '19:45', '15 minutes');
+(187, 'Alexis', 'Martin', '144-A Road 4 A. Reyes St. New Lower Bicutan, Taguig City', '02/27/2002', 'Male', '+639956493817', 'httpastronaut@gmail.com', '1656757993.jpeg', '$2y$10$0jejkcqg3KnLZs01pd8bk.I2eDJwmY/lCC21oVv7U3ZMbywTUmHSe', '3', '', 1, '2022-07-02 18:33:13'),
+(193, 'Rose Ann', 'Bonador', '25 Maginoo St. Brgy. Pinyahan Q.C.', '06/30/2022', 'Female', '09297205140', 'roseannbonador5@gmail.com', '1657392228.png', '$2y$10$vS.1yZohr0elK1t6n3Yf1.qhm82zlJFEFDQYqOXkVCNSgMGOZeOxG', '3', '5850011e016f5b5a6d92faaad95cd574feliztooth', 1, '2022-07-10 02:43:48');
 
 -- --------------------------------------------------------
 
@@ -694,7 +720,7 @@ CREATE TABLE `tblstaff` (
 --
 
 INSERT INTO `tblstaff` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `email`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
-(4, 'staff', '02/02/2000', 'none', 'Male', '+639297205140', 'staff@gmail.com', '1643183452.png', '$2y$10$76AN7jP9tLoEU02pGJgyCOtjq6z1h8ZLt5hx78VmsInwtPDsrxwtC', 'staff', 1, 'a0def9cc611c093ce0590683a94b167f', 0, '2022-01-26 15:50:52');
+(10, 'staff', '06/07/1994', 'Laguna', 'Male', '09912345678', 'staff1@gmail.com', '1657524767.png', '$2y$10$USfA9m/HjtoeOddfQ.u5oOuRUb3p21zo8mSXlWuxjqv9Bg5/k8IQy', '2', 1, '', 0, '2022-07-11 15:32:47');
 
 -- --------------------------------------------------------
 
@@ -703,76 +729,17 @@ INSERT INTO `tblstaff` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `emai
 --
 
 CREATE TABLE `treatment` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(255) NOT NULL,
-  `doc_id` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `appointment_id` bigint(20) NOT NULL,
+  `patient_id` bigint(20) NOT NULL,
+  `doc_id` bigint(20) NOT NULL,
   `visit` varchar(255) NOT NULL,
   `teeth` varchar(255) NOT NULL,
   `complaint` varchar(255) NOT NULL,
   `treatment` varchar(255) NOT NULL,
   `fees` varchar(255) NOT NULL,
   `remarks` varchar(255) NOT NULL,
-  `created_at` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `treatment`
---
-
-INSERT INTO `treatment` (`id`, `patient_id`, `doc_id`, `visit`, `teeth`, `complaint`, `treatment`, `fees`, `remarks`, `created_at`) VALUES
-(27, '183', '158', '2022-07-04', '1', 'success', 'Pasta', '0', 'Done', '2022-07-02 17:28:29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `email`, `password`, `created_at`) VALUES
-(1, 'admin@feliztoothdistrict.com', 'password', '2021-11-29 17:47:14');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_group`
---
-
-CREATE TABLE `user_group` (
-  `id` int(11) NOT NULL,
-  `user_id` varchar(191) NOT NULL,
-  `group_id` varchar(191) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_group`
---
-
-INSERT INTO `user_group` (`id`, `user_id`, `group_id`) VALUES
-(1, '1', '1'),
-(2, '92', '3'),
-(3, '54', '2');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vaccine_status`
---
-
-CREATE TABLE `vaccine_status` (
-  `id` int(11) NOT NULL,
-  `patient_id` varchar(191) NOT NULL,
-  `status` tinyint(3) NOT NULL
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -789,13 +756,8 @@ ALTER TABLE `about`
 -- Indexes for table `dental_history`
 --
 ALTER TABLE `dental_history`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `documents`
---
-ALTER TABLE `documents`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dh_patient_id_foreign` (`patient_id`);
 
 --
 -- Indexes for table `featured`
@@ -819,31 +781,59 @@ ALTER TABLE `header`
 -- Indexes for table `health_declaration`
 --
 ALTER TABLE `health_declaration`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hd_patient_id_foreign` (`patient_id`),
+  ADD KEY `hd_q_id_foreign` (`question_id`);
 
 --
 -- Indexes for table `medical_record`
 --
 ALTER TABLE `medical_record`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mr_patient_id_foreign` (`patient_id`);
+
+--
+-- Indexes for table `medicines`
+--
+ALTER TABLE `medicines`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `medicines_transactions`
+--
+ALTER TABLE `medicines_transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `medicine_transactions_medicines_id_foreign` (`medicines_id`);
+
+--
+-- Indexes for table `medicine_stocks`
+--
+ALTER TABLE `medicine_stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `medicine_stocks_medicines_id_foreign` (`medicines_id`);
 
 --
 -- Indexes for table `notification`
 --
 ALTER TABLE `notification`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notif_patient_id_foreign` (`patient_id`),
+  ADD KEY `notif_doc_id_foreign` (`doc_id`);
 
 --
 -- Indexes for table `prescription`
 --
 ALTER TABLE `prescription`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `prescription_doc_id_foreign` (`doc_id`),
+  ADD KEY `prescription_patient_id_foreign` (`patient_id`);
 
 --
 -- Indexes for table `procedures`
 --
 ALTER TABLE `procedures`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `procedures_service_id_foreign` (`service_id`);
 
 --
 -- Indexes for table `questionnaires`
@@ -861,13 +851,34 @@ ALTER TABLE `reviews`
 -- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `schedule_id_foreign` (`doc_id`);
 
 --
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supplies`
+--
+ALTER TABLE `supplies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supply_stocks`
+--
+ALTER TABLE `supply_stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `supply_stocks_supplys_id_foreign` (`supply_id`);
+
+--
+-- Indexes for table `supply_transactions`
+--
+ALTER TABLE `supply_transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `supply_transactions_supplys_id_foreign` (`supply_id`);
 
 --
 -- Indexes for table `system_details`
@@ -885,7 +896,10 @@ ALTER TABLE `tbladmin`
 -- Indexes for table `tblappointment`
 --
 ALTER TABLE `tblappointment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patient_id_foreign` (`patient_id`),
+  ADD KEY `app_sched_id_foreign` (`sched_id`),
+  ADD KEY `app_doc_id_foreign` (`doc_id`);
 
 --
 -- Indexes for table `tbldoctor`
@@ -900,12 +914,6 @@ ALTER TABLE `tblpatient`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tblschedule`
---
-ALTER TABLE `tblschedule`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
@@ -915,25 +923,10 @@ ALTER TABLE `tblstaff`
 -- Indexes for table `treatment`
 --
 ALTER TABLE `treatment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_group`
---
-ALTER TABLE `user_group`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `vaccine_status`
---
-ALTER TABLE `vaccine_status`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `treatment_id_foreign` (`appointment_id`),
+  ADD KEY `treatment_doc_id` (`doc_id`),
+  ADD KEY `treatment_patient_id` (`patient_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -950,12 +943,6 @@ ALTER TABLE `about`
 --
 ALTER TABLE `dental_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `documents`
---
-ALTER TABLE `documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `featured`
@@ -979,37 +966,55 @@ ALTER TABLE `header`
 -- AUTO_INCREMENT for table `health_declaration`
 --
 ALTER TABLE `health_declaration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1690;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1774;
 
 --
 -- AUTO_INCREMENT for table `medical_record`
 --
 ALTER TABLE `medical_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `medicines`
+--
+ALTER TABLE `medicines`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `medicines_transactions`
+--
+ALTER TABLE `medicines_transactions`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `medicine_stocks`
+--
+ALTER TABLE `medicine_stocks`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=324;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
 
 --
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `procedures`
 --
 ALTER TABLE `procedures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `questionnaires`
 --
 ALTER TABLE `questionnaires`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -1021,13 +1026,31 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `supplies`
+--
+ALTER TABLE `supplies`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `supply_stocks`
+--
+ALTER TABLE `supply_stocks`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `supply_transactions`
+--
+ALTER TABLE `supply_transactions`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `system_details`
@@ -1039,61 +1062,120 @@ ALTER TABLE `system_details`
 -- AUTO_INCREMENT for table `tbladmin`
 --
 ALTER TABLE `tbladmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tblappointment`
 --
 ALTER TABLE `tblappointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
 
 --
 -- AUTO_INCREMENT for table `tbldoctor`
 --
 ALTER TABLE `tbldoctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `tblpatient`
 --
 ALTER TABLE `tblpatient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
-
---
--- AUTO_INCREMENT for table `tblschedule`
---
-ALTER TABLE `tblschedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `treatment`
 --
 ALTER TABLE `treatment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Constraints for dumped tables
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `user_group`
+-- Constraints for table `dental_history`
 --
-ALTER TABLE `user_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `dental_history`
+  ADD CONSTRAINT `dh_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- AUTO_INCREMENT for table `vaccine_status`
+-- Constraints for table `health_declaration`
 --
-ALTER TABLE `vaccine_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `health_declaration`
+  ADD CONSTRAINT `hd_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hd_q_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questionnaires` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `medical_record`
+--
+ALTER TABLE `medical_record`
+  ADD CONSTRAINT `mr_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `medicines_transactions`
+--
+ALTER TABLE `medicines_transactions`
+  ADD CONSTRAINT `medicine_transactions_medicines_id_foreign` FOREIGN KEY (`medicines_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `medicine_stocks`
+--
+ALTER TABLE `medicine_stocks`
+  ADD CONSTRAINT `medicine_stocks_medicines_id_foreign` FOREIGN KEY (`medicines_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notification`
+--
+ALTER TABLE `notification`
+  ADD CONSTRAINT `notif_doc_id_foreign` FOREIGN KEY (`doc_id`) REFERENCES `tbldoctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notif_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `prescription`
+--
+ALTER TABLE `prescription`
+  ADD CONSTRAINT `prescription_doc_id_foreign` FOREIGN KEY (`doc_id`) REFERENCES `tbldoctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prescription_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `procedures`
+--
+ALTER TABLE `procedures`
+  ADD CONSTRAINT `procedures_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `supply_stocks`
+--
+ALTER TABLE `supply_stocks`
+  ADD CONSTRAINT `supply_stocks_supplys_id_foreign` FOREIGN KEY (`supply_id`) REFERENCES `supplies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `supply_transactions`
+--
+ALTER TABLE `supply_transactions`
+  ADD CONSTRAINT `supply_transactions_supplys_id_foreign` FOREIGN KEY (`supply_id`) REFERENCES `supplies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblappointment`
+--
+ALTER TABLE `tblappointment`
+  ADD CONSTRAINT `app_doc_id_foreign` FOREIGN KEY (`doc_id`) REFERENCES `tbldoctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `app_sched_id_foreign` FOREIGN KEY (`sched_id`) REFERENCES `schedule` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `treatment`
+--
+ALTER TABLE `treatment`
+  ADD CONSTRAINT `treatment_doc_id` FOREIGN KEY (`doc_id`) REFERENCES `tbldoctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `treatment_id_foreign` FOREIGN KEY (`appointment_id`) REFERENCES `tblappointment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `treatment_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `tblpatient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
