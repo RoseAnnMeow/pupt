@@ -89,7 +89,7 @@ if(isset($_SESSION['auth']))
               </div>
               <div class="row">
                 <div class="input-group col-sm-12 mb-3">
-                  <input type="tel" autocomplete="off" class="form-control" placeholder="09051234567" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="text" autocomplete="off" class="form-control" placeholder="09051234567" name="phone" required maxLength="11" minLength="11" onkeypress="isInputNumber(event)">
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-phone"></span>

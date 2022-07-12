@@ -42,7 +42,7 @@ include('config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" placeholder="09051234567" class="form-control" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="text" placeholder="09051234567" class="form-control" name="phone" maxLength="11" minLength="11" required onkeypress="isInputNumber(event)">
                 </div>
               </div>
               <div class="col-sm-6">
@@ -141,7 +141,7 @@ include('config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" id="edit_phone"  class="form-control" placeholder="09051234567" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="text" id="edit_phone" class="form-control" placeholder="09051234567" name="phone" maxLength="11" minLength="11" required onkeypress="isInputNumber(event)">
                 </div>
               </div>
               <div class="col-sm-6 auto">
@@ -368,7 +368,7 @@ include('config/dbconn.php');
                 } );
             }
         });
-
+ 
     $(document).on('click', '.viewAdminbtn', function() {       
     var userid = $(this).data('id');
 
@@ -416,7 +416,6 @@ include('config/dbconn.php');
         }
       });
     });
-
       //Admin Delete Modal
     $(document).on('click','.deleteAdminbtn', function(){
     

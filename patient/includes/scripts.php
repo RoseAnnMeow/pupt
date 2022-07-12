@@ -56,8 +56,21 @@
 <!--Custom JS -->
 <script src="../admin/assets/dist/js/custom.js"></script>
 <script>
-  $(document).ready(function () {
+
+function isInputNumber(evt){
 	
+	var ch = String.fromCharCode(evt.which);
+	
+	if(!(/[0-9]/.test(ch))){
+		evt.preventDefault();
+	}
+	
+}
+
+</script>
+<script>
+  $(document).ready(function () {
+
 	function load_unseen_notification(view = '')
 	{
         var user_id = $('#session_id').val();

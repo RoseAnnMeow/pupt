@@ -61,7 +61,7 @@ include('config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" placeholder="09051234567" class="form-control" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="text" placeholder="09051234567" class="form-control" name="phone" required maxLength="11" minLength="11" onkeypress="isInputNumber(event)">
                 </div>
               </div>
               <div class="col-sm-6">
@@ -196,7 +196,7 @@ include('config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" id="edit_phone" class="form-control" name="phone" placeholder="09051234567" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="text" id="edit_phone" class="form-control" name="phone" placeholder="09051234567" required maxLength="11" minLength="11" onkeypress="isInputNumber(event)">
                 </div>
               </div>
               <div class="col-sm-6 auto">

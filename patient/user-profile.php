@@ -99,7 +99,7 @@ include('includes/sidebar.php');
                                                 <div class="form-group col-md-2">
                                                     <label for="">Contact Number</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="09051234567" name="contact" pattern="^(09|\+639)\d{9}$" required>
+                                                    <input type="text" class="form-control"  value="<?=$row['phone']?>" placeholder="09051234567" name="contact" required maxLength="11" minLength="11" onkeypress="isInputNumber(event)">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Patient Image</label>
