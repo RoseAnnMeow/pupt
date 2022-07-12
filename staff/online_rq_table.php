@@ -2,6 +2,7 @@
 
     include('../admin/config/dbconn.php');
 
+    $status = $_POST['status'];
     $table = 'tblappointment';
     $primaryKey = 'id';
     
@@ -19,7 +20,7 @@
     require('../admin/config/sspconn.php');
     
     require( 'ssp.class.php' );
-    $where = "schedtype ='Online Schedule' ";
+    $where = "schedtype ='Online Schedule' AND status LIKE '$status' ";
     echo json_encode(
         SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
     );
