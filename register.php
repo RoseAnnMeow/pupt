@@ -38,7 +38,7 @@ if(isset($_SESSION['auth']))
               <div class="row">
                 <div class="col-sm-6">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="fname" placeholder="First name" required>
+                    <input type="text" class="form-control" name="fname" placeholder="First name" pattern="[a-zA-Z'-'\s]*"  required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -48,7 +48,7 @@ if(isset($_SESSION['auth']))
                 </div>
                 <div class="col-sm-6">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="lname" placeholder="Last name" required>
+                    <input type="text" class="form-control" name="lname" placeholder="Last name" pattern="[a-zA-Z'-'\s]*" required>
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -89,7 +89,7 @@ if(isset($_SESSION['auth']))
               </div>
               <div class="row">
                 <div class="input-group col-sm-12 mb-3">
-                  <input type="tel" input id="phone" autocomplete="off" class="form-control" placeholder="Mobile Number ex. +639" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="tel" autocomplete="off" class="form-control" placeholder="09051234567" name="phone" pattern="^(09|\+639)\d{9}$" required>
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-phone"></span>
@@ -99,7 +99,7 @@ if(isset($_SESSION['auth']))
               </div>
               <div class="row">
                 <div class="input-group col-sm-12 mb-3">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required>
+                  <input type="email" class="form-control" name="email" placeholder="Email" pattern="^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$" required>
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-envelope"></span>
