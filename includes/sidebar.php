@@ -24,7 +24,7 @@
           <li class="nav-item">
             <a href="user-profile.php" class="nav-link <?= $page == 'user-profile.php' ? 'active':''?>">
               <i class="nav-icon fa fa-user"></i>
-              <p>User Profile</p>
+              <p>Profile</p>
             </a>
           </li>
         </ul>

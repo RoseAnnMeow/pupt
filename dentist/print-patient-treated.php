@@ -31,7 +31,7 @@ $pdf->SetAligns(array('C', 'L', 'L', 'L', 'L', 'L', 'L'));
 
 $pdf->AddTableHeader($titlesArr);
 
-$sql= "SELECT CONCAT(lname,' ',fname) as fullname, s.day, t.teeth,t.treatment, d.name ,t.complaint
+$sql= "SELECT CONCAT(fname,' ',lname) as fullname, s.day, t.teeth,t.treatment, d.name ,t.complaint
 FROM tblpatient p 
 INNER JOIN treatment t ON t.patient_id = p.id
 INNER JOIN tbldoctor d ON d.id = t.doc_id

@@ -55,7 +55,7 @@ include('../admin/config/dbconn.php');
                                                 <div class="form-group col-md-6">
                                                     <label for="">Full Name</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="text" name="name" class="form-control" value="<?=$row['name']?>" required>
+                                                    <input type="text" name="name" class="form-control" value="<?=$row['name']?>" pattern="[a-zA-Z'-'\s]*" required>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Birthdate</label>
@@ -89,15 +89,15 @@ include('../admin/config/dbconn.php');
                                                 <div class="form-group col-md-2">
                                                     <label for="">Contact Number</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="+63 9XX XXX XXXX" name="contact" pattern="^(09|\+639)\d{9}$" required>
+                                                    <input type="tel" id="phone"  class="form-control"  value="<?=$row['phone']?>" placeholder="09051234567" name="contact" pattern="^(09|\+639)\d{9}$" required>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="">Email</label>
                                                     <span class="text-danger">*</span>
-                                                    <input type="email" name="email" class="form-control" value="<?=$row['email']?>" readonly>
+                                                    <input type="email" class="form-control" value="<?=$row['email']?>" pattern="^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$"  readonly>
                                                 </div>
                                                 <div class="form-group col-md-3">
-                                                    <label for="">Dentist Image</label>
+                                                    <label for="">Staff Image</label>
                                                     <input type="file" name="img_url" placeholder="">
                                                     <input type="hidden" name="old_image" value="<?=$row['image']?>"/>
                                                     <div id="uploaded_image">

@@ -26,14 +26,14 @@ include('../admin/config/dbconn.php');
                 <div class="form-group">
                   <label>First Name</label>
                   <span class="text-danger">*</span>
-                  <input type="text" name="fname" class="form-control" required>
+                  <input type="text" name="fname" class="form-control" pattern="[a-zA-Z'-'\s]*" required>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Last Name</label>
                   <span class="text-danger">*</span>
-                  <input type="text" name="lname" class="form-control" required>
+                  <input type="text" name="lname" class="form-control" pattern="[a-zA-Z'-'\s]*" required>
                 </div>
               </div>
             </div>
@@ -72,14 +72,14 @@ include('../admin/config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" input id="phone" class="form-control" placeholder="+63 9XX XXX XXXX" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="tel" input id="phone" class="form-control" placeholder="09051234567" name="phone" pattern="^(09|\+639)\d{9}$" required>
                 </div>
               </div>
               <div class="col-sm-6 mb-2 auto">
                 <div class="form-group">
                   <label>Email</label>
                   <span class="text-danger">*</span>
-                  <input type="email" name="email" class="form-control" required>
+                  <input type="email" name="email" class="form-control" pattern="^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$" required>
                 </div>             
               </div>
             </div>
@@ -142,14 +142,14 @@ include('../admin/config/dbconn.php');
                 <div class="form-group">
                   <label>First Name</label>
                   <span class="text-danger">*</span>
-                  <input type="text" name="fname" id="edit_fname" class="form-control" required>
+                  <input type="text" name="fname" id="edit_fname" class="form-control" pattern="[a-zA-Z'-'\s]*" required>
                 </div>
               </div>
               <div class="col-sm-6 mb-2">
                 <div class="form-group">
                   <label>Last Name</label>
                   <span class="text-danger">*</span>
-                  <input type="text" name="lname" id="edit_lname" class="form-control" required>
+                  <input type="text" name="lname" id="edit_lname" class="form-control" pattern="[a-zA-Z'-'\s]*" required>
                 </div>
               </div>
             </div>
@@ -188,14 +188,14 @@ include('../admin/config/dbconn.php');
                 <div class="form-group">
                   <label>Contact Number</label>
                   <span class="text-danger">*</span>
-                  <input type="tel" id="edit_phone"  class="form-control" placeholder="+63 9XX XXX XXXX" name="phone" pattern="^(09|\+639)\d{9}$" required>
+                  <input type="tel" id="edit_phone"  class="form-control" placeholder="09051234567" name="phone" pattern="^(09|\+639)\d{9}$" required>
                 </div>
               </div>
               <div class="col-sm-6 mb-2">
                 <div class="form-group">
                   <label>Email</label>
                   <span class="text-danger">*</span>
-                  <input type="email" name="email" id="edit_email" class="form-control" required>
+                  <input type="email" name="email" id="edit_email" class="form-control" pattern="^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$" required>
                   <span class="email_error text-danger"></span>
                 </div>             
               </div>

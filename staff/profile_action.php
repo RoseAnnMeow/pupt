@@ -10,9 +10,6 @@
         $gender = $_POST['gender'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
-        $email = $_POST['email'];
-        $degree = $_POST['degree'];
-        $specialty = $_POST['specialty'];
 
         $old_image = $_POST['old_image'];
         $image = $_FILES['img_url']['name'];
@@ -45,7 +42,7 @@
         }
         if($_SESSION['error'] == '')
         {
-            $sql = "UPDATE tblstaff SET name='$name',dob='$dob',gender='$gender',address='$address',phone='$contact',email='$email',image='$update_filename' WHERE id='$id'";
+            $sql = "UPDATE tblstaff SET name='$name',dob='$dob',gender='$gender',address='$address',phone='$contact',image='$update_filename' WHERE id='$id'";
             $query_run = mysqli_query($conn,$sql);
 
             if($query_run)

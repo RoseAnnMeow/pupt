@@ -65,7 +65,7 @@ include('../admin/config/dbconn.php');
             <div class="inner">
               <h3><?php
                 $userid = $_SESSION['auth_user']['user_id'];
-                $sql = "SELECT id FROM tblappointment WHERE doc_id='$userid' ORDER BY id";
+                $sql = "SELECT id FROM tblappointment WHERE doc_id='$userid' AND schedtype='Walk-in Schedule' ORDER BY id";
                 $query_run = mysqli_query($conn,$sql);
 
                 $row = mysqli_num_rows($query_run);
@@ -86,7 +86,7 @@ include('../admin/config/dbconn.php');
             <div class="inner">
               <h3><?php
                 $userid = $_SESSION['auth_user']['user_id'];
-                $sql = "SELECT id FROM tblappointment WHERE status='Pending' AND doc_id='$userid' AND schedtype='Online Schedule' ";
+                $sql = "SELECT id FROM tblappointment WHERE doc_id='$userid' AND schedtype='Online Schedule' ";
                 $query_run = mysqli_query($conn,$sql);
 
                 $row = mysqli_num_rows($query_run);

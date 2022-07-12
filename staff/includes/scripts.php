@@ -194,9 +194,6 @@
 		load_unseen_notification();; 
 	}, 5000);
  
-    $("#phone").inputmask({"mask": "+639999999999"});
-    $("#edit_phone").inputmask({"mask": "+639999999999"});
- 
 });
 </script>
 <script>

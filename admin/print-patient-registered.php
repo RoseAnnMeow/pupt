@@ -30,7 +30,7 @@ $pdf->SetAligns(array('C', 'L', 'L', 'L', 'L', 'L', 'L', 'L'));
 
 $pdf->AddTableHeader($titlesArr);
 
-$sql= "SELECT CONCAT(lname,' ',fname) as fullname,created_at,address,dob,gender,phone,email FROM tblpatient
+$sql= "SELECT CONCAT(fname,' ',lname) as fullname,created_at,address,dob,gender,phone,email FROM tblpatient
 where created_at between '$fromMysql' and '$toMysql' order by id asc";
 $results = mysqli_query($conn,$sql);
 $i = 0;

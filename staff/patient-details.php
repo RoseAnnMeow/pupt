@@ -513,7 +513,7 @@ include('../admin/config/dbconn.php');
                                                                             }
                                                                             else 
                                                                             {
-                                                                                echo $user['status'] = '<span class="badge badge-secondary">No Show</span>';
+                                                                                echo $user['status'] = '<span class="badge badge-secondary">Reschedule</span>';
                                                                             }
             
                                                                             ?>
