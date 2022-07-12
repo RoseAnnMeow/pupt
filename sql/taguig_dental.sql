@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2022 at 08:22 PM
+-- Generation Time: Jul 12, 2022 at 07:29 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.14
 
@@ -130,26 +130,6 @@ CREATE TABLE `health_declaration` (
   `answer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `health_declaration`
---
-
-INSERT INTO `health_declaration` (`id`, `question_id`, `patient_id`, `answer`) VALUES
-(1760, 3, 193, 'No'),
-(1761, 4, 193, 'No'),
-(1762, 5, 193, 'No'),
-(1763, 6, 193, 'No'),
-(1764, 7, 193, 'No'),
-(1765, 8, 193, 'No'),
-(1766, 9, 193, 'No'),
-(1767, 10, 193, 'No'),
-(1768, 11, 193, 'No'),
-(1769, 12, 193, 'No'),
-(1770, 13, 193, 'No'),
-(1771, 14, 193, 'No'),
-(1772, 15, 193, 'No'),
-(1773, 16, 193, 'No');
-
 -- --------------------------------------------------------
 
 --
@@ -225,7 +205,13 @@ INSERT INTO `medicines_transactions` (`id`, `medicines_id`, `user`, `stock`, `cr
 (50, 32, 'Admin (admin@gmail.com)', '+1', '2022-07-07 07:00:25', '2022-07-07 07:00:25'),
 (51, 32, 'Admin (admin@gmail.com)', '-2', '2022-07-07 07:04:37', '2022-07-07 07:04:37'),
 (52, 32, 'Admin (admin@gmail.com)', '+2', '2022-07-07 07:28:16', '2022-07-07 07:28:16'),
-(53, 32, 'Admin (admin@gmail.com)', '+3', '2022-07-07 07:28:24', '2022-07-07 07:28:24');
+(53, 32, 'Admin (admin@gmail.com)', '+3', '2022-07-07 07:28:24', '2022-07-07 07:28:24'),
+(54, 32, 'Dentists (dentist@gmail.com)', '+1', '2022-07-12 05:16:27', '2022-07-12 05:16:27'),
+(55, 32, 'Dentists (dentist@gmail.com)', '+1', '2022-07-12 05:16:28', '2022-07-12 05:16:28'),
+(56, 32, 'Dentists (dentist@gmail.com)', '-1', '2022-07-12 05:16:51', '2022-07-12 05:16:51'),
+(57, 32, 'Dentists (dentist@gmail.com)', '-1', '2022-07-12 05:16:51', '2022-07-12 05:16:51'),
+(58, 32, 'Dentists (dentist@gmail.com)', '+2', '2022-07-12 05:17:13', '2022-07-12 05:17:13'),
+(59, 31, 'Rose Ann Bonador (staff1@gmail.com)', '+2', '2022-07-12 07:11:48', '2022-07-12 07:11:48');
 
 -- --------------------------------------------------------
 
@@ -249,8 +235,8 @@ CREATE TABLE `medicine_stocks` (
 INSERT INTO `medicine_stocks` (`id`, `medicines_id`, `current_stock`, `consumed`, `total`, `created_at`) VALUES
 (23, 28, '30', '10', '20', '2022-07-06 05:31:42'),
 (24, 29, '128', '20', '108', '2022-07-06 05:32:35'),
-(26, 31, '30', '10', '20', '2022-07-06 06:13:27'),
-(27, 32, '7', '2', '5', '2022-07-07 07:00:12');
+(26, 31, '32', '10', '22', '2022-07-06 06:13:27'),
+(27, 32, '11', '4', '7', '2022-07-07 07:00:12');
 
 -- --------------------------------------------------------
 
@@ -267,16 +253,6 @@ CREATE TABLE `notification` (
   `type` int(1) NOT NULL,
   `created_at` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `notification`
---
-
-INSERT INTO `notification` (`id`, `patient_id`, `doc_id`, `subject`, `seen_status`, `type`, `created_at`) VALUES
-(353, 193, 158, 'Request An Appointment', 1, 0, '2022-07-11 04:31:55'),
-(355, 193, 158, 'Request An Appointment', 1, 0, '2022-07-11 20:49:46'),
-(362, 193, 158, 'Confirmed your Appointment', 0, 1, '2022-07-12 02:17:24'),
-(363, 193, 158, 'Confirmed your Appointment', 0, 1, '2022-07-12 02:17:25');
 
 -- --------------------------------------------------------
 
@@ -394,21 +370,6 @@ CREATE TABLE `schedule` (
   `duration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`id`, `doc_id`, `doc_name`, `day`, `starttime`, `endtime`, `duration`) VALUES
-(50, 158, 'Dr. Nelson Angeles', '2022-07-04', '9:05 AM', '9:05 PM', '30'),
-(51, 158, 'Dr. Nelson Angeles', '2022-07-03', '9:30 AM', '5:00 PM', '45'),
-(52, 158, 'Dr. Nelson Angeles', '2022-07-06', '9:00 AM', '5:00 PM', '30'),
-(56, 158, 'Dr. Nelson Angeles', '2022-07-09', '10:00 AM', '3:00 PM', '30'),
-(57, 158, 'Dr. Nelson Angeles', '2022-07-11', '8:00 AM', '5:00 PM', '30'),
-(59, 158, 'Dr. Nelson Angeles', '2022-07-10', '8:00 AM', '4:00 PM', '45'),
-(90, 158, 'Dr. Nelson Angeles', '2022-07-13', '9:00 AM', '2:00 PM', '60'),
-(91, 158, 'Dr. Nelson Angeles', '2022-07-15', '8:00 AM', '3:00 PM', '60'),
-(92, 158, 'Nelson Angeles', '2022-07-27', '10:00 AM', '3:00 PM', '30');
-
 -- --------------------------------------------------------
 
 --
@@ -494,7 +455,7 @@ INSERT INTO `supply_stocks` (`id`, `supply_id`, `current_stock`, `consumed`, `to
 (9, 17, '20', '6', '14', '2022-07-05 12:01:02', NULL),
 (10, 18, '1', '0', '1', '2022-07-06 06:24:36', NULL),
 (11, 19, '100', '10', '90', '2022-07-06 06:30:55', NULL),
-(12, 20, '6', '0', '6', '2022-07-06 06:32:47', NULL),
+(12, 20, '7', '0', '7', '2022-07-06 06:32:47', NULL),
 (13, 21, '45', '0', '45', '2022-07-06 06:33:48', NULL);
 
 -- --------------------------------------------------------
@@ -529,7 +490,8 @@ INSERT INTO `supply_transactions` (`id`, `supply_id`, `user`, `stock`, `created_
 (27, 19, 'Admin (admin@gmail.com)', '+100', '2022-07-06 06:31:11', '2022-07-06 06:31:11'),
 (28, 19, 'Admin (admin@gmail.com)', '-10', '2022-07-06 06:31:21', '2022-07-06 06:31:21'),
 (29, 20, 'Admin (admin@gmail.com)', '+6', '2022-07-06 06:33:00', '2022-07-06 06:33:00'),
-(30, 21, 'Admin (admin@gmail.com)', '+45', '2022-07-06 06:33:59', '2022-07-06 06:33:59');
+(30, 21, 'Admin (admin@gmail.com)', '+45', '2022-07-06 06:33:59', '2022-07-06 06:33:59'),
+(32, 20, 'Dentists (dentist@gmail.com)', '+1', '2022-07-12 05:17:35', '2022-07-12 05:17:35');
 
 -- --------------------------------------------------------
 
@@ -585,9 +547,7 @@ CREATE TABLE `tbladmin` (
 --
 
 INSERT INTO `tbladmin` (`id`, `name`, `address`, `phone`, `email`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
-(2, 'Admin', '123 Tests', '+639991234567', 'admin@gmail.com', '1642944005.png', '$2y$10$rOMqq.NE6WAaD5VqvBAwdeGqzdgG.4kTmIoeSoLS48rXBCRt34SPu', 'admin', 1, '', 0, '2022-01-23 21:20:05'),
-(11, 'Victoria Dolor', 'Barangay new lower bicutan Taguig city', '+639164546149', 'lullabyangela@gmail.com', '1655807754.png', '$2y$10$7syGUZfYF1ChM.tDksHyjeAtuUAGuSCod9gEymrUqk/2lJLSyxq4q', 'admin', 1, '', 0, '2022-06-21 18:35:54'),
-(12, 'Julius Cabaces', 'Pateros ', '+639164546149', 'juliuscarlos.cabaces@gmail.com', '1655863262.png', '$2y$10$gXNBMoFD6BqC9aEQ.YRz7OjXTXfTClBhfbWuLHJ96tMnMP6KvQwBi', 'admin', 1, '', 0, '2022-06-22 10:01:01');
+(2, 'Admin', 'Quezon City', '09912345555', 'admin@gmail.com', '1642944005.png', '$2y$10$rOMqq.NE6WAaD5VqvBAwdeGqzdgG.4kTmIoeSoLS48rXBCRt34SPu', 'admin', 1, '', 0, '2022-01-23 21:20:05');
 
 -- --------------------------------------------------------
 
@@ -612,19 +572,6 @@ CREATE TABLE `tblappointment` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tblappointment`
---
-
-INSERT INTO `tblappointment` (`id`, `patient_id`, `patient_name`, `doc_id`, `schedule`, `starttime`, `endtime`, `sched_id`, `schedtype`, `reason`, `seen_status`, `status`, `bgcolor`, `created_at`) VALUES
-(337, 187, 'Alexis Martin', 158, '2022-07-11', '08:00 AM', '08:30 AM', 57, 'Walk-in Schedule', 'Cleaning', 0, 'Confirmed', '#FF8C00', '2022-07-09 21:11:57'),
-(339, 183, 'Victoria Angela Marie Aquino Dolor', 158, '2022-07-11', '09:00 AM', '09:30 AM', 57, 'Walk-in Schedule', 'Restoration', 0, 'Confirmed', '#f39c12', '2022-07-10 02:31:43'),
-(341, 185, 'Julius Cabaces', 158, '2022-07-11', '01:30 PM', '02:00 PM', 57, 'Walk-in Schedule', 'Cleaning', 0, 'Confirmed', '#00c0ef', '2022-07-10 02:32:29'),
-(342, 184, 'Nicole Alcid', 158, '2022-07-11', '11:30 AM', '12:00 PM', 57, 'Walk-in Schedule', 'Whitening', 0, 'Confirmed', '#00a65a', '2022-07-10 02:33:49'),
-(343, 193, 'Rose Ann Bonador', 158, '2022-07-11', '08:30 AM', '09:00 AM', 57, 'Walk-in Schedule', 'Restoration', 0, 'Confirmed', '#FF8C00', '2022-07-10 03:13:42'),
-(350, 182, 'Alexis Martin', 158, '2022-07-13', '09:00 AM', '10:00 AM', 90, 'Walk-in Schedule', 'Whitening', 0, 'Cancelled', '#00c0ef', '2022-07-11 19:03:24'),
-(351, 193, 'Rose Ann Bonador', 158, '2022-07-13', '11:00 AM', '12:00 PM', 90, 'Online Schedule', 'Restoration', 0, 'Confirmed', '#0073b7', '2022-07-11 20:49:46');
-
 -- --------------------------------------------------------
 
 --
@@ -643,19 +590,12 @@ CREATE TABLE `tbldoctor` (
   `specialty` varchar(100) NOT NULL,
   `image` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(191) NOT NULL,
+  `role` varchar(191) NOT NULL DEFAULT '2',
   `status` tinyint(2) NOT NULL DEFAULT 1 COMMENT '0=inactive,1=active',
   `verify_token` varchar(255) NOT NULL,
   `verify_status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0=no,1=yes	',
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbldoctor`
---
-
-INSERT INTO `tbldoctor` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `email`, `degree`, `specialty`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
-(158, 'Nelson Angeles', '10/19/1967', 'Block 4 Lot 4 Annex 31, Betterliving Subdivision, Marcelo Green, Paranaque', 'Male', '+639088906445', 'staff@gmail.com', 'Doctor of Dental Medicine Masters in Educational Management , BS in Industrial Technology', 'General Dentistry', '1657015690.jpg', '$2y$10$3WY9GVfbAiCAtUVOpNb7dug4Tf9ksGfHifJlGSpvt7efkR3bLcAyu', '2', 1, '', 0, '2022-07-02 17:01:25');
 
 -- --------------------------------------------------------
 
@@ -674,23 +614,11 @@ CREATE TABLE `tblpatient` (
   `email` varchar(100) NOT NULL,
   `image` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(191) NOT NULL,
+  `role` varchar(191) NOT NULL DEFAULT 'patient',
   `verify_token` varchar(191) NOT NULL,
   `verify_status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0=no,1=yes',
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblpatient`
---
-
-INSERT INTO `tblpatient` (`id`, `fname`, `lname`, `address`, `dob`, `gender`, `phone`, `email`, `image`, `password`, `role`, `verify_token`, `verify_status`, `created_at`) VALUES
-(182, 'Alexis', 'Martin', 'Barangay pinagsama Taguig city', '02/27/2002', 'Male', '+639956493817', 'martinalexis2827@gmail.com', '1655800863.jpg', '$2y$10$glWUVLr.GNwFC3VyzBw25e3jG3abslGhzRUTLu/HFDhiacXULGYEq', 'patient', '863d8d9ddf57ec59ab42e21e1c55eceb', 0, '2022-06-21 16:41:03'),
-(183, 'Victoria Angela Marie Aquino', 'Dolor', 'Barangay new lower bicutan Taguig city', '11/04/2000', 'Female', '+639164546149', 'dolorvam@gmail.com', '1655809993.png', '$2y$10$HbRdpIepu4G9SDv.nmN0/.gLHxXGEfc1VP.NQpDD/U/tqosChMMnK', 'patient', '33ad5aca204c75e7f496ff1e4a6adac0', 1, '2022-06-21 19:13:13'),
-(184, 'Nicole', 'Alcid', 'Binan Laguna', '06/15/2022', 'Female', '+639956493817', 'nicolealcid9@gmail.com', '1655813588.jpeg', '$2y$10$OwiS7iqB2vxWnwIGpHrdA.rGTqlY9VtcNsLojuPCYpTVogRAqAwzy', 'patient', '3cc429d89d090420d29ff87f0011dd10', 0, '2022-06-21 20:13:08'),
-(185, 'Julius', 'Cabaces', 'Pateros', '06/15/2022', 'Male', '+639956493817', 'juliuscarlo.cabaces@gmail.com', '1655813844.jpeg', '$2y$10$792keY3FGbPSk4fntEvNde8ysmr.iRc1Gxg5fEyXF9S.kwaGQADt.', 'patient', '8416836a1ba0caf99536d2e39ea72290', 1, '2022-06-21 20:17:24'),
-(187, 'Alexis', 'Martin', '144-A Road 4 A. Reyes St. New Lower Bicutan, Taguig City', '02/27/2002', 'Male', '+639956493817', 'httpastronaut@gmail.com', '1656757993.jpeg', '$2y$10$0jejkcqg3KnLZs01pd8bk.I2eDJwmY/lCC21oVv7U3ZMbywTUmHSe', '3', '', 1, '2022-07-02 18:33:13'),
-(193, 'Rose Ann', 'Bonador', '25 Maginoo St. Brgy. Pinyahan Q.C.', '06/30/2022', 'Female', '09297205140', 'roseannbonador5@gmail.com', '1657392228.png', '$2y$10$vS.1yZohr0elK1t6n3Yf1.qhm82zlJFEFDQYqOXkVCNSgMGOZeOxG', '3', '5850011e016f5b5a6d92faaad95cd574feliztooth', 1, '2022-07-10 02:43:48');
 
 -- --------------------------------------------------------
 
@@ -714,13 +642,6 @@ CREATE TABLE `tblstaff` (
   `verify_status` tinyint(2) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblstaff`
---
-
-INSERT INTO `tblstaff` (`id`, `name`, `dob`, `address`, `gender`, `phone`, `email`, `image`, `password`, `role`, `status`, `verify_token`, `verify_status`, `created_at`) VALUES
-(10, 'staff', '06/07/1994', 'Laguna', 'Male', '09912345678', 'staff1@gmail.com', '1657524767.png', '$2y$10$USfA9m/HjtoeOddfQ.u5oOuRUb3p21zo8mSXlWuxjqv9Bg5/k8IQy', '2', 1, '', 0, '2022-07-11 15:32:47');
 
 -- --------------------------------------------------------
 
@@ -852,7 +773,7 @@ ALTER TABLE `reviews`
 --
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `schedule_id_foreign` (`doc_id`);
+  ADD KEY `sched_doc_id_foreign` (`doc_id`);
 
 --
 -- Indexes for table `services`
@@ -966,7 +887,7 @@ ALTER TABLE `header`
 -- AUTO_INCREMENT for table `health_declaration`
 --
 ALTER TABLE `health_declaration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1774;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1830;
 
 --
 -- AUTO_INCREMENT for table `medical_record`
@@ -984,7 +905,7 @@ ALTER TABLE `medicines`
 -- AUTO_INCREMENT for table `medicines_transactions`
 --
 ALTER TABLE `medicines_transactions`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `medicine_stocks`
@@ -996,7 +917,7 @@ ALTER TABLE `medicine_stocks`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=392;
 
 --
 -- AUTO_INCREMENT for table `prescription`
@@ -1026,7 +947,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -1050,7 +971,7 @@ ALTER TABLE `supply_stocks`
 -- AUTO_INCREMENT for table `supply_transactions`
 --
 ALTER TABLE `supply_transactions`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `system_details`
@@ -1068,31 +989,31 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblappointment`
 --
 ALTER TABLE `tblappointment`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
 
 --
 -- AUTO_INCREMENT for table `tbldoctor`
 --
 ALTER TABLE `tbldoctor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `tblpatient`
 --
 ALTER TABLE `tblpatient`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `treatment`
 --
 ALTER TABLE `treatment`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- Constraints for dumped tables
@@ -1148,6 +1069,12 @@ ALTER TABLE `prescription`
 --
 ALTER TABLE `procedures`
   ADD CONSTRAINT `procedures_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD CONSTRAINT `sched_doc_id_foreign` FOREIGN KEY (`doc_id`) REFERENCES `tbldoctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `supply_stocks`
