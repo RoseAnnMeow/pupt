@@ -297,7 +297,7 @@
                 if($_SESSION['error'] == '')
                 {
                     $sql = "INSERT INTO tblstaff (name,address,dob,gender,phone,email,image,password,role,created_at)
-                    VALUES ('$doc_fname','$doc_address','$doc_dob','$doc_gender','$doc_phone','$staff_email','$filename','$hash','2','$regdate')";
+                    VALUES ('$doc_fname','$doc_address','$doc_dob','$doc_gender','$doc_phone','$staff_email','$filename','$hash','3','$regdate')";
                     $doctor_query_run = mysqli_query($conn,$sql);
                     if ($doctor_query_run)
                     {

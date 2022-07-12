@@ -36,7 +36,10 @@
         if($password == $confirmPassword)
         {
             $hash = password_hash($password,PASSWORD_DEFAULT);
-            $checkemail = "SELECT email FROM tblpatient WHERE email='$email' ";
+            $checkemail = "SELECT email FROM tbladmin WHERE email='$email' 
+            UNION ALL SELECT email FROM tblstaff WHERE email='$email'
+            UNION ALL SELECT email FROM tblpatient WHERE email='$email'
+            UNION ALL SELECT email FROM tbldoctor WHERE email='$email' ";
             $checkemail_run = mysqli_query($conn, $checkemail);
 
             if(mysqli_num_rows($checkemail_run) > 0)
@@ -195,7 +198,10 @@
 
         if($password == $confirmPassword)
         {
-            $checkemail = "SELECT email FROM tblpatient WHERE email='$email' AND id != '$id' ";
+            $checkemail = "SELECT email FROM tbladmin WHERE email='$email' 
+            UNION ALL SELECT email FROM tblstaff WHERE email='$email'
+            UNION ALL SELECT email FROM tblpatient WHERE email='$email' AND id != '$id'  
+            UNION ALL SELECT email FROM tbldoctor WHERE email='$email' ";
             $checkemail_run = mysqli_query($conn, $checkemail);
     
             if(mysqli_num_rows($checkemail_run) > 0)

@@ -4,9 +4,8 @@ include("logics-builder-pdf.php");
 include('../admin/config/dbconn.php');
 
 $reportTitle = "Medicine Inventory";
-$datetime = date('F Y');
 
-$pdf = new LB_PDF('L', false, $reportTitle, $datetime);
+$pdf = new LB_PDF('L', false, $reportTitle);
 $pdf->SetMargins(15, 10);
 $pdf->AliasNbPages();
 $pdf->SetFont('Arial','',12);

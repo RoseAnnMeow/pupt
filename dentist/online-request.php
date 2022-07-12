@@ -184,7 +184,10 @@ include('../admin/config/dbconn.php');
               <div class="col-md-12 mt-4">
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pending-tab" data-toggle="tab" data-target="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
+                        <a class="nav-link active" id="all-tab" data-toggle="tab" data-target="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pending-tab" data-toggle="tab" data-target="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="confirmed-tab" data-toggle="tab" data-target="#confirmed" role="tab" aria-controls="confirmed" aria-selected="false">Confirmed</a>
@@ -202,7 +205,7 @@ include('../admin/config/dbconn.php');
               </div>
                 <div class="card-body">
                   <div class="tab-content">
-                    <div id="pending" class="tab-pane fade show active" role="tabpanel" aria-labelledby="pending-tab">
+                    <div id="pending" class="tab-pane fade" role="tabpanel" aria-labelledby="pending-tab">
                       <table id="pendingtbl" class="table table-borderless table-hover" style="width: 100%;">
                         <thead class="bg-light">
                           <tr>
@@ -264,6 +267,21 @@ include('../admin/config/dbconn.php');
                     </div>
                     <div id="reschedule" class="tab-pane fade" role="tabpanel" aria-labelledby="reschedule-tab">
                       <table id="orescheduletbl" class="table table-borderless table-hover" style="width: 100%;">
+                        <thead class="bg-light">
+                          <tr>
+                            <th class="export">Patient</th>
+                            <th class="export">Date Submitted</th>
+                            <th class="export">Appointment Date</th>
+                            <th class="export">Start Time</th>
+                            <th class="export">End Time</th>
+                            <th class="export">Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <div id="all" class="tab-pane fade show active" role="tabpanel" aria-labelledby="all-tab">
+                      <table id="oalltbl" class="table table-borderless table-hover" style="width: 100%;">
                         <thead class="bg-light">
                           <tr>
                             <th class="export">Patient</th>
@@ -406,7 +424,7 @@ include('../admin/config/dbconn.php');
 
     $(document).ready(function () {
 
-    var table2 = $('#oconfirmedtbl').DataTable( {
+  var table2 = $('#oconfirmedtbl').DataTable( {
       "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -698,7 +716,7 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
-  } );
+  });
   var table5 = $('#orescheduletbl').DataTable( {
     "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
         "<'row'<'col-sm-12'tr>>" +
@@ -795,7 +813,112 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
-  } );
+  });
+  var table6 = $('#oalltbl').DataTable( {
+    "dom": "<'row'<'col-sm-3'l><'col-sm-5'B><'col-sm-4'f>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "processing": true,
+        "searching": true,
+        "paging": true,
+        "responsive":true,
+        "pagingType": "simple",
+        "buttons": [
+            {
+                extend: 'copyHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-clipboard"></i>  Copy',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-csv"></i>  CSV',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'excel',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-excel"></i>  Excel',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="far fa-file-pdf"></i>  PDF',
+                exportOptions: {
+                    columns: '.export'
+                }
+            },
+            {
+                extend: 'print',
+                className: 'btn btn-outline-secondary btn-sm',
+                text: '<i class="fas fa-print"></i>  Print',
+                exportOptions: {
+                    columns: '.export'
+                }
+            }
+        ],
+        "order": [[ 1, "asc" ]],
+        "language": {
+          'search': '',
+          'searchPlaceholder': "Search...",
+          'emptyTable': "No results found",
+        },
+        "ajax": {
+            "url": "online_rq_table.php",
+              "type": "POST",
+              "data": {
+                "doctor_id": <?php echo $_SESSION['auth_user']['user_id'] ?>,
+                "status": '%e%'
+             },
+        },
+        "columns": [
+          { "data": "patient_name" },
+          { 
+            "data": "created_at",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { 
+            "data": "schedule",
+            render: function(data,type,row){
+              return moment(data).format("DD-MMMM-YYYY")
+            }
+          },
+          { "data": "starttime" },
+          { "data": "endtime" },
+          {
+            "data": 'status',
+            render: function(data, type, row) {
+              if(data == 'Confirmed'){
+                return '<span class="badge badge-success">Confirmed</span>';
+              }else if(data == 'Pending'){
+                return '<span class="badge badge-warning">Pending</span>';
+              }else if(data == 'Treated'){
+                return '<span class="badge badge-primary">Treated</span>';
+              }else if(data == 'Reschedule'){
+                return '<span class="badge badge-secondary">Reschedule</span>';
+              }else{
+                return '<span class="badge badge-danger">Cancelled</span>';
+              }
+            }
+          },
+          {
+            "data": 'id',
+            render: function(data, type,row) {
+              return '<button type="button" data-id="'+ row.patient_id +'" class="btn btn-sm btn-secondary viewbtn"><i class="fad fa-head-side-mask"></i></button> <button type="button" data-id="'+ data +'" class="btn btn-sm btn-info editbtn"><i class="fas fa-edit"></i></button>';
+            }
+          },
+        ],
+  });
 
   $('.nav-tabs a').on('shown.bs.tab', function (event) {
       var tabID = $(event.target).attr('data-target');
@@ -814,6 +937,9 @@ include('../admin/config/dbconn.php');
       }
       if( tabID === '#reschedule') {
         table5.columns.adjust().responsive.recalc();
+      }
+      if( tabID === '#all') {
+        table6.columns.adjust().responsive.recalc();
       }
     } );
 

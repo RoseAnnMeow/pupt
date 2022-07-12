@@ -84,7 +84,7 @@ include('config/dbconn.php');
           <div class="small-box bg-danger">
             <div class="inner">
               <h3><?php
-                $sql = "SELECT id FROM tblappointment WHERE status='Pending' AND schedtype='Online Schedule' ";
+                $sql = "SELECT id FROM tblappointment WHERE schedtype='Online Schedule' ";
                 $query_run = mysqli_query($conn,$sql);
 
                 $row = mysqli_num_rows($query_run);
