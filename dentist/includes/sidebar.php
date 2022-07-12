@@ -44,7 +44,7 @@
                 $row = mysqli_num_rows($query_run);
                 if($row > 0)
                 {
-                    echo '<span class="right badge badge-danger">New</span>';
+                    echo '<span class="right badge badge-light">New</span>';
                 }
                 ?>
             </p>

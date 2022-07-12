@@ -1,11 +1,12 @@
 <?php
 
-include("../admin/fpdf184/logics-builder-pdf.php");
+include("logics-builder-pdf.php");
 include('../admin/config/dbconn.php');
 
 $reportTitle = "Patients Treated";
 $from = $_GET['from'];
 $to = $_GET['to'];
+$user = $_GET['id'];
 
 $fromArr = explode("/", $from);
 $toArr = explode("/", $to);
@@ -35,7 +36,7 @@ FROM tblpatient p
 INNER JOIN treatment t ON t.patient_id = p.id
 INNER JOIN tbldoctor d ON d.id = t.doc_id
 LEFT JOIN schedule s ON s.id = t.visit
-where t.created_at between '$fromMysql' and '$toMysql' order by t.id asc";
+where t.created_at between '$fromMysql' and '$toMysql' and t.doc_id='$user' order by t.id asc";
 $results = mysqli_query($conn,$sql);
 $i = 0;
 while($row = mysqli_fetch_assoc($results))

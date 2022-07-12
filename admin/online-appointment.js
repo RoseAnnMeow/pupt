@@ -884,22 +884,22 @@
     });
 
     $('#edit_status').on('change', function() {
-          var treated = $(this).val();
-          var schedDate = $("#edit_schedule").val();
-          var appDate = Date.parse(schedDate);
-          var todayDate = new Date().getTime();; 
-          if(treated == "Treated")
+        var treated = $(this).val();
+        var schedDate = $("#edit_schedule").val();
+        var appDate = Date.parse(schedDate);
+        var todayDate = new Date().getTime();; 
+        if(treated == "Treated")
+        {
+          if(todayDate < appDate)
           {
-            if(todayDate < appDate)
-            {
-              if(confirm('The appointment date is not today, are you sure you want to set it to Treated?')){
-              }else{
-                  this.selectedIndex = 0;
-              }
-            }         
-            return false;
-          }  
-        });
+            if(confirm('The appointment date is not today, are you sure you want to set it to Treated?')){
+            }else{
+                this.selectedIndex = 0;
+            }
+          }         
+          return false;
+        }  
+      });
 
 });
 

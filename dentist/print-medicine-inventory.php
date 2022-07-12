@@ -1,6 +1,6 @@
 <?php
 
-require_once("../admin/fpdf184/logics-builder-pdf.php");
+include("logics-builder-pdf.php");
 include('../admin/config/dbconn.php');
 
 $reportTitle = "Medicine Inventory";

@@ -146,9 +146,10 @@ include('../admin/config/dbconn.php');
         $("#print_treated").click(function() {
           var from = $("#treated_from").val();
           var to = $("#treated_to").val();
+          var doctor_id = <?php echo $_SESSION['auth_user']['user_id'];?>;
           
           if(from !== '' && to !== '') {
-            var win = window.open("print-patient-treated.php?from=" + from 
+            var win = window.open("print-patient-treated.php?id="+ doctor_id +"&from=" + from 
               +"&to=" + to, "_blank");
             if(win) {
               win.focus();
