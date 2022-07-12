@@ -79,7 +79,7 @@
                 if($_SESSION['error'] == '')
                 {
                     $sql = "INSERT INTO tblpatient (fname,lname,address,dob,gender,phone,email,image,password,role,verify_status,created_at)
-                    VALUES ('$fname','$lname','$address','$dob','$gender','$phone','$email','$filename','$hash','3','1','$regdate')";
+                    VALUES ('$fname','$lname','$address','$dob','$gender','$phone','$email','$filename','$hash','patient','1','$regdate')";
                     $patient_query_run = mysqli_query($conn,$sql);
                     if ($patient_query_run)
                     {      

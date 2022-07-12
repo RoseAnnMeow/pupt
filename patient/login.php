@@ -4,7 +4,7 @@ include('includes/header.php');
 if(isset($_SESSION['auth']))
 {
     $_SESSION['status'] = "You are already logged in";
-    header('Location: dashboard.php');
+    header('Location: index.php');
     exit(0);
 }
 ?>
@@ -28,10 +28,10 @@ if(isset($_SESSION['auth']))
         <!-- /.login-logo -->
         <div class="card card-outline card-primary shadow">
             <div class="card-body login-card-body">
-            <a href="index.php"><h3 class="login-box-msg text-danger font-weight-bold">PUP Taguig Dental <br><b class="text-secondary"> Clinic</b></h3></a>
+            <a href="../index.php"><h3 class="login-box-msg text-danger font-weight-bold">PUP Taguig Dental <br><b class="text-secondary"> Clinic</b></h3></a>
                 <p class="login-box-msg">Sign in</p>
                 <?php
-                include('admin/message.php');
+                include('../admin/message.php');
                 ?>
                 <form action="logincode.php" method="post">
                     <div class="input-group mb-3">

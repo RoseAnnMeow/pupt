@@ -1,5 +1,5 @@
 <?php
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
@@ -25,7 +25,7 @@ include('includes/sidebar.php');
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <?php include('admin/message.php');?>
+                <?php include('../admin/message.php');?>
                 <div class="card card-primary card-outline">
                     <!-- /.cards-header -->
                     <div class="card-body">

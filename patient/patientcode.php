@@ -1,12 +1,12 @@
 <?php
 session_start();
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 date_default_timezone_set("Asia/Manila");
 
@@ -35,7 +35,7 @@ function sendmail_verify($fname,$email,$verify_token)
             <p> Please click the link below to verify your email address and complete the registration process.</p>
             <p> You will be automatically redirected to sign in page.</p>
             <p>Please click below to activate your account:</p>
-            <a href='http://localhost/PUP/verify-email.php?token=$verify_token'> Click Here </a>
+            <a href='http://localhost/PUP/patient/verify-email.php?token=$verify_token'> Click Here </a>
             ";
 
     $mail->Body = $email_template;
@@ -110,7 +110,7 @@ function sendmail_verify($fname,$email,$verify_token)
                     else
                     {
                         $filename = time().'.'.$image_extension;
-                        move_uploaded_file($_FILES['patient_image']['tmp_name'], 'upload/patients/'.$filename);  
+                        move_uploaded_file($_FILES['patient_image']['tmp_name'], '../upload/patients/'.$filename);  
                     }
                 }
                 else
@@ -123,8 +123,8 @@ function sendmail_verify($fname,$email,$verify_token)
                     $blue = rand(0, 255);
                     imagecolorallocate($imagecreate, 230, 230, 230);  
                     $textcolor = imagecolorallocate($imagecreate, $red, $green, $blue);
-                    imagettftext($imagecreate, 100, 0, 55, 150, $textcolor, 'admin/font/arial.ttf', $character);
-                    imagepng($imagecreate, 'upload/patients/'.$path);
+                    imagettftext($imagecreate, 100, 0, 55, 150, $textcolor, '../admin/font/arial.ttf', $character);
+                    imagepng($imagecreate, '../upload/patients/'.$path);
                     imagedestroy($imagecreate);
                     $filename = $path;
                 }

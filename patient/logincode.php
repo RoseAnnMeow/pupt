@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 
 if(isset($_POST['login_btn']))
 {
@@ -48,7 +48,7 @@ if(isset($_POST['login_btn']))
                     //     header('Location: admin/index.php');
                     //     exit(0); 
                     // }
-                    header('Location: dashboard.php');
+                    header('Location: index.php');
                     exit(0);          
                 }
                 else

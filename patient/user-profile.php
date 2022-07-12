@@ -1,5 +1,5 @@
 <?php
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
@@ -29,7 +29,7 @@ include('includes/sidebar.php');
                 <div class="row">
                     <div class="col-md-12">
                     <?php
-                    include('admin/message.php');
+                    include('../admin/message.php');
                     ?>
                     <div class="card">
                         <div class="card-header p-2">
@@ -106,7 +106,7 @@ include('includes/sidebar.php');
                                                     <input type="file" name="img_url" placeholder="">
                                                     <input type="hidden" name="old_image" value="<?=$row['image']?>"/>
                                                     <div id="uploaded_image">
-                                                    <img src="upload/patients/<?= $row['image']?>" class="img-thumbnail img-fluid" width="120" alt="Doctor Image">
+                                                    <img src="../upload/patients/<?= $row['image']?>" class="img-thumbnail img-fluid" width="120" alt="Doctor Image">
                                                     </div>     
                                                 </div>
                                             </div>

@@ -1,11 +1,11 @@
 <?php
 session_start();
 include('includes/header.php');
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 if(isset($_SESSION['auth']))
 {
     $_SESSION['status'] = "You are already logged in";
-    header('Location: dashboard.php');
+    header('Location: index.php');
     exit(0);
 }
 ?>
@@ -33,7 +33,7 @@ if(isset($_SESSION['auth']))
           <div class="card-body register-card-body">
             <a href="index.php"><h3 class="login-box-msg text-danger font-weight-bold">PUP Taguig Dental <br><b class="text-secondary"> Clinic</b></h3></a>
             <p class="login-box-msg">Create your account by filling the form below</p>
-            <?php include('admin/message.php');?>
+            <?php include('../admin/message.php');?>
             <form action="patientcode.php"  method="post" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-sm-6">

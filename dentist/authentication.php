@@ -6,14 +6,14 @@ if(!isset($_SESSION['auth']))
     header('Location: login.php');
     exit(0);
 }
-else if($_SESSION['auth_role'] == "staff")
+else if($_SESSION['auth_role'] == "3")
 {
     header('Location: ../staff/login.php');
     exit(0);
 }
 else if($_SESSION['auth_role'] == "patient")
 {
-    header('Location: ../login.php');
+    header('Location: ../patient/login.php');
     exit(0);
 }
 else if($_SESSION['auth_role'] == "admin")

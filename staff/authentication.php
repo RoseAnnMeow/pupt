@@ -8,10 +8,10 @@ if(!isset($_SESSION['auth']))
 }
 else if($_SESSION['auth_role'] == "patient")
 {
-    header('Location: ../login.php');
+    header('Location: ../patient/login.php');
     exit(0);
 }
-else if($_SESSION['auth_role'] == "dentist")
+else if($_SESSION['auth_role'] == "2")
 {
     header('Location: ../dentist/login.php');
     exit(0);

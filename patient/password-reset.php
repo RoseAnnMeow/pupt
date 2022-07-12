@@ -23,7 +23,7 @@ include('includes/header.php');
             <div class="card-body login-card-body">
                 <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
                 <?php
-                include('admin/message.php');
+                include('../admin/message.php');
                 ?>
                 <form action="password-reset-code.php" method="post">
                     <div class="input-group mb-3">

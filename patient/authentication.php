@@ -11,18 +11,17 @@ else if($_SESSION['auth_role'] == "3")
     header('Location: ../staff/login.php');
     exit(0);
 }
-else if($_SESSION['auth_role'] == "patient")
-{
-    header('Location: ../patient/login.php');
-    exit(0);
-}
 else if($_SESSION['auth_role'] == "2")
 {
     header('Location: ../dentist/login.php');
     exit(0);
 }
-else
+else if($_SESSION['auth_role'] == "admin")
 {
-    
+    header('Location: ../admin/login.php');
+    exit(0);
+}
+else{
+
 }
 ?>

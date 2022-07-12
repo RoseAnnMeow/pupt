@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 if(isset($_GET['token']))
 {
     $token = $_GET['token'];

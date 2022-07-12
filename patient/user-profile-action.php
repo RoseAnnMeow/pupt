@@ -1,6 +1,6 @@
 <?php
     include('authentication.php');
-    include('admin/config/dbconn.php');
+    include('../admin/config/dbconn.php');
 
     if(isset($_POST['update_user']))
     {
@@ -50,11 +50,11 @@
             {
                 if($image != NULL)
                 {
-                    if(file_exists('upload/patients/'.$old_image))
+                    if(file_exists('../upload/patients/'.$old_image))
                     {
-                        unlink("upload/patients/".$old_image);
+                        unlink("../upload/patients/".$old_image);
                     }
-                    move_uploaded_file($_FILES['img_url']['tmp_name'], 'upload/patients/'.$update_filename);
+                    move_uploaded_file($_FILES['img_url']['tmp_name'], '../upload/patients/'.$update_filename);
                 }
                 $_SESSION['success'] = "Profile Updated Successfully";
                 header('Location: user-profile.php');

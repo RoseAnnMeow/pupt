@@ -49,7 +49,7 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
-      <a href="login.php" class="appointment-btn"><span class="d-none d-md-inline"></span>Login</a>
+      <a href="portal.php" class="appointment-btn"><span class="d-none d-md-inline"></span>Login</a>
       
 
     </div>

@@ -1,12 +1,12 @@
 <?php
 session_start();
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 function send_password_reset($get_name,$get_email,$token){
     $mail = new PHPMailer(true);

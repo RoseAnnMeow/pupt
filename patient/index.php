@@ -1,5 +1,5 @@
 <?php
-include('admin/config/dbconn.php');
+include('../admin/config/dbconn.php');
 include('authentication.php');
 include('includes/header.php');
 include('includes/topbar.php');
@@ -40,7 +40,7 @@ include('includes/sidebar.php');
             <div class="row">
                <div class="col-md-12">
                   <?php
-                  include('admin/message.php');
+                  include('../admin/message.php');
                   ?>
                </div>
                <div class="col-md-3">
@@ -60,7 +60,7 @@ include('includes/sidebar.php');
                               ?>
                              
                            <img class="profile-user-img img-fluid img-circle"
-                              src="upload/patients/<?=$row['image']?>"
+                              src="../upload/patients/<?=$row['image']?>"
                               alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center"><?=$row['fname'].' '.$row['lname']?></h3>

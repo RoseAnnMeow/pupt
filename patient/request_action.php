@@ -1,6 +1,6 @@
 <?php
     include('authentication.php');
-    include('admin/config/dbconn.php');
+    include('../admin/config/dbconn.php');
 
     date_default_timezone_set("Asia/Manila");
 
@@ -62,11 +62,11 @@
 
         if($query_run){
             $_SESSION['success'] = "Appointment Submitted Successfully";
-            header('Location: dashboard.php');
+            header('Location: index.php');
         }else{
             $_SESSION['error'] = "Appointment Submission Failed";
             //$_SESSION['error'] = mysqli_error($conn);
-            header('Location: dashboard.php');
+            header('Location: index.php');
         }
 
         $sql = "INSERT INTO notification (patient_id,doc_id,subject,created_at) VALUES ('$patient_id','$doctor_id','$subject','$date_submitted')";
@@ -82,11 +82,11 @@
         if($query_run)
         {
             $_SESSION['success'] = "Appointment Cancelled Successfully";
-            header('Location: dashboard.php');
+            header('Location: index.php');
         }
         else{
             $_SESSION['error'] = "Appointment Failed to Cancelled";
-            header('Location: dashboard.php');
+            header('Location: index.php');
         }
 
     }

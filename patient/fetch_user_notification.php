@@ -1,6 +1,6 @@
 <?php
     include('authentication.php');
-    include('admin/config/dbconn.php');
+    include('../admin/config/dbconn.php');
 
     date_default_timezone_set("Asia/Manila");
     function timeago($time,$tense='ago')
@@ -57,7 +57,7 @@
         
             <a class="dropdown-item">
             <div class="media">
-              <img src="upload/doctors/'.$row['image'].'" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="../upload/doctors/'.$row['image'].'" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
               <h3 class="dropdown-item-title">
               '.$row['name'].'
