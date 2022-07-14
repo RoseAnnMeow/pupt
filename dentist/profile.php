@@ -130,7 +130,7 @@ include('../admin/config/dbconn.php');
                                     <div class="tab-pane" id="pass">
                                     <form action="profile_action.php" method="post">
                                             <div class="row">
-                                            <input type="hidden" name="userid" value="141">
+                                            <input type="hidden" name="userid" value="<?=$_SESSION['auth_user']['user_id']?>">
                                                 <div class="form-group col-md-6">
                                                     <label>Current password</label>
                                                     <input type="password" autocomplete="off" name="current_pass" class="form-control" required>

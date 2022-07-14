@@ -10,14 +10,14 @@ require 'vendor/autoload.php';
         $mail->isSMTP();                                         
         $mail->Host       = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;                 
-        $mail->Username   = 'puptdental@gmail.com';                  
-        $mail->Password   = 'alhxegkzskfvgicm';  
+        $mail->Username   = 'feliztoothdev@gmail.com';                  
+        $mail->Password   = 'zepfxfgpomfipwxe';  
     
         $mail->SMTPSecure = 'tls';                                
         $mail->Port       = 587;                      
 
-        $mail->setFrom('puptdental@gmail.com',$_POST["name"]);
-        $mail->addAddress($_POST["email"]); 
+        $mail->setFrom($_POST["email"],$_POST["name"]);
+        $mail->addAddress('feliztoothdev@gmail.com'); 
         $mail->addReplyTo($_POST["email"],$_POST["name"]); 
         $mail->isHTML(true);
         $mail->Subject = 'Contact Form | ' .$_POST["subject"];

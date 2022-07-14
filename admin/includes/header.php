@@ -4,9 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PUP Taguig DCMS</title>
-
- <!-- Google Font: Source Sans Pro -->
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <?php
+  include('config/dbconn.php');
+  $sql = "SELECT * FROM system_details";
+  $query_run = mysqli_query($conn,$sql);
+  while($row = mysqli_fetch_array($query_run)){?> 
+  <link href="../upload/<?=$row['logo']?>" rel="icon">
+  <?php }; ?><!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="assets/plugins/font-awesome-pro/css/all.min.css">
   <!-- daterange picker -->

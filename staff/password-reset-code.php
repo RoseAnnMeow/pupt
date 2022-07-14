@@ -31,7 +31,7 @@ function send_password_reset($get_name,$get_email,$token)
             <h2> Hello </h2> 
             <h3> You are receiving this email because we received a password reset request for your account.</h3>
             <p>Please click below to reset your password</p>
-            <a href='http://localhost/staff/password-change.php?token=$token&email=$get_email'> Click Here </a>
+            <a href='http://localhost/PUP/staff/password-change.php?token=$token&email=$get_email'> Click Here </a>
             ";
 
     $mail->Body = $email_template;

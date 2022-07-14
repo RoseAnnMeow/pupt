@@ -15,13 +15,13 @@ function send_password_reset($get_name,$get_email,$token)
     $mail->isSMTP();                                      
     $mail->Host       = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                 
-    $mail->Username   = 'puptdental@gmail.com';                  
-    $mail->Password   = 'alhxegkzskfvgicm'; 
+    $mail->Username   = 'feliztoothdev@gmail.com';                  
+    $mail->Password   = 'zepfxfgpomfipwxe'; 
 
     $mail->SMTPSecure = 'tls';          
     $mail->Port       = 587;    
     
-    $mail->setFrom('puptdental@gmail.com', $get_name);
+    $mail->setFrom('feliztoothdev@gmail.com', $get_name);
     $mail->addAddress($get_email);  
 
     $mail->isHTML(true); 
@@ -31,7 +31,7 @@ function send_password_reset($get_name,$get_email,$token)
             <h2> Hello </h2> 
             <h3> You are receiving this email because we received a password reset request for your account.</h3>
             <p>Please click below to reset your password</p>
-            <a href='http://localhost/admin/password-change.php?token=$token&email=$get_email'> Click Here </a>
+            <a href='http://localhost/PUP/admin/password-change.php?token=$token&email=$get_email'> Click Here </a>
             ";
 
     $mail->Body = $email_template;
