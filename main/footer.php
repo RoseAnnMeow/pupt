@@ -21,7 +21,7 @@
             <ul>
               <li> <a href="index.php">Home</a></li>
               <li> <a href="about-us.php">About</a></li>
-              <li> <a href="request-appointment.php">Make an Appointment</a></li>
+              <li> <a href="patient/request-appointment.php">Make an Appointment</a></li>
               <li> <a href="contact-us.php">Contact</a></li>
             </ul>
           </div>

@@ -21,7 +21,6 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <!-- <h5 class="logo me-auto"><a href="index.html">Feliz Tooth District</a></h5> -->
       <a href="index.php" class="logo me-auto"><img src="upload/<?=$row['brand']?>" alt="" class="img-fluid"></a>
 <?php }
 ?>
@@ -44,7 +43,7 @@
               <?php } } ?>
             </ul>
           </li>
-          <li><a class="nav-link scrollto <?= $page == 'request-appointment.php' ? 'active':''?>" href="request-appointment.php">Make an Appointment</a></li>
+          <li><a class="nav-link scrollto <?= $page == 'patient/request-appointment.php' ? 'active':''?>" href="patient/request-appointment.php">Make an Appointment</a></li>
           <li><a class="nav-link scrollto <?= $page == 'contact-us.php' ? 'active':''?>" href="contact-us.php">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

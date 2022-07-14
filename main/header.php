@@ -13,8 +13,7 @@
   $sql = "SELECT * FROM system_details";
   $query_run = mysqli_query($conn,$sql);
   while($row = mysqli_fetch_array($query_run))
-  {
-?>
+  {?>
   <link href="upload/<?=$row['logo']?>" rel="icon">
   <?php } ?>
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">

@@ -19,7 +19,7 @@ function sendmail_verify($fname,$email,$verify_token)
     $mail->Host       = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                 
     $mail->Username   = 'puptdental@gmail.com';                  
-    $mail->Password   = 'alhxegkzskfvgicm';  
+    $mail->Password   = 'zepfxfgpomfipwxe';  
 
     $mail->SMTPSecure = 'tls';          
     $mail->Port       = 587;    
