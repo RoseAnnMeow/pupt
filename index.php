@@ -145,7 +145,7 @@ include('main/topbar.php');
             <div class="error-message"></div>
             <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
           </div>
-          <div class="text-center"><a href="request-appointment.php" class="appointment-btn" style="font-size:23px;"><span class="d-none d-md-inline"></span>Make an Appointment</a></div>
+          <div class="text-center"><a href="patient/request-appointment.php" class="appointment-btn" style="font-size:23px;"><span class="d-none d-md-inline"></span>Make an Appointment</a></div>
         </form>
 
       </div>

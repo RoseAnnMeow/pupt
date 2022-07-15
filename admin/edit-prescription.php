@@ -86,34 +86,35 @@ include('config/dbconn.php');
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Medicine</label>
+                                        
+                                    <div class="form-group">
+                                            <label>Select Dentist</label>
                                             <span class="text-danger">*</span>
-                                            <select class="form-control select2 medicines" name="select_medicine" id="edit_medicines" style="width: 100%;" required>
-                                            <option selected disabled value="">Select Medicine</option>
+                                            <select class="form-control select2 doctor" id="edit_doctor" name="select_doctor" style="width: 100%;" required>
                                             <?php
-                                            if(isset($_GET['id']))
-                                            {
-                                                echo $id = $_GET['id'];
-                                            } 
-                                            $sql = "SELECT * FROM medicines";
-                                            $patient_query_run = mysqli_query($conn,$sql);
-                                            if(mysqli_num_rows($query_run) > 0)
-                                            {
-                                                foreach($patient_query_run as $row)
+                                                if(isset($_GET['id']))
                                                 {
-                                                ?>
-                                                <option value="<?php echo $row['id'];?>">
-                                                <?php echo $row['med_name'];?></option>
-                                                <?php
+                                                    echo $id = $_GET['id'];
+                                                } 
+                                                $sql = "SELECT * FROM tbldoctor WHERE status='1'";
+                                                $query_run = mysqli_query($conn,$sql);
+                                                if(mysqli_num_rows($query_run) > 0)
+                                                {
+                                                    foreach($query_run as $row)
+                                                    {
+                                                    ?>
+
+                                                    <option value="<?php echo $row['id'];?>">
+                                                    <?php echo $row['name'];?></option>
+                                                    <?php
+                                                    }
                                                 }
-                                            }
-                                            else
-                                            {
-                                                ?>
-                                                <option value="">No Record Found"</option>
-                                                <?php
-                                            }
+                                                else
+                                                {
+                                                    ?>
+                                                    <option value="">No Record Found"</option>
+                                                    <?php
+                                                }
                                                 ?>     
                                             </select>
                                         </div>
