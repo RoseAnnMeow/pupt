@@ -33,7 +33,7 @@
         array( 'db' => 'treatment',  'dt' => 'treatment' ),
         array( 'db' => 'teeth',  'dt' => 'teeth' ),
         array( 'db' => 'complaint',  'dt' => 'complaint' ),
-        array( 'db' => 'fees',  'dt' => 'fees' ),
+        array( 'db' => 'fees',   'dt' => 'fees' ),
         array( 'db' => 'remarks',   'dt' => 'remarks' ),
         array( 'db' => 'id',   'dt' => 'id' ),
     );

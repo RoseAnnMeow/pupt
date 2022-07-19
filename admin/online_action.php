@@ -18,7 +18,7 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
     $mail->Host       = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                 
     $mail->Username   = 'puptdental@gmail.com';                  
-    $mail->Password   = 'alhxegkzskfvgicm';  
+    $mail->Password   = 'kafrwfrmyhjjcrhf';  
 
     $mail->SMTPSecure = 'tls';                                
     $mail->Port       = 587;                      
@@ -95,13 +95,22 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
         $doctor_id = $_POST['select_dentist'];
         $schedule_id = $_POST['scheddate'];
         $selectedTime = $_POST['schedTime'];
+
         $preferredTime = explode("-", $selectedTime);
         $s_time = $preferredTime[0];
         $e_time = $preferredTime[1];
         foreach ($_POST['service'] as $selectedService){
           $services .= $selectedService.",";
         }
+        
         $treatment = rtrim($services, ", ");
+        $status = $_POST['status'];
+        $bgcolor = $_POST['color'];
+        $subject = 'Confirmed your Appointment';
+        $type = '1';
+        $cancelled = 'Cancelled your Appointment';
+        $send_email = $_POST['send-email'];
+        $date_submitted = date('Y-m-d H:i:s');
 
         $sql = "SELECT * FROM schedule WHERE id='$schedule_id'";
         $query_run = mysqli_query($conn,$sql);
@@ -110,14 +119,6 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
             $schedule = $row['day'];
           }
         }
-
-        $status = $_POST['status'];
-        $bgcolor = $_POST['color'];
-        $subject = 'Confirmed your Appointment';
-        $type = '1';
-        $cancelled = 'Cancelled your Appointment';
-        $send_email = $_POST['send-email'];
-        $date_submitted = date('Y-m-d H:i:s');
 
         $sql = "UPDATE tblappointment set doc_id='$doctor_id',schedule='$schedule',starttime='$s_time',endtime='$e_time', reason='$treatment',status='$status',bgcolor='$bgcolor' WHERE id='$id' ";
         $query_run = mysqli_query($conn,$sql);
@@ -145,24 +146,31 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
             }
         }
 
-        $systemlogo = "SELECT * from system_details";
-        $systemdetails = mysqli_query($conn,$systemlogo);
-        $systemdata = mysqli_fetch_array($systemdetails);
-        $system_logo = $systemdata['brand'];
-        $system_address = $systemdata['address'];
-        $system_mobile = $systemdata['mobile'];
-        $system_email = $systemdata['email'];
+        $sql = "SELECT * from system_details";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $logo = $row['brand'];
+                $system_address = $row['address'];
+                $system_mobile = $row['mobile'];
+                $system_email = $row['email'];
+            }
+        }
+        
 
-        $fulldata = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.lname,p.phone,p.email,a.created_at FROM tblappointment a INNER JOIN tblpatient p ON p.id ='$patient_id' WHERE a.id='$id'";
-        $appdetails = mysqli_query($conn,$fulldata);
-        $patient_data = mysqli_fetch_array($appdetails);
-        $patient_name = $patient_data['pname'];
-        $patient_lname = $patient_data['lname'];
-        $date_submission = date('l, F j, Y',strtotime($patient_data['created_at']));
-        $patient_email = $patient_data['email'];
-        $patient_date = date('l, F j, Y',strtotime($patient_data['schedule']));
-        $patient_phone = $patient_data['phone'];
-        $patient_time = $s_time;
+        $sql= "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.lname,p.phone,p.email,a.created_at FROM tblappointment a INNER JOIN tblpatient p ON p.id ='$patient_id' WHERE a.id='$id'";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+              $patient_name = $row['pname'];
+              $patient_lname = $row['lname'];
+              $date_submission = date('l, F j, Y',strtotime($row['created_at']));
+              $patient_email = $row['email'];
+              $patient_date = date('l, F j, Y',strtotime($row['schedule']));
+              $patient_phone = $row['phone'];
+              $patient_time = $s_time;
+            }
+        }
         
         if($query_run){
           if($status =='Confirmed'){
@@ -202,7 +210,7 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
                 <div class="row">
                   <div class="col-md-8">
                     <div class="invoice p-3 mb-3" id="prescription">
-                        <img src="../upload/'.$system_logo.'" height="100" alt="Logo">
+                        <img src="../upload/'.$logo.'" height="100" alt="Logo">
                       <br>
                       <table class="table" style="width:100%;">
                         <tr>

@@ -16,7 +16,7 @@
       <nav class="mt-4">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-              <a href="index.php" class="nav-link <?= $page == 'dashboard.php' ? 'active':''?>">
+              <a href="index.php" class="nav-link <?= $page == 'index.php' ? 'active':''?>">
                 <i class="fa fa-home nav-icon"></i>
                 <p>Dashboard</p>
               </a>

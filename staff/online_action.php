@@ -18,7 +18,7 @@ function sendEmail($pdf,$patient_name,$patient_lname,$patient_email,$patient_dat
     $mail->Host       = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                 
     $mail->Username   = 'puptdental@gmail.com';                  
-    $mail->Password   = 'alhxegkzskfvgicm';  
+    $mail->Password   = 'kafrwfrmyhjjcrhf';  
 
     $mail->SMTPSecure = 'tls';                                
     $mail->Port       = 587;                      

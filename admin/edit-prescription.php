@@ -85,9 +85,8 @@ include('config/dbconn.php');
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        
-                                    <div class="form-group">
+                                    <div class="col-md-4">                                 
+                                        <div class="form-group">
                                             <label>Select Dentist</label>
                                             <span class="text-danger">*</span>
                                             <select class="form-control select2 doctor" id="edit_doctor" name="select_doctor" style="width: 100%;" required>

@@ -1,13 +1,11 @@
 <?php
 
-    include('config/dbconn.php');
+    include('../admin/config/dbconn.php');
 
-    $status = $_POST['status'];
     $table = 'tblappointment';
     $primaryKey = 'id';
-
+    
     $columns = array(
-        array( 'db' => 'patient_id', 'dt' => 'patient_id' ),
         array( 'db' => 'patient_name', 'dt' => 'patient_name' ),
         array( 'db' => 'created_at',  'dt' => 'created_at' ),
         array( 'db' => 'schedule',   'dt' => 'schedule' ),
@@ -17,10 +15,10 @@
         array( 'db' => 'id',   'dt' => 'id' ),
     );
     
-    require( 'config/sspconn.php' );
+    require('../admin/config/sspconn.php');
     
     require( 'ssp.class.php' );
-    $where = "schedtype ='Walk-in Schedule' AND status LIKE '$status'";
+    $where = "schedtype ='Walk-in Schedule'";
     echo json_encode(
         SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
     );

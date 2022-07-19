@@ -93,7 +93,7 @@ include('../admin/config/dbconn.php');
               </div>   
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Date</label>
+                    <label>Appointment Date</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="scheddate" id="preferredDate" style="width: 100%;" required>
                     </select>
@@ -101,7 +101,7 @@ include('../admin/config/dbconn.php');
               </div> 
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Time</label>
+                    <label>Appointment Time</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="schedTime" id="preferredTime" style="width:100%;" required>
                     </select>
@@ -113,15 +113,17 @@ include('../admin/config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="form-control select2" multiple="multiple" name="service[]" id="service" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
-                        if(mysqli_num_rows($query_run) > 0){
-                          foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                        if(mysqli_num_rows($query_run) > 0)
+                        {
+                          foreach($query_run as $row)
+                          {
+                            ?>
+
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>
@@ -262,7 +264,7 @@ include('../admin/config/dbconn.php');
               </div>   
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Date</label>
+                    <label>Appointment Date</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="scheddate" id="edit_sched" style="width:100%;" required disabled>
                     </select>
@@ -270,7 +272,7 @@ include('../admin/config/dbconn.php');
               </div>     
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Time</label>
+                    <label>Appointment Time</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="schedTime" id="edit_schedTime" style="width:100%;" required disabled>
                     </select>
@@ -282,15 +284,14 @@ include('../admin/config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="select2" multiple="multiple" name="service[]" id="edit_reason" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($query_run) > 0){
                           foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                            ?>
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>
@@ -576,11 +577,7 @@ include('../admin/config/dbconn.php');
           'emptyTable': "No results found",
         },
         "ajax": {
-            "url": "appointment_table.php",
-            "type": "POST",
-             "data": {
-             "status": '%e%' 
-             }
+            "url": "appointment_table1.php",
         },
         "columns": [
           { "data": "patient_name" },
@@ -621,18 +618,6 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
-        "initComplete": function () {
-          this.api().columns().every( function () {
-            var that = this;
-            $( 'input', this.footer() ).on( 'keyup change clear', function () {
-              if ( that.search() !== this.value ) {
-                that
-                  .search( this.value )
-                  .draw();
-              }
-            });
-          });
-        },
       });
 
       $(document).ready(function () {

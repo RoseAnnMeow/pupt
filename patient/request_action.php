@@ -65,7 +65,6 @@
             header('Location: index.php');
         }else{
             $_SESSION['error'] = "Appointment Submission Failed";
-            //$_SESSION['error'] = mysqli_error($conn);
             header('Location: index.php');
         }
 

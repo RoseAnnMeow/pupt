@@ -18,7 +18,7 @@ function sendEmail($patient_name,$patient_email,$patient_date,$patient_time,$pat
     $mail->Host       = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                 
     $mail->Username   = 'puptdental@gmail.com';                  
-    $mail->Password   = 'alhxegkzskfvgicm';  
+    $mail->Password   = 'kafrwfrmyhjjcrhf';  
 
     $mail->SMTPSecure = 'tls';                                
     $mail->Port       = 587;        
@@ -94,20 +94,26 @@ function sendEmail($patient_name,$patient_email,$patient_date,$patient_time,$pat
         VALUES ('$patient_id','$patient_name','$doctor_id','$schedule','$s_time','$e_time','$schedule_id','$treatment','$schedtype','$status','$bgcolor','$date_submitted')";
         $query_run = mysqli_query($conn,$sql);
 
-        $systemlogo = "SELECT * from system_details";
-        $systemdetails = mysqli_query($conn,$systemlogo);
-        $systemdata = mysqli_fetch_array($systemdetails);
-        $system_logo = $systemdata['brand'];
+        $sql = "SELECT * from system_details";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $system_logo = $row['brand'];
+            }
+        }
 
-        $fulldata = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.phone,p.email,a.created_at FROM tblappointment a INNER JOIN tblpatient p WHERE p.id ='$patient_id' ORDER BY a.id DESC";
-        $appdetails = mysqli_query($conn,$fulldata);
-        $patient_data = mysqli_fetch_array($appdetails);
-        $patient_name = $patient_data['pname'];
-        $date_submission = date('l, F j, Y',strtotime($patient_data['created_at']));
-        $patient_email = $patient_data['email'];
-        $patient_date = date('l, F j, Y',strtotime($patient_data['schedule']));
-        $patient_phone = $patient_data['phone'];
-        $patient_time = $s_time;
+        $sql = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.phone,p.email,a.created_at FROM tblappointment a INNER JOIN tblpatient p WHERE p.id ='$patient_id' ORDER BY a.id DESC";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $patient_name = $row['pname'];
+                $date_submission = date('l, F j, Y',strtotime($row['created_at']));
+                $patient_email = $row['email'];
+                $patient_date = date('l, F j, Y',strtotime($row['schedule']));
+                $patient_phone = $row['phone'];
+                $patient_time = $s_time;
+            }
+        }
 
         if($query_run)
         {
@@ -209,22 +215,27 @@ function sendEmail($patient_name,$patient_email,$patient_date,$patient_time,$pat
             }
         }
        
+        $sql = "SELECT * from system_details";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $system_logo = $row['brand'];
+            }
+        }
 
-        $systemlogo = "SELECT * from system_details";
-        $systemdetails = mysqli_query($conn,$systemlogo);
-        $systemdata = mysqli_fetch_array($systemdetails);
-        $system_logo = $systemdata['brand'];
-
-        $fulldata = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.phone,p.email,a.created_at,a.starttime FROM tblappointment a INNER JOIN tblpatient p ON p.id ='$patient_id' WHERE a.id='$id'";
-        $appdetails = mysqli_query($conn,$fulldata);
-        $patient_data = mysqli_fetch_array($appdetails);
-        $patient_name = $patient_data['pname'];
-        $date_submission = date('l, F j, Y',strtotime($patient_data['created_at']));
-        $patient_email = $patient_data['email'];
-        $patient_date = date('l, F j, Y',strtotime($patient_data['schedule']));
-        $patient_phone = $patient_data['phone'];
-        $patient_time = $patient_data['starttime'];
-
+        $sql = "SELECT a.*, CONCAT(p.fname,' ',p.lname) AS pname,p.phone,p.email,a.created_at,a.starttime FROM tblappointment a INNER JOIN tblpatient p ON p.id ='$patient_id' WHERE a.id='$id'";
+        $query_run = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                $patient_name = $row['pname'];
+                $date_submission = date('l, F j, Y',strtotime($row['created_at']));
+                $patient_email = $row['email'];
+                $patient_date = date('l, F j, Y',strtotime($row['schedule']));
+                $patient_phone = $row['phone'];
+                $patient_time = $row['starttime'];
+            }
+        }
+        
         if($query_run)
         {               
             if(!empty($_POST['send-email']))

@@ -2,10 +2,9 @@
 
     include('config/dbconn.php');
 
-    $status = $_POST['status'];
     $table = 'tblappointment';
     $primaryKey = 'id';
-
+    
     $columns = array(
         array( 'db' => 'patient_id', 'dt' => 'patient_id' ),
         array( 'db' => 'patient_name', 'dt' => 'patient_name' ),
@@ -20,7 +19,7 @@
     require( 'config/sspconn.php' );
     
     require( 'ssp.class.php' );
-    $where = "schedtype ='Walk-in Schedule' AND status LIKE '$status'";
+    $where = "schedtype ='Online Schedule'";
     echo json_encode(
         SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
     );

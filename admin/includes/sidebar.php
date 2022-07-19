@@ -137,6 +137,12 @@
           </ul>
         </li>
         <li class="nav-item">
+          <a href="services.php" class="nav-link <?= $page == 'services.php' ? 'active':''?>">
+            <i class="nav-icon fas fa-teeth"></i>
+            <p>Dental Services</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="prescription.php" class="nav-link <?= $page == 'prescription.php' || $page == 'add-prescription.php' || $page == 'view-prescription.php' || $page == 'edit-prescription.php' ? 'active':''?>">
             <i class="nav-icon fas fa-prescription"></i>
             <p>Prescription</p>
@@ -148,8 +154,8 @@
             <p>Treatment</p>
           </a>
         </li>
-        <li class="nav-item <?= $page == 'highlight-content.php' || $page == 'about.php' || $page == 'services.php' || $page == 'procedures.php' || $page == 'health-declaration.php' || $page == 'review.php' || $page == 'gallery.php'|| $page == 'featured-dentist.php' || $page == 'settings.php' ? 'menu-open':''?>">
-          <a href="#" class="nav-link <?= $page == 'highlight-content.php' || $page == 'about.php' || $page == 'services.php' || $page == 'procedures.php' || $page == 'health-declaration.php' || $page == 'review.php' || $page == 'gallery.php'|| $page == 'featured-dentist.php' || $page == 'settings.php' ? 'active':''?>">
+        <li class="nav-item <?= $page == 'highlight-content.php' || $page == 'about.php' || $page == 'procedures.php' || $page == 'health-declaration.php' || $page == 'review.php' || $page == 'gallery.php'|| $page == 'featured-dentist.php' || $page == 'settings.php' ? 'menu-open':''?>">
+          <a href="#" class="nav-link <?= $page == 'highlight-content.php' || $page == 'about.php' || $page == 'procedures.php' || $page == 'health-declaration.php' || $page == 'review.php' || $page == 'gallery.php'|| $page == 'featured-dentist.php' || $page == 'settings.php' ? 'active':''?>">
             <i class="nav-icon fas fa-globe"></i>
             <p>Website</p>
             <i class="fas fa-angle-left right "></i>
@@ -165,18 +171,6 @@
               <a href="about.php" class="nav-link <?= $page == 'about.php' ? 'active':''?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>About Us</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="services.php" class="nav-link <?= $page == 'services.php' ? 'active':''?>">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Services</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="procedures.php" class="nav-link <?= $page == 'procedures.php' ? 'active':''?>">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Treatments and Prices</p>
               </a>
             </li>
             <li class="nav-item">

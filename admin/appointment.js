@@ -58,11 +58,11 @@
           'emptyTable': "No results found",
         },
         "ajax": {
-            "url": "appointment_table.php",
-            "type": "POST",
-             "data": {
-             "status": '%e%' 
-             }
+            "url": "appointment_table1.php",
+            // "type": "POST",
+            //  "data": {
+            //  "status": '%e%' 
+            //  }
         },
         "columns": [
           { "data": "patient_name" },
@@ -105,18 +105,6 @@
             }
           },
         ],
-        "initComplete": function () {
-          this.api().columns().every( function () {
-            var that = this;
-            $( 'input', this.footer() ).on( 'keyup change clear', function () {
-              if ( that.search() !== this.value ) {
-                that
-                  .search( this.value )
-                  .draw();
-              }
-            });
-          });
-        },
       });
 
       var table2 = $('#confirmedtbl').DataTable( {
@@ -536,7 +524,7 @@
       if( tabID === '#cancelled') {
         table4.columns.adjust().responsive.recalc();
       }
-      if( tabID === '#noshow') {
+      if( tabID === '#reschedule') {
         table5.columns.adjust().responsive.recalc();
       }
     } );

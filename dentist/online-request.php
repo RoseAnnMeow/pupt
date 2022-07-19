@@ -74,16 +74,18 @@ include('../admin/config/dbconn.php');
                   <label>Service</label>
                   <span class="text-danger">*</span>
                   <select class="select2" multiple="multiple" name="service[]" id="edit_reason" style="width: 100%;" required>
-                      <?php
-                        $sql = "SELECT * FROM procedures ORDER BY procedures ASC";
+                  <?php
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
-                        if(mysqli_num_rows($query_run) > 0){
-                          foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                        if(mysqli_num_rows($query_run) > 0)
+                        {
+                          foreach($query_run as $row)
+                          {
+                            ?>
+
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>

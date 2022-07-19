@@ -113,15 +113,17 @@ include('config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="form-control select2" multiple="multiple" name="service[]" id="service" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures ORDER BY procedures ASC";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
-                        if(mysqli_num_rows($query_run) > 0){
-                          foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                        if(mysqli_num_rows($query_run) > 0)
+                        {
+                          foreach($query_run as $row)
+                          {
+                            ?>
+
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>
@@ -225,7 +227,6 @@ include('config/dbconn.php');
                     if(mysqli_num_rows($query_run) > 0){
                       foreach($query_run as $row){
                         ?>
-
                         <option value="<?php echo $row['id'];?>">
                         <?php echo $row['fname'].' '.$row['lname'];?></option>
                         <?php
@@ -282,15 +283,14 @@ include('config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="select2" multiple="multiple" name="service[]" id="edit_reason" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures ORDER BY procedures ASC";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($query_run) > 0){
                           foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                            ?>
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>

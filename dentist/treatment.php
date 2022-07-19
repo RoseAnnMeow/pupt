@@ -24,61 +24,26 @@ include('../admin/config/dbconn.php');
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-              <div class="form-group">
-                <input type="hidden" name="edit_id" id="edit_id">
-                <label>Select Patient</label>
-                <span class="text-danger">*</span>
-                  <select class="form-control select2 patient" name="select_patient" id="edit_patient" style="width: 100%;" readonly disabled>
-                  <option selected disabled value="">Select Patient</option>
-                    <?php
-                      if(isset($_GET['id']))
-                      {
-                        echo $id = $_GET['id'];
-                      } 
-                      $sql = "SELECT CONCAT(p.fname,' ',p.lname) as pname,t.id,t.patient_id FROM tblappointment t INNER JOIN tblpatient p ON p.id = t.patient_id WHERE t.status='Treated'";
-                      $query_run = mysqli_query($conn,$sql);
-                      if(mysqli_num_rows($query_run) > 0)
-                      {
-                        foreach($query_run as $row)
-                        {
-                          ?>
-
-                          <option value="<?php echo $row['patient_id'];?>">
-                          <?php echo $row['pname'];?></option>
-                          <?php
-                        }
-                      }
-                      else
-                      {
-                        ?>
-                        <option value="">No Record Found"</option>
-                        <?php
-                      }
-                      ?>                  
-                  </select>
+                <div class="form-group">
+                  <input type="hidden" name="edit_id" id="edit_id">
+                  <b>Patient Name: </b> <span class="text-muted" id="edit_patient"></span>
+                </div>
               </div>
-            </div>
-              <input type="hidden" class="form-control" name="selectpatient" id="show_patient" readonly>
-              <input type="hidden" class="form-control" name="sched_id" id="sched_id" readonly>
-              <input type="hidden" class="form-control" name="select_dentist" id="edit_dentist" readonly>
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Date Visit</label>
-                    <span class="text-danger">*</span>
-                    <input type="text" autocomplete="off" name="visit" class="form-control" id="edit_visit" readonly>
+                  <b>Date Visit: </b> <span class="text-muted" id="edit_visit"></span>
                 </div>
               </div>     
               <div class="col-sm-12">
-                  <div class="form-group">
-                      <label for="">Treatment</label>
-                      <input type="text" name="treatment" id="edit_treatment" class="form-control" readonly>
-                  </div>
+                <div class="form-group">
+                  <b>Service: </b> <span class="text-muted" id="edit_treatment"></span>
+                </div>
               </div>  
               <div class="col-sm-12">
-                  <div class="form-group">
-                      <label for="">Teeth No./s</label>
-                      <input type="number" name="teeth" id="edit_teeth" min="0" class="form-control" >
-                  </div>
+                <div class="form-group">
+                  <label for="">Teeth No./s</label>
+                  <input type="text" name="teeth" id="edit_teeth" class="form-control" >
+                </div>
               </div>  
               <div class="col-sm-12">
                 <div class="form-group">
@@ -90,9 +55,9 @@ include('../admin/config/dbconn.php');
               <div class="col-sm-12">
                   <div class="form-group">
                       <label for="">Fees</label>
-                      <input type="number" name="fees" id="edit_fees" min="0" class="form-control" >
+                      <input type="number" name="fees" id="edit_fees" class="form-control" >
                   </div>
-              </div> 
+              </div>                   
               <div class="col-sm-12">
                   <div class="form-group">
                       <label for="">Remarks</label>
@@ -176,7 +141,7 @@ include('../admin/config/dbconn.php');
                       <tr>
                         <th class="export">Patient</th>
                         <th class="export">Date Visit</th>
-                        <th class="export">Treatment</th>
+                        <th class="export">Service</th>
                         <th class="export">Teeth No./s</th>
                         <th class="export">Description</th>
                         <th class="export">Fees</th>
@@ -188,7 +153,7 @@ include('../admin/config/dbconn.php');
                       <tr>
                         <th class="search">Patient</th>
                         <th class="search">Date Visit</th>
-                        <th class="search">Treatment</th>
+                        <th class="search">Service</th>
                         <th class="search">Teeth No./s</th>
                         <th class="search">Description</th>
                         <th class="search">Fees</th>
@@ -299,7 +264,7 @@ include('../admin/config/dbconn.php');
         { "data": "treatment" },
         { "data": "teeth" },
         { "data": "complaint" },
-        { "data": "fees"},
+        { "data": "fees" },
         { "data": "remarks" },
         {
           "data": 'id',
@@ -346,36 +311,30 @@ include('../admin/config/dbconn.php');
 
 
     $(document).on('click', '.editbtn', function() {          
-      var treatment = $(this).data('id');
-
+      var user_id = $(this).data('id');
+      console.log(user_id);
       $.ajax({
         type:'post',
-        url: "treatment_action.php",
+        url:"treatment_action.php",
         data:
         {
           'checking_editbtn':true,
-          'treatment_id':treatment,
+          'userid':user_id,
         },
+        dataType:"JSON",
         success: function (response) {
-        $.each(response, function (key, value){
-          $('#edit_id').val(value['id']);
-          $('#show_patient').val(value['patient_id']);
-          $('#edit_patient').val(value['patient_id']);
-          $('#edit_patient').select2().trigger('change');
-          $('#edit_dentist').val(value['doc_id']);
-          $('#sched_id').val(value['visit']);      
-          $('#edit_visit').val(value['visit']);      
-          $('#edit_teeth').val(value['teeth']);      
-          $('#edit_complaint').val(value['complaint']);
-          $('#edit_treatment').val(value['treatment']);
-          $('#edit_fees').val(value['fees']);
-          $('#edit_amount').val(value['amount']);
-          $('#edit_remarks').val(value['remarks']);
-        });
-
-        $('#EditAppointmentModal').modal('show');
+          $('#edit_id').val(response.id);
+          $('#edit_patient').text(response.fullname);
+          $('#edit_visit').text(response.day);
+          $('#edit_treatment').text(response.treatment);   
+          $('#edit_teeth').val(response.teeth);      
+          $('#edit_complaint').val(response.complaint); 
+          $('#edit_fees').val(response.fees);
+          $('#edit_remarks').val(response.remarks);
+          $('#EditAppointmentModal').modal('show');
         }
-      });
+      })
+      
     });
 
     $(document).on('click','.deletebtn', function(){     
@@ -385,38 +344,7 @@ include('../admin/config/dbconn.php');
       
       });
 
-    $('#patient').on('change', function (){
-      var user_id = $(this).val();
-      console.log(user_id);
-      $.ajax({
-        type:'post',
-        url:"treatment_action.php",
-        data:{user_id:user_id},
-        dataType:"JSON",
-        success: function (response) {
-          $('#dentist').val(response.doc_id);
-          $('#visit').val(response.visit);
-          $('#treatment').val(response.treatment);
-        }
-      })
-      
-    });
-    $('#edit_patient').on('change', function (){
-      var user_id = $(this).val();
-      console.log(user_id);
-      $.ajax({
-        type:'post',
-        url:"treatment_action.php",
-        data:{user_id:user_id},
-        dataType:"JSON",
-        success: function (response) {
-          $('#edit_dentist').val(response.doc_id);
-          $('#edit_visit').val(response.visit);
-          $('#edit_treatment').val(response.treatment);
-        }
-      })
-      
-    });
+
 
 });
 

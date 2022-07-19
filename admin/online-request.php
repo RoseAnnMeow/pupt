@@ -38,12 +38,16 @@ include('config/dbconn.php');
               <span class="text-danger">*</span>
                 <select class="select2 patient" name="" id="edit_patient" style="width:100%;" required disabled>
                   <?php
+                    if(isset($_GET['id']))
+                    {
+                      $id = $_GET['id'];
+                    } 
                     $sql = "SELECT * FROM tblpatient";
                     $query_run = mysqli_query($conn,$sql);
                     if(mysqli_num_rows($query_run) > 0){
                       foreach($query_run as $row){
                         ?>
-                        <option>
+                        <option value="<?php echo $row['id'];?>">
                         <?php echo $row['fname'].' '.$row['lname'];?></option>
                         <?php
                       }
@@ -79,7 +83,7 @@ include('config/dbconn.php');
               </div>   
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Date</label>
+                    <label>Appointment Date</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="scheddate" id="edit_sched" style="width:100%;" required>
                     </select>
@@ -87,7 +91,7 @@ include('config/dbconn.php');
               </div>     
               <div class="col-sm-12">              
                 <div class="form-group">
-                    <label>Appontment Time</label>
+                    <label>Appointment Time</label>
                     <span class="text-danger">*</span>
                     <select class="form-control select2" name="schedTime" id="edit_schedTime" style="width:100%;" required>
                     </select>
@@ -99,15 +103,14 @@ include('config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="select2" multiple="multiple" name="service[]" id="edit_reason" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures ORDER BY procedures ASC";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($query_run) > 0){
                           foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                            ?>
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>

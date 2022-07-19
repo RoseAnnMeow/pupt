@@ -37,12 +37,16 @@ include('../admin/config/dbconn.php');
               <span class="text-danger">*</span>
                 <select class="select2 patient" name="" id="edit_patient" style="width:100%;" required disabled>
                   <?php
+                    if(isset($_GET['id']))
+                    {
+                      echo $id = $_GET['id'];
+                    } 
                     $sql = "SELECT * FROM tblpatient";
                     $query_run = mysqli_query($conn,$sql);
                     if(mysqli_num_rows($query_run) > 0){
                       foreach($query_run as $row){
                         ?>
-                        <option>
+                        <option value="<?php echo $row['id'];?>">
                         <?php echo $row['fname'].' '.$row['lname'];?></option>
                         <?php
                       }
@@ -98,15 +102,14 @@ include('../admin/config/dbconn.php');
                   <span class="text-danger">*</span>
                   <select class="select2" multiple="multiple" name="service[]" id="edit_reason" style="width: 100%;" required>
                       <?php
-                        $sql = "SELECT * FROM procedures";
+                        $sql = "SELECT * FROM services ORDER BY title ASC";
                         $query_run = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($query_run) > 0){
                           foreach($query_run as $row){
-                            $service_name = $row['procedures'];
-                            echo '
-                              <option value="'.$service_name.'">'.$service_name.'</option>
-                            ';
-                            
+                            ?>
+                            <option value="<?php echo $row['title'];?>">
+                            <?php echo $row['title'];?></option>
+                            <?php
                           }
                         }
                       ?>
@@ -391,11 +394,7 @@ include('../admin/config/dbconn.php');
           'emptyTable': "No results found",
         },
         "ajax": {
-            "url": "online_rq_table.php",
-            "type": "POST",
-             "data": {
-             "status": '%e%'
-             }
+            "url": "online_rq_table1.php",
         },
         "columns": [
           { "data": "patient_name" },
@@ -436,18 +435,6 @@ include('../admin/config/dbconn.php');
             }
           },
         ],
-        "initComplete": function () {
-          this.api().columns().every( function () {
-            var that = this;
-            $( 'input', this.footer() ).on( 'keyup change clear', function () {
-              if ( that.search() !== this.value ) {
-                that
-                  .search( this.value )
-                  .draw();
-              }
-            });
-          });
-        },
       });
       $('#oapptmttbl tfoot th.search').each( function () {
           var title = $(this).text();
@@ -1191,7 +1178,7 @@ include('../admin/config/dbconn.php');
         success: function (response) {
           $('#edit_id').val(response['id']);
           $('#edit_pat_id').val(response['patient_id']);
-          $('#edit_patient').val(response['patient_name']);
+          $('#edit_patient').val(response['patient_id']);
           $('#edit_patient').select2().trigger('change');
           $('#edit_doc_id').val(response['doc_id']);
           $('#edit_dentist').val(response['doc_id']);
